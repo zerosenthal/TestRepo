@@ -62,13 +62,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1581">
-              <caret line="252" selection-start-line="252" selection-end-line="252" />
+            <state relative-caret-position="121">
+              <caret line="253" column="5" lean-forward="true" selection-start-line="253" selection-start-column="5" selection-end-line="253" selection-end-column="5" />
               <folding>
                 <element signature="method#equals#0;class#DocumentImpl#0" />
                 <element signature="method#compress#0;class#DocumentImpl#0" />
                 <element signature="method#decompress#0;class#DocumentImpl#0" />
                 <element signature="method#writeString#0;class#DocumentImpl#0" />
+                <element signature="e#7736#7737#0" expanded="true" />
                 <element signature="e#7767#7768#0" expanded="true" />
               </folding>
             </state>
@@ -78,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/TrieImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1224">
-              <caret line="80" selection-start-line="80" selection-end-line="80" />
+            <state relative-caret-position="189">
+              <caret line="76" column="9" lean-forward="true" selection-start-line="76" selection-start-column="9" selection-end-line="76" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -90,7 +91,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2526">
+            <state relative-caret-position="3179">
               <caret line="205" column="95" lean-forward="true" selection-start-line="205" selection-start-column="95" selection-end-line="205" selection-end-column="95" />
             </state>
           </provider>
@@ -99,8 +100,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Trie.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
+            <state relative-caret-position="17">
               <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/TrieImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="91" column="72" selection-start-line="91" selection-start-column="72" selection-end-line="91" selection-end-column="72" />
             </state>
           </provider>
         </entry>
@@ -122,12 +132,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/StackImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/TrieImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/TrieImplTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/HashTableImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/TrieImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/TrieImplTest.java" />
       </list>
     </option>
   </component>
@@ -222,7 +232,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555292413301" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555293181881" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../stage2" />
@@ -319,7 +329,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TrieImplTest.testGetAllSorted" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TrieImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="stage3" />
       <extension name="coverage">
         <pattern>
@@ -329,8 +339,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="edu.yu.cs.com1320.project.Impl" />
       <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.TrieImplTest" />
-      <option name="METHOD_NAME" value="testGetAllSorted" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -338,10 +347,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.DocumentStoreImplTest" />
+        <item itemvalue="JUnit.TrieImplTest" />
         <item itemvalue="JUnit.DocumentStoreImplTest.testSearchCompressed" />
         <item itemvalue="JUnit.DocumentStoreImplTest.testSearch" />
         <item itemvalue="JUnit.DocumentStoreImplTest.testUndoTrie" />
-        <item itemvalue="JUnit.TrieImplTest.testGetAllSorted" />
       </list>
     </recent_temporary>
   </component>
@@ -359,15 +368,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DocumentStoreImplTest_testSearchCompressed - 2019.04.08 at 16h 45m 19s.xml">
-      <configuration name="DocumentStoreImplTest.testSearchCompressed" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DocumentStoreImplTest_testUndoTrie - 2019.04.08 at 16h 45m 31s.xml">
-      <configuration name="DocumentStoreImplTest.testUndoTrie" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DocumentStoreImplTest - 2019.04.08 at 16h 46m 08s.xml">
-      <configuration name="DocumentStoreImplTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="DocumentStoreImplTest - 2019.04.08 at 16h 49m 16s.xml">
       <configuration name="DocumentStoreImplTest" configurationId="JUnit" />
     </history-entry>
@@ -387,6 +387,15 @@
       <configuration name="DocumentStoreImplTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="DocumentStoreImplTest - 2019.04.11 at 18h 36m 36s.xml">
+      <configuration name="DocumentStoreImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TrieImplTest - 2019.04.14 at 21h 50m 14s.xml">
+      <configuration name="TrieImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TrieImplTest - 2019.04.14 at 21h 51m 10s.xml">
+      <configuration name="TrieImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DocumentStoreImplTest - 2019.04.14 at 21h 51m 23s.xml">
       <configuration name="DocumentStoreImplTest" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -429,12 +438,6 @@
           <line>74</line>
           <properties />
           <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/TrieImplTest.java</url>
-          <line>54</line>
-          <properties />
-          <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java</url>
@@ -522,13 +525,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/TrieImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="54" selection-start-line="54" selection-end-line="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/TooSimpleTrie.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
@@ -571,37 +567,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1581">
-          <caret line="252" selection-start-line="252" selection-end-line="252" />
-          <folding>
-            <element signature="method#equals#0;class#DocumentImpl#0" />
-            <element signature="method#compress#0;class#DocumentImpl#0" />
-            <element signature="method#decompress#0;class#DocumentImpl#0" />
-            <element signature="method#writeString#0;class#DocumentImpl#0" />
-            <element signature="e#7767#7768#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/TrieImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="80" selection-start-line="80" selection-end-line="80" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Trie.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -617,9 +582,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="253" column="5" lean-forward="true" selection-start-line="253" selection-start-column="5" selection-end-line="253" selection-end-column="5" />
+          <folding>
+            <element signature="method#equals#0;class#DocumentImpl#0" />
+            <element signature="method#compress#0;class#DocumentImpl#0" />
+            <element signature="method#decompress#0;class#DocumentImpl#0" />
+            <element signature="method#writeString#0;class#DocumentImpl#0" />
+            <element signature="e#7736#7737#0" expanded="true" />
+            <element signature="e#7767#7768#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/TrieImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="76" column="9" lean-forward="true" selection-start-line="76" selection-start-column="9" selection-end-line="76" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Trie.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/TrieImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="91" column="72" selection-start-line="91" selection-start-column="72" selection-end-line="91" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2526">
+        <state relative-caret-position="3179">
           <caret line="205" column="95" lean-forward="true" selection-start-line="205" selection-start-column="95" selection-end-line="205" selection-end-column="95" />
         </state>
       </provider>

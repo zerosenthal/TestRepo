@@ -61,8 +61,8 @@ public class TrieImplTest
     {
         this.intTrie.deleteAll("Elimelekh");
 
-        assertEquals("testing deleteAll for leaf node", null, this.intTrie.getAllSorted("Elimelekh"));
-        assertEquals("testing deleteAll for leaf node", null, this.intTrie.getAllSorted("Elim"));
+        assertEquals("testing deleteAll for leaf node", new ArrayList(), this.intTrie.getAllSorted("Elimelekh"));
+        assertEquals("testing deleteAll for leaf node", new ArrayList(), this.intTrie.getAllSorted("Elim"));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class TrieImplTest
     {
         this.intTrie.deleteAll("Eli");
 
-        assertEquals("testing deleteAll for parent node", null, this.intTrie.getAllSorted("Eli"));
+        assertEquals("testing deleteAll for parent node", new ArrayList(), this.intTrie.getAllSorted("Eli"));
         assertEquals("testing deleteAll for parent node", new ArrayList<Integer>(Arrays.asList(2, 12)), this.intTrie.getAllSorted("Elimelekh"));
     }
 
@@ -88,7 +88,7 @@ public class TrieImplTest
     {
         this.intTrie.delete("Russel", 0);
 
-        assertEquals("testing specific delete for leaf", null, this.intTrie.getAllSorted("Russel"));
-        assertEquals("testing specific delete for leaf", null, this.intTrie.getAllSorted("Russe"));
+        assertEquals("testing specific delete for leaf", new ArrayList(), this.intTrie.getAllSorted("Russel"));
+        assertEquals("testing specific delete for leaf", new ArrayList(), this.intTrie.getAllSorted("Russe"));
     }
 }

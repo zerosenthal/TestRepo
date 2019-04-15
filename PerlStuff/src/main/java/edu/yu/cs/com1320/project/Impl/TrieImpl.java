@@ -73,7 +73,7 @@ public class TrieImpl<Value> implements Trie<Value>
 
         if (node == null || node.valueList == null)
         {
-            return null;
+            return new ArrayList<Value>();
         }
 
         node.valueList.sort(this.valueComparator);
