@@ -2,25 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="282dc66b-e718-4a87-8822-34279ae1b644" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../stage1/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../stage1/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTestStage2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/com1320_search-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/com1320_search-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.yu.cs.com1320.project.Impl.HashTableImplTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.yu.cs.com1320.project.Impl.HashTableImplTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.yu.cs.com1320.project.Impl.StackImplTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.yu.cs.com1320.project.Impl.StackImplTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.yu.cs.com1320.project.Impl.HashTableImplTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/edu.yu.cs.com1320.project.Impl.HashTableImplTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.yu.cs.com1320.project.Impl.StackImplTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/edu.yu.cs.com1320.project.Impl.StackImplTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/DepartmentalEmployeePay/src/main/java/edu/yu/intro/DepartmentalEmployeePay.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/DepartmentalEmployeePay/src/main/java/edu/yu/intro/DepartmentalEmployeePay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/DesignForInheritance/src/main/java/edu/yu/intro/GoodTA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/DesignForInheritance/src/main/java/edu/yu/intro/GoodTA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/DesignForInheritance/src/main/java/edu/yu/intro/TA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/DesignForInheritance/src/main/java/edu/yu/intro/TA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/IterativeFactorial/src/main/java/edu/yu/intro/IterativeFactorial.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/IterativeFactorial/src/main/java/edu/yu/intro/IterativeFactorial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/Library1/src/main/java/edu/yu/intro/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/Library1/src/main/java/edu/yu/intro/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/Library2/src/test/java/edu/yu/intro/test/TestLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/Library2/src/test/java/edu/yu/intro/test/TestLibrary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/SqrtApproximation/src/main/java/edu/yu/intro/SqrtApproximation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/SqrtApproximation/src/main/java/edu/yu/intro/SqrtApproximation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/StringUtilities/src/test/java/edu/yu/intro/test/TestStringUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/StringUtilities/src/test/java/edu/yu/intro/test/TestStringUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/grade_for_RefactoredFactorial.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Document.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Document.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/DocumentStore$CompressionFormat.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/DocumentStore$CompressionFormat.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/DocumentStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/DocumentStore.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/HashTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/HashTable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/Command.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/Command.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/DocumentImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/DocumentImpl$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/DocumentImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/DocumentImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/HashTableImpl$HashNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/HashTableImpl$HashNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/HashTableImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/HashTableImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/StackImpl$StackNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/StackImpl$StackNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/StackImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Impl/StackImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Stack.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/yu/cs/com1320/project/Stack.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/yu/cs/com1320/project/Impl/HashTableImplTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/yu/cs/com1320/project/Impl/HashTableImplTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/yu/cs/com1320/project/Impl/StackImplTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/yu/cs/com1320/project/Impl/StackImplTest.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -48,17 +48,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
+            <state relative-caret-position="1258">
               <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="7" column="43" lean-forward="true" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+              <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -86,7 +86,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
@@ -128,7 +128,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -142,6 +142,7 @@
         <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/HashTableImplTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTestStage2.java" />
       </list>
     </option>
   </component>
@@ -180,64 +181,36 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="com1320_search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage2" type="462c0819:PsiDirectoryNode" />
+              <item name="PerlStuff" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="com1320_search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage2" type="462c0819:PsiDirectoryNode" />
+              <item name="PerlStuff" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="com1320_search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage2" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com1320_search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage2" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com1320_search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage2" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com1320_search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage2" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="Impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com1320_search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage2" type="462c0819:PsiDirectoryNode" />
+              <item name="PerlStuff" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="com1320_search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage2" type="462c0819:PsiDirectoryNode" />
+              <item name="PerlStuff" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="com1320_search" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage2" type="462c0819:PsiDirectoryNode" />
+              <item name="PerlStuff" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -247,14 +220,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553998582353" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554088750823" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -265,6 +237,9 @@
       <recent name="edu.yu.cs.com1320.project.Impl" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="edu.yu.cs.com1320.project.Impl" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="edu.yu.cs.com1320.project.Impl" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -287,20 +262,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.DocumentStoreImpl">
-    <configuration name="DocumentStoreImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentStoreImpl" />
-      <module name="stage2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.yu.cs.com1320.project.Impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.DocumentStoreImplTestStage2">
     <configuration name="DocumentStoreImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="stage2" />
       <extension name="coverage">
@@ -311,6 +273,21 @@
       </extension>
       <option name="PACKAGE_NAME" value="edu.yu.cs.com1320.project.Impl" />
       <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DocumentStoreImplTestStage2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="com1320_search" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.yu.cs.com1320.project.Impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.yu.cs.com1320.project.Impl" />
+      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentStoreImplTestStage2" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -365,11 +342,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DocumentStoreImplTestStage2" />
         <item itemvalue="JUnit.HashTableImplTest" />
         <item itemvalue="JUnit.DocumentStoreImplTest" />
         <item itemvalue="JUnit.DocumentStoreImplTest.testUndoNoURI" />
         <item itemvalue="JUnit.DocumentStoreImplTest.testEmptyCommandStack" />
-        <item itemvalue="Application.DocumentStoreImpl" />
       </list>
     </recent_temporary>
   </component>
@@ -387,9 +364,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DocumentStoreImplTest_testEmptyCommandStack - 2019.03.20 at 16h 58m 59s.xml">
-      <configuration name="DocumentStoreImplTest.testEmptyCommandStack" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="DocumentStoreImplTest_testUndoNoURI - 2019.03.20 at 16h 59m 28s.xml">
       <configuration name="DocumentStoreImplTest.testUndoNoURI" configurationId="JUnit" />
     </history-entry>
@@ -417,11 +391,16 @@
     <history-entry file="HashTableImplTest - 2019.03.22 at 15h 14m 36s.xml">
       <configuration name="HashTableImplTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="DocumentStoreImplTestStage2 - 2019.03.31 at 23h 19m 39s.xml">
+      <configuration name="DocumentStoreImplTestStage2" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32955465" />
+      <window_info id="Learn" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16490166" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -430,12 +409,12 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3285968" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32779455" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.58081704" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3285968" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32779455" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3285968" />
@@ -443,7 +422,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven" order="4" weight="0.32955465" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.3290469" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
@@ -577,13 +556,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/StackImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/StackImplTest.java" />
     <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.base/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
@@ -599,6 +572,13 @@
             <element signature="e#1713#1714#0" expanded="true" />
             <element signature="e#1745#1746#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1258">
+          <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -621,17 +601,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-          <folding>
-            <element signature="e#5056#5057#0" expanded="true" />
-            <element signature="e#5088#5089#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/HashTableImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3825">
@@ -646,17 +615,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="43" lean-forward="true" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+          <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTestStage2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="36" column="7" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+          <folding>
+            <element signature="e#5056#5057#0" expanded="true" />
+            <element signature="e#5088#5089#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
