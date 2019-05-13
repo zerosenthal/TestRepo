@@ -29,7 +29,7 @@ public abstract class MinHeap<E extends Comparable>
 
     protected  boolean isEmpty()
     {
-        return this.count == -1;
+        return this.count == 0;
     }
     /**
      * is elements[i] > elements[j]?
