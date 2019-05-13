@@ -1,0 +1,1005 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="65d1d768-d6e8-468d-93f1-742224268c58" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../stage1/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../stage1/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stage2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../stage2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stage2/target/com1320_search-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../stage2/target/com1320_search-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stage2/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../stage2/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stage2/target/surefire-reports/TEST-edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../stage2/target/surefire-reports/TEST-edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stage2/target/surefire-reports/TEST-edu.yu.cs.com1320.project.Impl.HashTableImplTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../stage2/target/surefire-reports/TEST-edu.yu.cs.com1320.project.Impl.HashTableImplTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stage2/target/surefire-reports/TEST-edu.yu.cs.com1320.project.Impl.StackImplTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../stage2/target/surefire-reports/TEST-edu.yu.cs.com1320.project.Impl.StackImplTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stage2/target/surefire-reports/edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../stage2/target/surefire-reports/edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stage2/target/surefire-reports/edu.yu.cs.com1320.project.Impl.HashTableImplTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../stage2/target/surefire-reports/edu.yu.cs.com1320.project.Impl.HashTableImplTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stage2/target/surefire-reports/edu.yu.cs.com1320.project.Impl.StackImplTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../stage2/target/surefire-reports/edu.yu.cs.com1320.project.Impl.StackImplTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stage3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../stage3/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/stage4.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/DepartmentalEmployeePay/src/main/java/edu/yu/intro/DepartmentalEmployeePay.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/DepartmentalEmployeePay/src/main/java/edu/yu/intro/DepartmentalEmployeePay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/DesignForInheritance/src/main/java/edu/yu/intro/GoodTA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/DesignForInheritance/src/main/java/edu/yu/intro/GoodTA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/DesignForInheritance/src/main/java/edu/yu/intro/TA.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/DesignForInheritance/src/main/java/edu/yu/intro/TA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/IterativeFactorial/src/main/java/edu/yu/intro/IterativeFactorial.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/IterativeFactorial/src/main/java/edu/yu/intro/IterativeFactorial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/Library1/src/main/java/edu/yu/intro/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/Library1/src/main/java/edu/yu/intro/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/Library2/src/test/java/edu/yu/intro/test/TestLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/Library2/src/test/java/edu/yu/intro/test/TestLibrary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/SqrtApproximation/src/main/java/edu/yu/intro/SqrtApproximation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/SqrtApproximation/src/main/java/edu/yu/intro/SqrtApproximation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/StringUtilities/src/test/java/edu/yu/intro/test/TestStringUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/StringUtilities/src/test/java/edu/yu/intro/test/TestStringUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../IntroToCompSci/assignments/grade_for_RefactoredFactorial.txt" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/stage4$DocumentStoreImplTest_testTimeStamper.ic" NAME="DocumentStoreImplTest.testTimeStamper Coverage Results" MODIFIED="1556464197988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>edu.yu.cs.com1320.project.Impl.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="stage4" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3060">
+              <caret line="198" selection-start-line="198" selection-end-line="198" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/MinHeapImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="18" column="49" lean-forward="true" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1239#1240#0" expanded="true" />
+                <element signature="e#1307#1308#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/MinHeap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-707">
+              <caret line="286" selection-start-line="286" selection-end-line="286" />
+              <folding>
+                <element signature="e#2507#2508#0" expanded="true" />
+                <element signature="e#2556#2557#0" expanded="true" />
+                <element signature="e#7647#7648#0" expanded="true" />
+                <element signature="e#7683#7684#0" expanded="true" />
+                <element signature="e#7741#7742#0" expanded="true" />
+                <element signature="e#7777#7778#0" expanded="true" />
+                <element signature="e#8377#8378#0" expanded="true" />
+                <element signature="e#8430#8431#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Document.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="315" column="39" selection-start-line="315" selection-start-column="39" selection-end-line="315" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#5122#5123#0" expanded="true" />
+                <element signature="e#5186#5187#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/StackImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1326">
+              <caret line="78" selection-start-line="78" selection-end-line="78" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/HashTableImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="265">
+              <caret line="290" column="5" selection-start-line="290" selection-start-column="5" selection-end-line="290" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/Command.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
+              <folding>
+                <element signature="e#537#538#0" expanded="true" />
+                <element signature="e#570#571#0" expanded="true" />
+                <element signature="e#613#614#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="JUnit4 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>this</find>
+      <find>.equal</find>
+      <find>contains</find>
+      <find>.equals</find>
+      <find>code</find>
+      <find>remove</find>
+      <find>elementsToArrayIndex</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/project/Stack.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Stack.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/com1320/project/Stack.java" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/TrieImplTest.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/MinHeap.java" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/MinHeapImplTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/DocumentStore.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/Command.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/MinHeapImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/HashTableImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Document.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/MinHeap.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="com1320_search" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="9" />
+    <option name="y" value="18" />
+    <option name="width" value="1347" />
+    <option name="height" value="690" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="stage4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stage4" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stage4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stage4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stage4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stage4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stage4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stage4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stage4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stage4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stage4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stage4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="Impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stage4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stage4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stage4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stage4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stage4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stage4" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557685776243" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="Images" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="edu.yu.cs.com1320.project.Impl" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="edu.yu.cs.com1320.project.Impl" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\CompSci\MYGIT\PerlEli\DataStructures\project\stage4\src\test\java\edu\yu\cs\com1320\project" />
+      <recent name="C:\CompSci\MYGIT\PerlEli\DataStructures\project\stage4\src\main\java\edu\yu\cs\com1320" />
+      <recent name="C:\CompSci\MYGIT\PerlEli\DataStructures\project\stage4\src\main\java\edu\yu\com1320" />
+      <recent name="C:\CompSci\MYGIT\PerlEli\DataStructures\project\stage4\src\main\java" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.DocumentStoreImplTest">
+    <configuration name="DocumentStoreImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="stage4" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.yu.cs.com1320.project.Impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.yu.cs.com1320.project.Impl" />
+      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DocumentStoreImplTest.testByteMemManage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="stage4" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.yu.cs.com1320.project.Impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.yu.cs.com1320.project.Impl" />
+      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest" />
+      <option name="METHOD_NAME" value="testByteMemManage" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DocumentStoreImplTest.testGenericUndo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="stage4" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.yu.cs.com1320.project.Impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.yu.cs.com1320.project.Impl" />
+      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest" />
+      <option name="METHOD_NAME" value="testGenericUndo" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DocumentStoreImplTest.testTimeStamper" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="stage4" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.yu.cs.com1320.project.Impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.yu.cs.com1320.project.Impl" />
+      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest" />
+      <option name="METHOD_NAME" value="testTimeStamper" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DocumentStoreImplTest.testUndoNoURI" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="stage4" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.yu.cs.com1320.project.Impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.yu.cs.com1320.project.Impl" />
+      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest" />
+      <option name="METHOD_NAME" value="testUndoNoURI" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.DocumentStoreImplTest" />
+        <item itemvalue="JUnit.DocumentStoreImplTest.testUndoNoURI" />
+        <item itemvalue="JUnit.DocumentStoreImplTest.testByteMemManage" />
+        <item itemvalue="JUnit.DocumentStoreImplTest.testGenericUndo" />
+        <item itemvalue="JUnit.DocumentStoreImplTest.testTimeStamper" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="65d1d768-d6e8-468d-93f1-742224268c58" name="Default Changelist" comment="" />
+      <created>1555696854322</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1555696854322</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="DocumentStoreImplTest_testUndoNoURI - 2019.05.09 at 23h 02m 08s.xml">
+      <configuration name="DocumentStoreImplTest.testUndoNoURI" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DocumentStoreImplTest_testUndoNoURI - 2019.05.09 at 23h 07m 11s.xml">
+      <configuration name="DocumentStoreImplTest.testUndoNoURI" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DocumentStoreImplTest_testUndoNoURI - 2019.05.09 at 23h 13m 11s.xml">
+      <configuration name="DocumentStoreImplTest.testUndoNoURI" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DocumentStoreImplTest_testUndoNoURI - 2019.05.09 at 23h 21m 46s.xml">
+      <configuration name="DocumentStoreImplTest.testUndoNoURI" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DocumentStoreImplTest_testUndoNoURI - 2019.05.09 at 23h 22m 00s.xml">
+      <configuration name="DocumentStoreImplTest.testUndoNoURI" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DocumentStoreImplTest_testUndoNoURI - 2019.05.09 at 23h 22m 39s.xml">
+      <configuration name="DocumentStoreImplTest.testUndoNoURI" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DocumentStoreImplTest - 2019.05.09 at 23h 41m 15s.xml">
+      <configuration name="DocumentStoreImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DocumentStoreImplTest - 2019.05.12 at 10h 55m 10s.xml">
+      <configuration name="DocumentStoreImplTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DocumentStoreImplTest_testUndoNoURI - 2019.05.12 at 10h 55m 25s.xml">
+      <configuration name="DocumentStoreImplTest.testUndoNoURI" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DocumentStoreImplTest - 2019.05.12 at 10h 55m 40s.xml">
+      <configuration name="DocumentStoreImplTest" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49704143" weight="0.26153848" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.5029586" side_tool="true" weight="0.24939272" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.3285968" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3285968" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39964476" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3285968" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3285968" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3285968" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.32955465" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Coverage" order="8" side_tool="true" weight="0.32955465" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49704143" weight="0.26153848" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.5029586" side_tool="true" weight="0.24939272" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.3285968" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3285968" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39964476" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3285968" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3285968" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3285968" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.32955465" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Coverage" order="8" side_tool="true" weight="0.32955465" />
+    </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java</url>
+          <line>249</line>
+          <properties />
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java</url>
+          <line>198</line>
+          <properties />
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>((HashMap.Node)((HashMap)((MinHeapImpl)this).elementsToArrayIndex).entrySet().toArray()[0]).getKey().equals(element)</expression-string>
+        <language-id>JAVA</language-id>
+        <custom-info>edu.yu.cs.com1320.project.Impl.MinHeapImpl,java.util.HashMap.Node,java.util.HashMap</custom-info>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>thisCommand.undo()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>docStore.undo()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>undoDelete(uri, previousDoc,previousContentString)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>this.docHashTable.put(uri, previousDoc) == null</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>return this.docHashTable.put(uri, previousDoc)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>docStore.undo(new URI(&quot;42&quot;))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>docStore.undo(new URI(&quot;42&quot;));</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>string = this.docHashTable.get(uri).decompress()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/Impl/StackImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/Impl/DocumentImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/Document.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/Impl/Command.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/Impl/HashTableImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/Impl/TrieImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/Impl/TooSimpleTrie.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/Impl/DocumentStoreImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/project/Stack.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/com1320/project/Trie.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/com1320/project/Impl/StackImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/com1320/project/Impl/DocumentImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/com1320/project/Document.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/com1320/project/Impl/Command.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/com1320/project/Impl/HashTableImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/com1320/project/Impl/TrieImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/com1320/project/Impl/TooSimpleTrie.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/com1320/project/Impl/DocumentStoreImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/com1320/project/Stack.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Trie.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/TrieImpl.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Stack.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/HashTableImplTest.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/StackImplTest.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/TrieImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding>
+            <element signature="e#565#756#0" expanded="true" />
+            <element signature="e#755#756#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.base/java/lang/Math.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-433">
+          <caret line="461" column="25" selection-start-line="461" selection-start-column="25" selection-end-line="461" selection-end-column="25" />
+          <folding>
+            <element signature="e#17923#17924#0" expanded="true" />
+            <element signature="e#18006#18007#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/TooSimpleTrie.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.13-beta-2/junit-4.13-beta-2-sources.jar!/org/junit/internal/runners/statements/InvokeMethod.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.13-beta-2/junit-4.13-beta-2-sources.jar!/org/junit/runners/model/FrameworkMethod.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+          <folding>
+            <element signature="e#1984#1985#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/DocumentStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="108" column="40" lean-forward="true" selection-start-line="108" selection-start-column="40" selection-end-line="108" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/MinHeapImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="96" column="46" selection-start-line="96" selection-start-column="46" selection-end-line="96" selection-end-column="46" />
+          <folding>
+            <element signature="e#643#644#0" expanded="true" />
+            <element signature="e#682#683#0" expanded="true" />
+            <element signature="e#744#745#0" expanded="true" />
+            <element signature="e#773#774#0" expanded="true" />
+            <element signature="e#805#806#0" expanded="true" />
+            <element signature="e#853#854#0" expanded="true" />
+            <element signature="e#2041#2042#0" expanded="true" />
+            <element signature="e#2122#2123#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.base/jdk/internal/reflect/NativeMethodAccessorImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="68" column="33" selection-start-line="68" selection-start-column="33" selection-end-line="68" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.13-beta-2/junit-4.13-beta-2-sources.jar!/org/junit/internal/runners/statements/ExpectException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.13-beta-2/junit-4.13-beta-2-sources.jar!/org/junit/internal/runners/statements/RunBefores.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.13-beta-2/junit-4.13-beta-2-sources.jar!/org/junit/runners/ParentRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="307" selection-start-line="307" selection-end-line="307" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.base/java/lang/Comparable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="136" column="15" selection-start-line="136" selection-start-column="15" selection-end-line="136" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.13-beta-2/junit-4.13-beta-2-sources.jar!/org/junit/internal/runners/model/ReflectiveCallable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="41" column="19" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/StackImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1326">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.13-beta-3/junit-4.13-beta-3.jar!/org/junit/runners/model/FrameworkMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+          <folding>
+            <element signature="e#1059#1252#0" expanded="true" />
+            <element signature="e#1251#1252#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.13-beta-3/junit-4.13-beta-3.jar!/org/junit/runners/ParentRunner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="306" selection-start-line="306" selection-end-line="306" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.13-beta-3/junit-4.13-beta-3.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.base/java/util/function/Function.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="48" column="6" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/HashTableImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="290" column="5" selection-start-line="290" selection-start-column="5" selection-end-line="290" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/Command.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+          <folding>
+            <element signature="e#537#538#0" expanded="true" />
+            <element signature="e#570#571#0" expanded="true" />
+            <element signature="e#613#614#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="315" column="39" selection-start-line="315" selection-start-column="39" selection-end-line="315" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5122#5123#0" expanded="true" />
+            <element signature="e#5186#5187#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Document.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-707">
+          <caret line="286" selection-start-line="286" selection-end-line="286" />
+          <folding>
+            <element signature="e#2507#2508#0" expanded="true" />
+            <element signature="e#2556#2557#0" expanded="true" />
+            <element signature="e#7647#7648#0" expanded="true" />
+            <element signature="e#7683#7684#0" expanded="true" />
+            <element signature="e#7741#7742#0" expanded="true" />
+            <element signature="e#7777#7778#0" expanded="true" />
+            <element signature="e#8377#8378#0" expanded="true" />
+            <element signature="e#8430#8431#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3060">
+          <caret line="198" selection-start-line="198" selection-end-line="198" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/MinHeapImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="18" column="49" lean-forward="true" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1239#1240#0" expanded="true" />
+            <element signature="e#1307#1308#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/MinHeap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>stage4</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
