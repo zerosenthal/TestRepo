@@ -32,7 +32,7 @@ public class GraveyardIOImpl extends DocumentIO
         this.versionCounter = versionCounter;
     }
 
-    private class CustomJsonSerializer implements JsonSerializer<Document>
+    protected class CustomJsonSerializer implements JsonSerializer<Document>
     {
         @Override
         public JsonElement serialize(Document document, Type type, JsonSerializationContext jsonSerializationContext)
@@ -57,11 +57,12 @@ public class GraveyardIOImpl extends DocumentIO
             element = gson.toJsonTree(doc.getWordMap(), Map.class);
             jsonDoc.add("Word Map", element);
 
+
             return jsonDoc;
         }
     }
 
-    private class CustomJsonDeserializer implements JsonDeserializer<Document>
+    protected class CustomJsonDeserializer implements JsonDeserializer<Document>
     {
 
         @Override
@@ -70,13 +71,14 @@ public class GraveyardIOImpl extends DocumentIO
             Gson gson = new GsonBuilder().create();
             JsonObject jsonDoc = jsonElement.getAsJsonObject();
 
-            byte[] contents = Base64.decodeBase64(jsonDoc.get("contents").getAsString());
+            byte[] contents = Base64.decodeBase64((jsonDoc.get("Contents")).getAsString());
             URI uri = gson.fromJson(jsonDoc.get("URI"), URI.class);
             DocumentStore.CompressionFormat compForm = gson.fromJson(jsonDoc.get("Compression Format"), DocumentStore.CompressionFormat.class);
             int hashCode = jsonDoc.get("Hash Code").getAsInt();
             Map wordMap = gson.fromJson(jsonDoc.get("Word Map"), Map.class);
 
-            DocumentImpl doc = new DocumentImpl(new ByteArrayInputStream(contents), uri, compForm);
+            DocumentImpl doc = new DocumentImpl(null, uri, compForm);
+            doc.contents = contents;
             doc.hashCode = hashCode;
             doc.setWordMap(wordMap);
 
@@ -91,8 +93,8 @@ public class GraveyardIOImpl extends DocumentIO
     public File serialize(Document doc, Integer versionChange)
     {
         GsonBuilder gsonBuilder = new GsonBuilder();
-
-        gsonBuilder.registerTypeHierarchyAdapter(Document.class, new CustomJsonSerializer());
+        CustomJsonSerializer customSerializer = new CustomJsonSerializer();
+        gsonBuilder.registerTypeHierarchyAdapter(Document.class, customSerializer);
         Gson customGson = gsonBuilder.create();
         String customJson = customGson.toJson(doc);
 
@@ -151,21 +153,29 @@ public class GraveyardIOImpl extends DocumentIO
         String fullPath = dir + fileSeparator + "graveyard" + fileSeparator + uriPath + fileSeparator + "v" + version + ".json";
 
         String customJson = null;
-        try (DataInputStream reader = new DataInputStream(new FileInputStream(fullPath)))
+
+        try (BufferedReader br = new BufferedReader(new FileReader(fullPath)))
         {
-            customJson = reader.readUTF();
-        } catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        } catch (IOException e)
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+            while (line != null)
+            {
+                sb.append(line);
+                line = br.readLine();
+            }
+            customJson = sb.toString();
+        }
+        catch(IOException e)
         {
             e.printStackTrace();
         }
 
-        (new File(fullPath)).delete();
+
+        File jsonFile = new File(fullPath);
+        jsonFile.delete();
         GsonBuilder gsonBuilder = new GsonBuilder();
 
-        gsonBuilder.registerTypeHierarchyAdapter(Document.class, new CustomJsonDeserializer());
+        gsonBuilder.registerTypeHierarchyAdapter(Document.class, new GraveyardIOImpl.CustomJsonDeserializer());
         Gson customGson = gsonBuilder.create();
         Document doc = customGson.fromJson(customJson, Document.class);
 

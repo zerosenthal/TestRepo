@@ -43,7 +43,7 @@ public class DocumentIOImpl extends DocumentIO
             JsonElement element;
             JsonObject jsonDoc = new JsonObject();
 
-            element = new JsonPrimitive(Base64.encodeBase64String(doc.contents));
+            element = new JsonPrimitive(Base64.encodeBase64String(doc.getDocument()));
             jsonDoc.add("Contents", element);
 
             element = gson.toJsonTree(doc.getKey(), URI.class);
@@ -77,7 +77,8 @@ public class DocumentIOImpl extends DocumentIO
             int hashCode = jsonDoc.get("Hash Code").getAsInt();
             Map wordMap = gson.fromJson(jsonDoc.get("Word Map"), Map.class);
 
-            DocumentImpl doc = new DocumentImpl(new ByteArrayInputStream(contents), uri, compForm);
+            DocumentImpl doc = new DocumentImpl(null, uri, compForm);
+            doc.contents = contents;
             doc.hashCode = hashCode;
             doc.setWordMap(wordMap);
 
@@ -147,7 +148,6 @@ public class DocumentIOImpl extends DocumentIO
         String fullPath = dir + fileSeparator + uriPath + ".json";
 
         String customJson = null;
-
 
         try (BufferedReader br = new BufferedReader(new FileReader(fullPath)))
         {

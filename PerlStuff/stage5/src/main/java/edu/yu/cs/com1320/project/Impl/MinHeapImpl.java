@@ -26,23 +26,8 @@ public class MinHeapImpl<E extends Comparable> extends MinHeap<E>
     public void reHeapify(E element)
     {
         int elementIndex = getArrayIndex(element);
-
-        //if element is > its left child, downheap
-        if ((elementIndex * 2 < elements.length) && (elements[elementIndex * 2] != null) && (isGreater(elementIndex, elementIndex * 2)))
-        {
-            downHeap(elementIndex);
-        }
-
-        //if parent is > element, upheap
-        else if ((elementIndex != 1) && isGreater((int)Math.floor((elementIndex / 2.0)), elementIndex))
-        {
-            upHeap(elementIndex);
-        }
-
-        else
-        {
-            checkChildOrder(elementIndex);
-        }
+        downHeap(elementIndex);
+        upHeap(elementIndex);
     }
 
     protected int getArrayIndex(E element)
@@ -110,10 +95,8 @@ public class MinHeapImpl<E extends Comparable> extends MinHeap<E>
         while (k > 1 && this.isGreater(k / 2, k))
         {
             this.swap(k, k / 2);
-            checkChildOrder(k);
             k = k / 2;
         }
-        checkChildOrder(k);
     }
 
     /**
@@ -134,12 +117,10 @@ public class MinHeapImpl<E extends Comparable> extends MinHeap<E>
             //if the current value is < the smaller child, we're done
             if (!this.isGreater(k, j))
             {
-                checkChildOrder(k);
                 break;
             }
             //if not, swap and continue testing
             this.swap(k, j);
-            checkChildOrder(k);
             k = j;
         }
     }
@@ -178,25 +159,6 @@ public class MinHeapImpl<E extends Comparable> extends MinHeap<E>
         return min;
     }
 
-    private void checkChildOrder(int elementIndex)
-    {
-        //if sibling is null, do nothing
-        if (elementIndex + 1 < super.elements.length && super.elements[elementIndex + 1] == null)
-        {
-        }
-
-        //if element isn't the root, is right child and is less than left child, swap
-        else if ((elementIndex != 1) && (elementIndex % 2 != 0) && (isGreater(elementIndex - 1, elementIndex)))
-        {
-            swap(elementIndex - 1, elementIndex);
-        }
-
-        //if element is left child, there is a right child, and is greater than right child, swap
-        else if ((elementIndex % 2 == 0) && (hasNext(elementIndex)) && (isGreater(elementIndex, elementIndex + 1)))
-        {
-            swap(elementIndex, elementIndex + 1);
-        }
-    }
 
     private boolean hasNext(int elementIndex)
     {

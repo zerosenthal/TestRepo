@@ -1,10 +1,12 @@
 package edu.yu.cs.com1320.project.Impl;
 
 import edu.yu.cs.com1320.project.DocumentStore;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -18,7 +20,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Project: stage4
+ * Project: stage5
  * DocumentStoreImplTest.java
  * Created 3/11/2019
  *
@@ -41,18 +43,19 @@ public class DocumentStoreImplTest
 
         String str = "Hello this is a string";
         testInput = new ByteArrayInputStream(str.getBytes());
-        testURI = URI.create("testing_this_input");
+        testURI = URI.create("https://docStoreTests/store1/testURI");
 
         String str1 = "String1";
         String str2 = "String2";
         String str3 = "String3";
         String str4 = "String4";
+        String str5 = "String5";
 
-        docStore.putDocument(new ByteArrayInputStream(str1.getBytes()), new URI("1"));
-        docStore.putDocument(new ByteArrayInputStream(str2.getBytes()), new URI("2"));
-        docStore.putDocument(new ByteArrayInputStream(str4.getBytes()), new URI("1"));
-        docStore.putDocument(new ByteArrayInputStream(str3.getBytes()), new URI("3"));
-        docStore.deleteDocument(new URI("2"));
+        docStore.putDocument(new ByteArrayInputStream(str1.getBytes()), new URI("https://docStoreTests/store1/1"));
+        docStore.putDocument(new ByteArrayInputStream(str2.getBytes()), new URI("https://docStoreTests/store1/2"));
+        docStore.putDocument(new ByteArrayInputStream(str4.getBytes()), new URI("https://docStoreTests/store1/1"));
+        docStore.putDocument(new ByteArrayInputStream(str3.getBytes()), new URI("https://docStoreTests/store1/3"));
+        docStore.deleteDocument(new URI("https://docStoreTests/store1/2"));
 
         docStore2 = new DocumentStoreImpl();
 
@@ -62,9 +65,9 @@ public class DocumentStoreImplTest
         String text2 = "A string, this is. This, A STRING, I say";
         String text3 = "I say, I say, I say";
 
-        docStore3.putDocument(new ByteArrayInputStream(text1.getBytes()), new URI("1"));
-        docStore3.putDocument(new ByteArrayInputStream(text2.getBytes()), new URI("2"));
-        docStore3.putDocument(new ByteArrayInputStream(text3.getBytes()), new URI("3"));
+        docStore3.putDocument(new ByteArrayInputStream(text1.getBytes()), new URI("https://docStoreTests/store3/1"));
+        docStore3.putDocument(new ByteArrayInputStream(text2.getBytes()), new URI("https://docStoreTests/store3/2"));
+        docStore3.putDocument(new ByteArrayInputStream(text3.getBytes()), new URI("https://docStoreTests/store3/3"));
 
         docStore4 = new DocumentStoreImpl();
 
@@ -73,11 +76,29 @@ public class DocumentStoreImplTest
         String message3 = "This document goes in third";
         String message4 = "This document replaces the second document";
 
-        docStore4.putDocument(new ByteArrayInputStream(message1.getBytes()), new URI("1"));
-        docStore4.putDocument(new ByteArrayInputStream(message2.getBytes()), new URI("2"));
-        docStore4.putDocument(new ByteArrayInputStream(message3.getBytes()), new URI("3"));
-        docStore4.putDocument(new ByteArrayInputStream(message4.getBytes()), new URI("2"));
+        docStore4.putDocument(new ByteArrayInputStream(message1.getBytes()), new URI("https://docStoreTests/store4/1"));
+        docStore4.putDocument(new ByteArrayInputStream(message2.getBytes()), new URI("https://docStoreTests/store4/2"));
+        docStore4.putDocument(new ByteArrayInputStream(message3.getBytes()), new URI("https://docStoreTests/store4/3"));
+        docStore4.putDocument(new ByteArrayInputStream(message4.getBytes()), new URI("https://docStoreTests/store4/2"));
     }
+
+    /*work in progress
+    @After
+    public void tearDown()
+    {
+        File testDir = (new File(System.getProperty("user.dir") + "docStoreTests")).getParentFile();
+        File graveyardDir = (new File(System.getProperty("user.dir") + "docStoreTests")).getParentFile();
+
+        for (File file: testDir.listFiles()) {
+            file.delete();
+        }
+        testDir.delete();
+
+        for (File file: graveyardDir.listFiles()) {
+            file.delete();
+        }
+        graveyardDir.delete();
+    }*/
 
     @Test
     public void testSetDefaultCompressionFormat()
@@ -153,38 +174,38 @@ public class DocumentStoreImplTest
         assertArrayEquals("testing get compressed byte[]", storedArray, outputArray);
     }
 
-    /*@Test
+    @Test
     public void testDeleteDocument()
     {
         docStore.putDocument(testInput, testURI);
         docStore.deleteDocument(testURI);
 
-        assertTrue("testing delete method", docStore.docHashTable.get(testURI) == null);
-    }*/
+        assertTrue("testing delete method", docStore.docBTree.get(testURI) == null);
+    }
 
     @Test
     public void testGenericUndo() throws URISyntaxException
     {
         assertTrue(docStore.undo());
 
-        assertEquals("testing undo delete", "String2", docStore.getDocument(new URI("2")));
+        assertEquals("testing undo delete", "String2", docStore.getDocument(new URI("https://docStoreTests/store1/2")));
 
         assertTrue(docStore.undo());
 
-        assertEquals("testing undo put new doc", null, docStore.docBTree.get(new URI("3")));
+        assertEquals("testing undo put new doc", null, docStore.docBTree.get(new URI("https://docStoreTests/store1/3")));
 
         assertTrue(docStore.undo());
 
-        assertEquals("testing undo put overwrite doc", "String1", docStore.getDocument(new URI("1")));
+        assertEquals("testing undo put overwrite doc", "String1", docStore.getDocument(new URI("https://docStoreTests/store1/1")));
     }
 
     @Test
     public void testURIUndo() throws URISyntaxException
     {
-       docStore.undo(new URI("1"));
+       assertTrue(docStore.undo(new URI("https://docStoreTests/store1/1")));
 
-        assertEquals("testing undo uri", "String1", docStore.getDocument(new URI("1")));
-        assertEquals("testing undo uri, stack reset", "String3", docStore.getDocument(new URI("3")));
+        assertEquals("testing undo uri", "String1", docStore.getDocument(new URI("https://docStoreTests/store1/1")));
+        assertEquals("testing undo uri, stack reset", "String3", docStore.getDocument(new URI("https://docStoreTests/store1/3")));
     }
 
     @Test(expected = IllegalStateException.class)
@@ -196,14 +217,14 @@ public class DocumentStoreImplTest
     @Test(expected = IllegalStateException.class)
     public void testUndoNoURI() throws URISyntaxException
     {
-        docStore.undo(new URI("42"));
+        docStore.undo(new URI("https://docStoreTests/store1/42"));
     }
 
     @Test
     public void testSearch() throws URISyntaxException
     {
-        List<String> stringList = new ArrayList<String>(Arrays.asList(this.docStore3.getDocument(new URI("2")), this.docStore3.getDocument(new URI("1"))));
-        List<String> sayList = new ArrayList<String>(Arrays.asList(this.docStore3.getDocument(new URI("3")), this.docStore3.getDocument(new URI("1")), this.docStore3.getDocument(new URI("2"))));
+        List<String> stringList = new ArrayList<String>(Arrays.asList(this.docStore3.getDocument(new URI("https://docStoreTests/store3/2")), this.docStore3.getDocument(new URI("https://docStoreTests/store3/1"))));
+        List<String> sayList = new ArrayList<String>(Arrays.asList(this.docStore3.getDocument(new URI("https://docStoreTests/store3/3")), this.docStore3.getDocument(new URI("https://docStoreTests/store3/1")), this.docStore3.getDocument(new URI("https://docStoreTests/store3/2"))));
 
         assertEquals("testing search uncompressed", stringList, this.docStore3.search("string"));
         assertEquals("testing search uncompressed capital keyword", stringList, this.docStore3.search("String"));
@@ -213,8 +234,8 @@ public class DocumentStoreImplTest
     @Test
     public void testSearchCompressed() throws URISyntaxException
     {
-        List<byte[]> stringList = new ArrayList<byte[]>(Arrays.asList(this.docStore3.getCompressedDocument(new URI("2")), this.docStore3.getCompressedDocument(new URI("1"))));
-        List<byte[]> sayList = new ArrayList<byte[]>(Arrays.asList(this.docStore3.getCompressedDocument(new URI("3")), this.docStore3.getCompressedDocument(new URI("1")), this.docStore3.getCompressedDocument(new URI("2"))));
+        List<byte[]> stringList = new ArrayList<byte[]>(Arrays.asList(this.docStore3.getCompressedDocument(new URI("https://docStoreTests/store3/2")), this.docStore3.getCompressedDocument(new URI("https://docStoreTests/store3/1"))));
+        List<byte[]> sayList = new ArrayList<byte[]>(Arrays.asList(this.docStore3.getCompressedDocument(new URI("https://docStoreTests/store3/3")), this.docStore3.getCompressedDocument(new URI("https://docStoreTests/store3/1")), this.docStore3.getCompressedDocument(new URI("https://docStoreTests/store3/2"))));
 
         assertEquals("testing search compressed", stringList, this.docStore3.searchCompressed("string"));
         assertEquals("testing search compressed", stringList, this.docStore3.searchCompressed("String"));
@@ -225,15 +246,15 @@ public class DocumentStoreImplTest
     public void testUndoTrie() throws URISyntaxException
     {
         String text4 = "Say say say say";
-        List<String> sayList = new ArrayList<String>(Arrays.asList(this.docStore3.getDocument(new URI("3")), this.docStore3.getDocument(new URI("1")), this.docStore3.getDocument(new URI("2"))));
+        List<String> sayList = new ArrayList<String>(Arrays.asList(this.docStore3.getDocument(new URI("https://docStoreTests/store3/3")), this.docStore3.getDocument(new URI("https://docStoreTests/store3/1")), this.docStore3.getDocument(new URI("https://docStoreTests/store3/2"))));
 
-        this.docStore3.putDocument(new ByteArrayInputStream(text4.getBytes()), new URI("4"));
+        this.docStore3.putDocument(new ByteArrayInputStream(text4.getBytes()), new URI("https://docStoreTests/store3/4"));
 
         docStore3.undo();
 
         assertEquals("testing undo put trie update", sayList, this.docStore3.search("say"));
 
-        docStore3.deleteDocument(new URI("3"));
+        docStore3.deleteDocument(new URI("https://docStoreTests/store3/3"));
 
         docStore3.undo();
 
@@ -247,9 +268,11 @@ public class DocumentStoreImplTest
 
         this.docStore4.setMaxDocumentBytes(670);
 
-         this.docStore4.putDocument(new ByteArrayInputStream(newMessage.getBytes()), new URI("5"));
+        this.docStore4.putDocument(new ByteArrayInputStream(newMessage.getBytes()), new URI("https://docStoreTests/store4/5"));
 
-        assertEquals("testing memory management for byte limit", null, this.docStore4.getDocument(new URI("1")));
+        File diskFile = new File(System.getProperty("user.dir") + System.getProperty("file.separator") + "docStoreTests/store4/1" + ".json");
+
+        assertTrue("testing memory management for byte limit", diskFile.exists());
     }
 
     @Test
@@ -259,9 +282,11 @@ public class DocumentStoreImplTest
 
         this.docStore4.setMaxDocumentCount(3);
 
-        this.docStore4.putDocument(new ByteArrayInputStream(newMessage.getBytes()), new URI("5"));
+        this.docStore4.putDocument(new ByteArrayInputStream(newMessage.getBytes()), new URI("https://docStoreTests/store4/5"));
 
-        assertEquals("testing memory management for byte limit", null, this.docStore4.getDocument(new URI("1")));
+        File diskFile = new File(System.getProperty("user.dir") + System.getProperty("file.separator") + "docStoreTests/store4/1" + ".json");
+
+        assertTrue("testing memory management for byte limit", diskFile.exists());
     }
 
     

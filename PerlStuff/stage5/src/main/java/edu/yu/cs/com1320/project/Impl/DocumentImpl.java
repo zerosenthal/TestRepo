@@ -46,12 +46,21 @@ public class DocumentImpl implements Document
      */
     public DocumentImpl(InputStream input, URI newURI, DocumentStore.CompressionFormat newCompForm)
     {
-        String string = buildString(input);
+        if (input == null)
+        {
+            this.uri = newURI;
+            this.compForm = newCompForm;
+        }
 
-        this.contents = string.getBytes();
-        this.uri = newURI;
-        this.hashCode = string.hashCode();
-        this.compForm = newCompForm;
+        else
+        {
+            String string = buildString(input);
+
+            this.contents = string.getBytes();
+            this.uri = newURI;
+            this.hashCode = string.hashCode();
+            this.compForm = newCompForm;
+        }
     }
 
     @Override

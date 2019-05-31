@@ -3,11 +3,8 @@ package edu.yu.cs.com1320.project.Impl;
 import edu.yu.cs.com1320.project.BTree;
 import edu.yu.cs.com1320.project.Document;
 
-import javax.print.Doc;
 import java.io.File;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Project: stage5

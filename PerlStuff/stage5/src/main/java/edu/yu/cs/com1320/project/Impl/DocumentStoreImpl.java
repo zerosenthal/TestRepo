@@ -30,8 +30,9 @@ public class DocumentStoreImpl implements DocumentStore
     private int currentDocumentCount;
     private int currentDocumentBytes;
     private StackImpl<URI> sentToDisk;
-    private GraveyardIOImpl graveyardDocIO;
     private Map<URI, Integer> versionCounter;
+    private GraveyardIOImpl graveyardDocIO;
+
 
 
     public DocumentStoreImpl()
@@ -47,8 +48,8 @@ public class DocumentStoreImpl implements DocumentStore
         this.currentDocumentCount = 0;
         this.currentDocumentBytes = 0;
         this.sentToDisk = new StackImpl<URI>();
-        this.graveyardDocIO = new GraveyardIOImpl(this.versionCounter);
         this.versionCounter = new HashMap<>();
+        this.graveyardDocIO = new GraveyardIOImpl(this.versionCounter);
     }
 
     public DocumentStoreImpl(File baseDir)
@@ -64,8 +65,8 @@ public class DocumentStoreImpl implements DocumentStore
         this.currentDocumentCount = 0;
         this.currentDocumentBytes = 0;
         this.sentToDisk = new StackImpl<URI>();
-        this.graveyardDocIO = new GraveyardIOImpl(this.versionCounter, baseDir);
         this.versionCounter = new HashMap<>();
+        this.graveyardDocIO = new GraveyardIOImpl(this.versionCounter, baseDir);
     }
 
 
@@ -189,13 +190,12 @@ public class DocumentStoreImpl implements DocumentStore
                             (thisURI -> undoLoadedPut(uri, previousTimeStamp)),
                             (thisURI -> redoLoadedPut(uri, finalTimeStamp)));
 
-                    this.usageQueueRemove(uri);
                     this.graveyardDocIO.serialize(previousDoc, 0);//send replaced doc to disk as current version#
                     this.versionCounter.put(uri, (this.versionCounter.get(uri)) + 1); //increment current version#
                     this.docBTree.put(uri, document);
                     this.commandStack.push(newCommand);
                     document.setLastUseTime(finalTimeStamp);
-                    this.usageQueue.insert(new URIWrapper(uri));
+                    this.usageQueue.reHeapify(new URIWrapper(uri));
                     this.enforceMemoryLimits(false, (previousDoc.getDocument().length), (finalDocument.getDocument().length));
                 }
                 else
@@ -206,6 +206,7 @@ public class DocumentStoreImpl implements DocumentStore
                             (thisURI -> undoNewPut(uri)),
                             (thisURI -> redoNewPut(uri, finalTimeStamp)));
 
+                    this.versionCounter.put(uri, (this.versionCounter.get(uri)) + 1); //increment current version#
                     this.docBTree.put(uri, document);
                     this.commandStack.push(newCommand);
                     document.setLastUseTime(finalTimeStamp);
@@ -291,10 +292,11 @@ public class DocumentStoreImpl implements DocumentStore
     {
         DocumentImpl finalDocument = this.get(uri);
         allowReturnToMemory(true, finalDocument.getDocument().length, 0);
-        this.graveyardDocIO.serialize(finalDocument, 1); //send new doc to disk as next version#
+        this.graveyardDocIO.serialize(finalDocument, 0); //send new doc to disk as next version#
         this.versionCounter.put(uri, (this.versionCounter.get(uri))-1); //roll back current version#
-        Boolean undoSuccessful = this.docBTree.put(uri, null) == finalDocument;
+        this.searchTrieDelete(uri);
         this.usageQueueRemove(uri);
+        Boolean undoSuccessful = this.docBTree.put(uri, null) == finalDocument;
         return undoSuccessful;
     }
 
@@ -353,8 +355,8 @@ public class DocumentStoreImpl implements DocumentStore
             this.currentDocumentCount--;
             this.currentDocumentBytes = this.currentDocumentBytes - previousDoc.getDocument().length;
             this.graveyardDocIO.serialize(previousDoc, 0);//send deleted doc to disk as current version#
-            this.docBTree.put(uri, null);
             this.usageQueueRemove(uri);
+            this.docBTree.put(uri, null);
             return true;
         }
 
@@ -376,6 +378,7 @@ public class DocumentStoreImpl implements DocumentStore
         }
         this.enforceMemoryLimits(true, 0, previousDoc.getDocument().length);
         boolean undoSuccessful = this.docBTree.put(uri, previousDoc) == null;
+        previousDoc.setLastUseTime(previousTimeStamp);
         this.usageQueue.insert(new URIWrapper(uri));
         return undoSuccessful;
     }
@@ -387,8 +390,8 @@ public class DocumentStoreImpl implements DocumentStore
         this.currentDocumentCount--;
         this.currentDocumentBytes = this.currentDocumentBytes - previousDoc.getDocument().length;
         this.graveyardDocIO.serialize(previousDoc, 0);//send deleted doc to disk as current version#
-        boolean redoSuccessful = this.docBTree.put(uri, null) == previousDoc;
         this.usageQueueRemove(uri);
+        boolean redoSuccessful = this.docBTree.put(uri, null) == previousDoc;
         return redoSuccessful;
     }
 
@@ -467,7 +470,10 @@ public class DocumentStoreImpl implements DocumentStore
             {
                 throw new IllegalStateException(e.getMessage());
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
     }
 
@@ -926,7 +932,12 @@ public class DocumentStoreImpl implements DocumentStore
     private DocumentImpl get(URI uri)
     {
         DocumentImpl doc = this.docBTree.get(uri);
-        if (this.usageQueue.getArrayIndex(new URIWrapper(uri)) == -1)
+        if (doc == null)
+        {
+            return null;
+        }
+
+        else if (this.usageQueue.getArrayIndex(new URIWrapper(uri)) == -1)
         {
             this.enforceMemoryLimits(true, 0, doc.getDocument().length);
             this.sentToDiskRemove(uri);

@@ -1,11 +1,13 @@
 package edu.yu.cs.com1320.project.Impl;
 
+import edu.yu.cs.com1320.project.Document;
 import edu.yu.cs.com1320.project.DocumentStore;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -38,13 +40,11 @@ public class DocumentIOImplTest
     }
 
     @Test
-    public void serialize() throws URISyntaxException
+    public void serialize() throws URISyntaxException, IOException
     {
         URI uri = new URI("https://jsonTests/doc");
-        DocumentImpl doc = new DocumentImpl(new ByteArrayInputStream(("string").getBytes()), uri, DocumentStore.CompressionFormat.BZIP2);
-        Map<String, Integer> wordMap = new HashMap<>();
-        wordMap.put("string", 1);
-        doc.setWordMap(wordMap);
+        DocumentImpl doc = new DocumentImpl(new ByteArrayInputStream(("string").getBytes()), uri, DocumentStore.CompressionFormat.ZIP);
+        doc.contents = doc.compress();
 
         String expectedPath = System.getProperty("user.dir") + System.getProperty("file.separator") + uri.getHost() + uri.getPath() + ".json";
         assertEquals("testing file path", new File(expectedPath), this.docIO.serialize(doc));
@@ -53,16 +53,17 @@ public class DocumentIOImplTest
     }
 
     @Test
-    public void deserialize() throws URISyntaxException
+    public void deserialize() throws URISyntaxException, IOException
     {
         URI uri = new URI("https://jsonTests/doc");
-        DocumentImpl doc = new DocumentImpl(new ByteArrayInputStream(("string").getBytes()), uri, DocumentStore.CompressionFormat.BZIP2);
-        Map<String, Integer> wordMap = new HashMap<>();
-        wordMap.put("string", 1);
-        doc.setWordMap(wordMap);
-        this.docIO.serialize(doc);
+        DocumentImpl doc = new DocumentImpl(new ByteArrayInputStream(("string").getBytes()), uri, DocumentStore.CompressionFormat.ZIP);
+        doc.contents = doc.compress();
 
-        assertEquals("testing deserialize", doc, (DocumentImpl) this.docIO.deserialize(uri));
+        this.docIO.serialize(doc);
+        Document deserializedDoc = this.docIO.deserialize(uri);
+
+        assertEquals("testing deserialize", doc, (DocumentImpl) deserializedDoc);
+        assertEquals("testing strings", doc.decompress(), ((DocumentImpl) deserializedDoc).decompress());
 
         String expectedPath = System.getProperty("user.dir") + System.getProperty("file.separator") + uri.getHost() + uri.getPath() + ".json";
         assertFalse(new File(expectedPath).exists());
