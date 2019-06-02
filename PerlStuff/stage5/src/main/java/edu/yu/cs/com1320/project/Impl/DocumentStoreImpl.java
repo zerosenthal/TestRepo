@@ -2,10 +2,12 @@ package edu.yu.cs.com1320.project.Impl;
 
 import edu.yu.cs.com1320.project.DocumentStore;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 
 
@@ -176,13 +178,13 @@ public class DocumentStoreImpl implements DocumentStore
 
             if (previousDoc != document)
             {
-                this.processDocContents(document, new String(decompressedContents));
                 document.contents = document.compress();
 
                 DocumentImpl finalDocument = document;
 
                 if (previousDoc != null)
                 {
+                    this.searchTrieDelete(uri);
                     long previousTimeStamp = previousDoc.getLastUseTime();
                     long finalTimeStamp = System.currentTimeMillis();
                     Command newCommand = new Command
@@ -213,6 +215,7 @@ public class DocumentStoreImpl implements DocumentStore
                     this.usageQueue.insert(new URIWrapper(uri));
                     this.enforceMemoryLimits(true, 0, (finalDocument.getDocument().length));
                 }
+                this.processDocContents(document, new String(decompressedContents));
             }
         }
         catch (IOException e)
@@ -829,7 +832,7 @@ public class DocumentStoreImpl implements DocumentStore
 
         else
         {
-            this.commandStack.pop();
+            this.sentToDisk.pop();
             return true;
         }
     }

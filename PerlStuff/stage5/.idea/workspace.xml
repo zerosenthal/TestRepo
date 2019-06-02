@@ -33,79 +33,51 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/StackImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1326">
+              <caret line="78" selection-start-line="78" selection-end-line="78" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="98">
+              <caret line="251" selection-start-line="251" selection-end-line="251" />
+              <folding>
+                <element signature="e#2638#2639#0" expanded="true" />
+                <element signature="e#2687#2688#0" expanded="true" />
+                <element signature="e#7814#7815#0" expanded="true" />
+                <element signature="e#7872#7873#0" expanded="true" />
+                <element signature="e#7908#7909#0" expanded="true" />
+                <element signature="e#7953#7954#0" expanded="true" />
+                <element signature="e#7984#7985#0" expanded="true" />
+                <element signature="e#8071#8072#0" expanded="true" />
+                <element signature="e#8107#8108#0" expanded="true" />
+                <element signature="e#8289#8290#0" expanded="true" />
+                <element signature="e#8338#8339#0" expanded="true" />
+                <element signature="e#8392#8393#0" expanded="true" />
+                <element signature="e#8431#8432#0" expanded="true" />
+                <element signature="e#8508#8509#0" expanded="true" />
+                <element signature="e#8561#8562#0" expanded="true" />
+                <element signature="e#8627#8628#0" expanded="true" />
+                <element signature="e#8661#8662#0" expanded="true" />
+                <element signature="e#8739#8740#0" expanded="true" />
+                <element signature="e#8781#8782#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/BTreeImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1615">
-              <caret line="111" column="64" selection-start-line="111" selection-start-column="64" selection-end-line="111" selection-end-column="64" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4434#4435#0" expanded="true" />
-                <element signature="e#4464#4465#0" expanded="true" />
-                <element signature="e#10135#10136#0" expanded="true" />
-                <element signature="e#10178#10179#0" expanded="true" />
-                <element signature="e#10250#10251#0" expanded="true" />
-                <element signature="e#10294#10295#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="47" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
-              <folding>
-                <element signature="e#983#1666#0" />
-                <element signature="e#1672#2383#0" />
-                <element signature="e#2510#2925#0" />
-                <element signature="e#3049#3219#0" />
-                <element signature="e#3049#3692#0" />
-                <element signature="e#3698#3833#0" />
-                <element signature="e#3698#4176#0" />
-                <element signature="e#4182#4438#0" />
-                <element signature="e#4583#4815#0" />
-                <element signature="e#4583#7683#0" />
-                <element signature="e#7689#8428#0" />
-                <element signature="e#8434#9357#0" />
-                <element signature="e#9363#10271#0" />
-                <element signature="e#10277#10795#0" />
-                <element signature="e#10801#11517#0" />
-                <element signature="e#11523#11905#0" />
-                <element signature="e#11911#12078#0" />
-                <element signature="e#11911#13026#0" />
-                <element signature="e#13032#13672#0" />
-                <element signature="e#13678#14192#0" />
-                <element signature="e#14198#14524#0" />
-                <element signature="e#14198#15112#0" />
-                <element signature="e#15118#15431#0" />
-                <element signature="e#15118#16442#0" />
-                <element signature="e#16448#17406#0" />
-                <element signature="e#16718#17295#0" />
-                <element signature="e#17412#17687#0" />
-                <element signature="e#17412#18501#0" />
-                <element signature="e#18507#18804#0" />
-                <element signature="e#18507#19504#0" />
-                <element signature="e#19510#19986#0" />
-                <element signature="e#19992#20088#0" />
-                <element signature="e#19992#20411#0" />
-                <element signature="e#20417#20575#0" />
-                <element signature="e#20417#20898#0" />
-                <element signature="e#22801#23816#0" />
-                <element signature="e#26370#26678#0" />
-                <element signature="e#27192#30646#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentIO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+            <state relative-caret-position="246">
+              <caret line="110" column="27" selection-start-line="110" selection-start-column="27" selection-end-line="110" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -114,10 +86,65 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentIOImplTest.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="28" column="74" selection-start-line="28" selection-start-column="74" selection-end-line="28" selection-end-column="74" />
+            <state relative-caret-position="323">
+              <caret line="337" selection-start-line="337" selection-end-line="337" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="87">
+              <caret line="766" selection-start-line="766" selection-end-line="766" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#7960#7977#0" expanded="true" />
+                <element signature="e#18258#18266#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/TrieImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="70" selection-start-line="70" selection-end-line="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/MinHeapImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1156">
+              <caret line="71" selection-start-line="71" selection-end-line="71" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/Command.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
+              <folding>
+                <element signature="e#430#431#0" expanded="true" />
+                <element signature="e#461#462#0" expanded="true" />
+                <element signature="e#537#538#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -125,20 +152,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentIOImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="169" column="25" selection-start-line="169" selection-start-column="8" selection-end-line="169" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/GraveyardIOImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1780">
-              <caret line="169" column="71" selection-start-line="169" selection-start-column="71" selection-end-line="169" selection-end-column="71" />
+            <state relative-caret-position="555">
+              <caret line="137" selection-start-line="137" selection-end-line="137" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -161,6 +176,10 @@
     <findStrings>
       <find>this.docBTree.get</find>
       <find>check</find>
+      <find>this.docBTree.put(uri, null);</find>
+      <find>search</find>
+      <find>searchTrieDelete</find>
+      <find>delete</find>
     </findStrings>
     <dirStrings>
       <dir>C:\CompSci\MYGIT\PerlEli\DataStructures\project\stage5\src\main\java\project</dir>
@@ -178,23 +197,25 @@
         <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/BTree.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/TrieImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Document.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/DocumentIO.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Serializable.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocURIWrapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/URIWrapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentIO.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/ShalomBTreeImplTestStage5.java" />
-        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/MinHeapImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocIOTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/BTreeImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/QueueImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/GraveyardIOImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentIOImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/BTreeImplTest.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentIOImplTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentIOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/GraveyardIOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/MinHeapImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/BTreeImpl.java" />
+        <option value="$PROJECT_DIR$/README.txt" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java" />
       </list>
     </option>
   </component>
@@ -216,8 +237,8 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="949" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-11" />
     <option name="width" value="980" />
     <option name="height" value="1031" />
   </component>
@@ -227,8 +248,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -236,70 +255,16 @@
               <item name="stage5" type="b2602c69:ProjectViewProjectNode" />
               <item name="stage5" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="stage5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stage5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stage5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stage5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stage5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="Impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stage5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stage5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stage5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="Impl" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559310186334" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559476982364" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../stage4" />
@@ -336,21 +301,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.DocumentIOImplTest">
-    <configuration name="QueueImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.QueueImpl" />
-      <module name="stage5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.yu.cs.com1320.project.Impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DocIOTest.deserialize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.DocumentStoreImplTest.testStage5">
+    <configuration name="DocumentStoreImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="stage5" />
       <extension name="coverage">
         <pattern>
@@ -359,29 +311,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="edu.yu.cs.com1320.project.Impl" />
-      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocIOTest" />
-      <option name="METHOD_NAME" value="deserialize" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DocumentIOImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="stage5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.yu.cs.com1320.project.Impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="edu.yu.cs.com1320.project.Impl" />
-      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentIOImplTest" />
+      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DocumentIOImplTest.deserialize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DocumentStoreImplTest.testByteMemManage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="stage5" />
       <extension name="coverage">
         <pattern>
@@ -390,14 +326,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="edu.yu.cs.com1320.project.Impl" />
-      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentIOImplTest" />
-      <option name="METHOD_NAME" value="deserialize" />
+      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest" />
+      <option name="METHOD_NAME" value="testByteMemManage" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DocumentIOImplTest.serialize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DocumentStoreImplTest.testCountMemManage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="stage5" />
       <extension name="coverage">
         <pattern>
@@ -406,8 +342,40 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="edu.yu.cs.com1320.project.Impl" />
-      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentIOImplTest" />
-      <option name="METHOD_NAME" value="serialize" />
+      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest" />
+      <option name="METHOD_NAME" value="testCountMemManage" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DocumentStoreImplTest.testStage5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="stage5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.yu.cs.com1320.project.Impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.yu.cs.com1320.project.Impl" />
+      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest" />
+      <option name="METHOD_NAME" value="testStage5" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DocumentStoreImplTest.testUndoTrie" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="stage5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.yu.cs.com1320.project.Impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.yu.cs.com1320.project.Impl" />
+      <option name="MAIN_CLASS_NAME" value="edu.yu.cs.com1320.project.Impl.DocumentStoreImplTest" />
+      <option name="METHOD_NAME" value="testUndoTrie" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -415,11 +383,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DocumentIOImplTest" />
-        <item itemvalue="JUnit.DocumentIOImplTest.deserialize" />
-        <item itemvalue="JUnit.DocumentIOImplTest.serialize" />
-        <item itemvalue="Application.QueueImpl" />
-        <item itemvalue="JUnit.DocIOTest.deserialize" />
+        <item itemvalue="JUnit.DocumentStoreImplTest.testStage5" />
+        <item itemvalue="JUnit.DocumentStoreImplTest" />
+        <item itemvalue="JUnit.DocumentStoreImplTest.testCountMemManage" />
+        <item itemvalue="JUnit.DocumentStoreImplTest.testByteMemManage" />
+        <item itemvalue="JUnit.DocumentStoreImplTest.testUndoTrie" />
       </list>
     </recent_temporary>
   </component>
@@ -437,41 +405,41 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DocumentIOImplTest_serialize - 2019.05.31 at 01h 26m 19s.xml">
-      <configuration name="DocumentIOImplTest.serialize" configurationId="JUnit" />
+    <history-entry file="DocumentStoreImplTest_testStage5 - 2019.06.02 at 01h 20m 26s.xml">
+      <configuration name="DocumentStoreImplTest.testStage5" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DocumentIOImplTest_serialize - 2019.05.31 at 01h 28m 15s.xml">
-      <configuration name="DocumentIOImplTest.serialize" configurationId="JUnit" />
+    <history-entry file="DocumentStoreImplTest_testStage5 - 2019.06.02 at 01h 32m 58s.xml">
+      <configuration name="DocumentStoreImplTest.testStage5" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DocumentIOImplTest_deserialize - 2019.05.31 at 01h 30m 42s.xml">
-      <configuration name="DocumentIOImplTest.deserialize" configurationId="JUnit" />
+    <history-entry file="DocumentStoreImplTest_testStage5 - 2019.06.02 at 01h 38m 22s.xml">
+      <configuration name="DocumentStoreImplTest.testStage5" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DocumentIOImplTest_deserialize - 2019.05.31 at 01h 31m 07s.xml">
-      <configuration name="DocumentIOImplTest.deserialize" configurationId="JUnit" />
+    <history-entry file="DocumentStoreImplTest_testStage5 - 2019.06.02 at 01h 39m 27s.xml">
+      <configuration name="DocumentStoreImplTest.testStage5" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DocumentIOImplTest_deserialize - 2019.05.31 at 01h 32m 51s.xml">
-      <configuration name="DocumentIOImplTest.deserialize" configurationId="JUnit" />
+    <history-entry file="DocumentStoreImplTest_testStage5 - 2019.06.02 at 01h 42m 08s.xml">
+      <configuration name="DocumentStoreImplTest.testStage5" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DocumentIOImplTest_deserialize - 2019.05.31 at 01h 33m 43s.xml">
-      <configuration name="DocumentIOImplTest.deserialize" configurationId="JUnit" />
+    <history-entry file="DocumentStoreImplTest_testStage5 - 2019.06.02 at 01h 43m 05s.xml">
+      <configuration name="DocumentStoreImplTest.testStage5" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DocumentIOImplTest_deserialize - 2019.05.31 at 01h 39m 37s.xml">
-      <configuration name="DocumentIOImplTest.deserialize" configurationId="JUnit" />
+    <history-entry file="DocumentStoreImplTest_testStage5 - 2019.06.02 at 01h 43m 15s.xml">
+      <configuration name="DocumentStoreImplTest.testStage5" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DocumentIOImplTest_deserialize - 2019.05.31 at 01h 40m 00s.xml">
-      <configuration name="DocumentIOImplTest.deserialize" configurationId="JUnit" />
+    <history-entry file="DocumentStoreImplTest_testStage5 - 2019.06.02 at 01h 45m 57s.xml">
+      <configuration name="DocumentStoreImplTest.testStage5" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DocumentIOImplTest - 2019.05.31 at 01h 40m 31s.xml">
-      <configuration name="DocumentIOImplTest" configurationId="JUnit" />
+    <history-entry file="DocumentStoreImplTest_testStage5 - 2019.06.02 at 01h 46m 03s.xml">
+      <configuration name="DocumentStoreImplTest.testStage5" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DocumentIOImplTest - 2019.05.31 at 01h 43m 00s.xml">
-      <configuration name="DocumentIOImplTest" configurationId="JUnit" />
+    <history-entry file="DocumentStoreImplTest_testStage5 - 2019.06.02 at 08h 04m 00s.xml">
+      <configuration name="DocumentStoreImplTest.testStage5" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="-7" y="0" width="653" height="687" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.22672065" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.48016194" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -481,12 +449,12 @@
       <window_info anchor="bottom" id="Messages" order="0" weight="0.3285968" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.3285968" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.36944938" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.39964476" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.37833038" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.3837838" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3285968" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.33333334" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -499,7 +467,7 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22672065" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.22672065" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -509,8 +477,8 @@
       <window_info anchor="bottom" id="Messages" order="0" weight="0.3285968" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.3285968" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.36944938" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.39964476" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.36944938" />
+      <window_info active="true" anchor="bottom" id="Debug" order="4" visible="true" weight="0.39964476" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
@@ -527,6 +495,60 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout-to-restore>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentIOImplTest.java</url>
+          <line>59</line>
+          <properties />
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java</url>
+          <line>317</line>
+          <properties />
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java</url>
+          <line>319</line>
+          <properties />
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java</url>
+          <line>324</line>
+          <properties />
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java</url>
+          <line>326</line>
+          <properties />
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java</url>
+          <line>332</line>
+          <properties />
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java</url>
+          <line>310</line>
+          <properties />
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java</url>
+          <line>337</line>
+          <properties />
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
@@ -534,61 +556,55 @@
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>jsonFile.delete()</expression-string>
+        <expression-string>this.wordSearchTrie.getAllSorted(keyword)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>jsonFile.delete();</expression-string>
+        <expression-string>docStore.search(&quot;doc1.3&quot;)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>wordMap</expression-string>
+        <expression-string>this.get(uri)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>gsonBuilder.registerTypeAdapter(Document.class, new DocumentIOImpl.CustomJsonSerializer())</expression-string>
+        <expression-string>this.bTree.get(this.uri)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>new DocumentIOImpl.CustomJsonSerializer()</expression-string>
+        <expression-string>Exception e</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>gsonBuilder.registerTypeAdapter(Document.class, new CustomJsonSerializer())</expression-string>
+        <expression-string>docStore.undo(new URI(&quot;https://docStoreTests/store1/1&quot;))</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>doc.getKey().getHost() + doc.getKey().getPath()</expression-string>
+        <expression-string>this.docBTree.put(uri, null)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>doc.getKey().getHost()</expression-string>
+        <expression-string>Boolean undoSuccessful = this.docBTree.put(uri, null) == finalDocument;</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>docIO.serialize(doc1)</expression-string>
+        <expression-string>this.versionCounter.get(doc.getKey())</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/java/edu/yu/cs/com1320/project/Impl/StackImplTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/java/edu/yu/cs/com1320/project/Impl/MinHeapImplTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/java/edu/yu/cs/com1320/project/Impl/HashTableImplTest.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/java/edu/yu/cs/com1320/project/Impl/TrieImplTest.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/Command.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/DocumentStore.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -672,29 +688,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="54" column="21" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/URIWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="107" column="1" lean-forward="true" selection-start-line="14" selection-end-line="107" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#556#557#0" expanded="true" />
-            <element signature="e#582#583#0" expanded="true" />
-            <element signature="e#634#635#0" expanded="true" />
-            <element signature="e#662#663#0" expanded="true" />
-            <element signature="e#1068#1069#0" expanded="true" />
-            <element signature="e#1089#1090#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/URIWrapper.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/MinHeap.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="77">
@@ -709,148 +703,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/ShalomBTreeImplTestStage5.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="56" lean-forward="true" selection-start-line="23" selection-start-column="56" selection-end-line="23" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#546#573#0" expanded="true" />
-            <element signature="e#3066#3076#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/BTreeImplTestStage5(S)">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="23" column="56" lean-forward="true" selection-start-line="23" selection-start-column="56" selection-end-line="23" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-43">
-          <caret line="173" column="72" lean-forward="true" selection-start-line="173" selection-start-column="72" selection-end-line="173" selection-end-column="72" />
-          <folding>
-            <element signature="e#6365#6366#0" expanded="true" />
-            <element signature="e#6397#6398#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocIOTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="48" selection-start-line="48" selection-end-line="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentIOTest(S)">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="38" selection-end-line="100" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/TrieImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/MinHeapImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="56" column="22" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/ShalomBTreeImplTestStage5.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/BTreeImplTestStage5(S)" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocIOTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentIOTest(S)" />
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/QueueImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1207">
           <caret line="71" column="36" selection-start-line="71" selection-start-column="36" selection-end-line="71" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/StackImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="47" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
-          <folding>
-            <element signature="e#983#1666#0" />
-            <element signature="e#1672#2383#0" />
-            <element signature="e#2510#2925#0" />
-            <element signature="e#3049#3219#0" />
-            <element signature="e#3049#3692#0" />
-            <element signature="e#3698#3833#0" />
-            <element signature="e#3698#4176#0" />
-            <element signature="e#4182#4438#0" />
-            <element signature="e#4583#4815#0" />
-            <element signature="e#4583#7683#0" />
-            <element signature="e#7689#8428#0" />
-            <element signature="e#8434#9357#0" />
-            <element signature="e#9363#10271#0" />
-            <element signature="e#10277#10795#0" />
-            <element signature="e#10801#11517#0" />
-            <element signature="e#11523#11905#0" />
-            <element signature="e#11911#12078#0" />
-            <element signature="e#11911#13026#0" />
-            <element signature="e#13032#13672#0" />
-            <element signature="e#13678#14192#0" />
-            <element signature="e#14198#14524#0" />
-            <element signature="e#14198#15112#0" />
-            <element signature="e#15118#15431#0" />
-            <element signature="e#15118#16442#0" />
-            <element signature="e#16448#17406#0" />
-            <element signature="e#16718#17295#0" />
-            <element signature="e#17412#17687#0" />
-            <element signature="e#17412#18501#0" />
-            <element signature="e#18507#18804#0" />
-            <element signature="e#18507#19504#0" />
-            <element signature="e#19510#19986#0" />
-            <element signature="e#19992#20088#0" />
-            <element signature="e#19992#20411#0" />
-            <element signature="e#20417#20575#0" />
-            <element signature="e#20417#20898#0" />
-            <element signature="e#22801#23816#0" />
-            <element signature="e#26370#26678#0" />
-            <element signature="e#27192#30646#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/BTreeImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1615">
-          <caret line="111" column="64" selection-start-line="111" selection-start-column="64" selection-end-line="111" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4434#4435#0" expanded="true" />
-            <element signature="e#4464#4465#0" expanded="true" />
-            <element signature="e#10135#10136#0" expanded="true" />
-            <element signature="e#10178#10179#0" expanded="true" />
-            <element signature="e#10250#10251#0" expanded="true" />
-            <element signature="e#10294#10295#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -903,16 +763,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/GraveyardIOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1780">
-          <caret line="169" column="71" selection-start-line="169" selection-start-column="71" selection-end-line="169" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/internal/JsonReaderInternalAccess.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -927,13 +777,6 @@
           <folding>
             <element signature="e#2752#2753#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.13-beta-3/junit-4.13-beta-3.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
@@ -965,20 +808,155 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentIOImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/BTreeImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="169" column="25" selection-start-line="169" selection-start-column="8" selection-end-line="169" selection-end-column="25" />
+        <state relative-caret-position="467">
+          <caret line="60" column="77" selection-start-line="60" selection-start-column="77" selection-end-line="60" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="61" column="21" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentIOImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="61" column="34" selection-start-line="61" selection-start-column="34" selection-end-line="61" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/GraveyardIOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="181" selection-start-line="181" selection-end-line="181" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentIOImplTest.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.13-beta-3/junit-4.13-beta-3.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="28" column="74" selection-start-line="28" selection-start-column="74" selection-end-line="28" selection-end-column="74" />
+        <state relative-caret-position="238">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/StackImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1326">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/MinHeapImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1156">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/Command.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+          <folding>
+            <element signature="e#430#431#0" expanded="true" />
+            <element signature="e#461#462#0" expanded="true" />
+            <element signature="e#537#538#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/internal/bind/TreeTypeAdapter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="57" selection-start-line="57" selection-end-line="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentIOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="137" selection-start-line="137" selection-end-line="137" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/TrieImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="70" selection-start-line="70" selection-end-line="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="251" selection-start-line="251" selection-end-line="251" />
+          <folding>
+            <element signature="e#2638#2639#0" expanded="true" />
+            <element signature="e#2687#2688#0" expanded="true" />
+            <element signature="e#7814#7815#0" expanded="true" />
+            <element signature="e#7872#7873#0" expanded="true" />
+            <element signature="e#7908#7909#0" expanded="true" />
+            <element signature="e#7953#7954#0" expanded="true" />
+            <element signature="e#7984#7985#0" expanded="true" />
+            <element signature="e#8071#8072#0" expanded="true" />
+            <element signature="e#8107#8108#0" expanded="true" />
+            <element signature="e#8289#8290#0" expanded="true" />
+            <element signature="e#8338#8339#0" expanded="true" />
+            <element signature="e#8392#8393#0" expanded="true" />
+            <element signature="e#8431#8432#0" expanded="true" />
+            <element signature="e#8508#8509#0" expanded="true" />
+            <element signature="e#8561#8562#0" expanded="true" />
+            <element signature="e#8627#8628#0" expanded="true" />
+            <element signature="e#8661#8662#0" expanded="true" />
+            <element signature="e#8739#8740#0" expanded="true" />
+            <element signature="e#8781#8782#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/BTreeImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="110" column="27" selection-start-line="110" selection-start-column="27" selection-end-line="110" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="766" selection-start-line="766" selection-end-line="766" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7960#7977#0" expanded="true" />
+            <element signature="e#18258#18266#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/yu/cs/com1320/project/Impl/DocumentStoreImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="337" selection-start-line="337" selection-end-line="337" />
         </state>
       </provider>
     </entry>

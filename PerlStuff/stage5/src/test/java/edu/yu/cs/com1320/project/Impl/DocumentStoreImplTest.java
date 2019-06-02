@@ -16,8 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Project: stage5
@@ -289,5 +288,55 @@ public class DocumentStoreImplTest
         assertTrue("testing memory management for byte limit", diskFile.exists());
     }
 
-    
+    @Test
+    public void testStage5() throws URISyntaxException
+    {
+        DocumentStoreImpl docStore = new DocumentStoreImpl();
+
+        URI uri1 = new URI("https://docStoreTests/doc1");
+        String doc1_1 = "doc1.1";
+        String doc1_2 = "doc1.2";
+        String doc1_3 = "doc1.3";
+
+        URI uri2 = new URI("https://docStoreTests/doc2");
+        String doc2_1 = "doc2.1";
+
+        URI uri3 = new URI("https://docStoreTests/doc3");
+        String doc3_1 = "doc3.1";
+
+        docStore.setMaxDocumentCount(2);
+
+        docStore.putDocument(new ByteArrayInputStream(doc1_1.getBytes()), uri1, DocumentStore.CompressionFormat.GZIP);
+        docStore.putDocument(new ByteArrayInputStream(doc1_2.getBytes()), uri1, DocumentStore.CompressionFormat.GZIP);
+        docStore.putDocument(new ByteArrayInputStream(doc1_3.getBytes()), uri1, DocumentStore.CompressionFormat.GZIP); //doc1 should be overridden twice, v1 and v2 should be on disk
+
+        File docFile1_1 = new File(System.getProperty("user.dir") + System.getProperty("file.separator") + "graveyard" + System.getProperty("file.separator") + uri1.getHost() + uri1.getPath() + System.getProperty("file.separator") + "v1" + ".json");
+        File docFile1_2 = new File(System.getProperty("user.dir") + System.getProperty("file.separator") + "graveyard" + System.getProperty("file.separator") + uri1.getHost() + uri1.getPath() + System.getProperty("file.separator") + "v2" + ".json");
+        assertTrue(docFile1_1.exists());
+        assertTrue(docFile1_2.exists());
+
+        docStore.putDocument(new ByteArrayInputStream(doc2_1.getBytes()), uri2, DocumentStore.CompressionFormat.GZIP);
+
+        docStore.putDocument(new ByteArrayInputStream(doc3_1.getBytes()), uri3, DocumentStore.CompressionFormat.GZIP);//exceeds mem limit, should send doc1.3 to disk in bTree
+
+        File docFile1_3 = new File(System.getProperty("user.dir") + System.getProperty("file.separator") + uri1.getHost() + uri1.getPath() + ".json");
+        assertTrue(docFile1_3.exists());
+
+        docStore.search("doc13"); //search should bring doc1.3 back to memory, kick doc2 out
+
+        docStore.undo(); //should undo put of doc3, allow doc2 back into memory
+
+        File docFile2_1 = new File(System.getProperty("user.dir") + System.getProperty("file.separator") + uri2.getHost() + uri2.getPath() + ".json");
+        assertFalse(docFile2_1.exists());
+        assertEquals("doc2.1", docStore.getDocument(uri2));
+
+        docStore.undo(uri1); //should bypass doc2 on stack, roll back doc1 to v2
+
+        assertEquals("doc1.2", docStore.getDocument(uri1));
+        assertFalse(docFile1_2.exists());
+
+        docStore.undo(uri1); //should bypass doc2 on stack, roll back doc1 to v1
+        assertEquals("doc1.1", docStore.getDocument(uri1));
+        assertFalse(docFile1_1.exists());
+    }
 }

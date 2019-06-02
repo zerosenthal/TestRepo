@@ -106,7 +106,9 @@ public class BTreeImpl implements BTree<URI, DocumentImpl>
             }
             else if (value instanceof File)
             {
-                return (DocumentImpl) this.docIO.deserialize(k);
+                DocumentImpl doc = (DocumentImpl) this.docIO.deserialize(k);
+                entry.val = doc;
+                return doc;
             }
         }
         return null;
