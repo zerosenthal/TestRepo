@@ -10,52 +10,47 @@ import java.util.List;
  * Project: stage3
  * TrieImpl.java - class representing a Trie
  * Created 4/4/2019
- * @see TooSimpleTrie
  *
  * @author Elimelekh Perl
+ * @see TooSimpleTrie
  */
-public class TrieImpl<Value> implements Trie<Value>
-{
+public class TrieImpl<Value> implements Trie<Value> {
     protected static final int alphabetSize = 256; // extended ASCII
     protected TrieNode root;
     protected Comparator<Value> valueComparator;
 
-    public TrieImpl(Comparator<Value> comparator)
-    {
+    public TrieImpl(Comparator<Value> comparator) {
         this.root = new TrieNode();
         this.valueComparator = comparator;
     }
 
-    protected static class TrieNode<Value>
-    {
+    protected static class TrieNode<Value> {
         private List<Value> valueList;
         protected TrieNode[] links = new TrieNode[alphabetSize];
 
-        public TrieNode()
-        {
+        public TrieNode() {
             this.valueList = null;
         }
 
-        protected void addValue(Value val)
-        {
-            if (this.valueList == null)
-            {
+        protected void addValue(Value val) {
+            if (this.valueList == null) {
                 this.valueList = new ArrayList<Value>();
             }
 
-            if (this.valueList.contains(val))
-            {
+            if (this.valueList.contains(val)) {
                 this.valueList.set(this.valueList.indexOf(val), val);
-            }
-            else
-            {
+            } else {
                 this.valueList.add(val);
             }
         }
 
-        protected void removeValue(Value val) { this.valueList.remove(val); }
+        protected void removeValue(Value val) {
+            this.valueList.remove(val);
+        }
 
-        protected int listSize() { return this.valueList.size(); }
+        protected int listSize() {
+            return this.valueList.size();
+        }
     }
 
     /**
@@ -66,12 +61,10 @@ public class TrieImpl<Value> implements Trie<Value>
      * @return
      */
     @Override
-    public List getAllSorted(String key)
-    {
+    public List getAllSorted(String key) {
         TrieNode node = this.get(this.root, key, 0);
 
-        if (node == null || node.valueList == null)
-        {
+        if (node == null || node.valueList == null) {
             return new ArrayList<Value>();
         }
 
@@ -84,20 +77,16 @@ public class TrieImpl<Value> implements Trie<Value>
      * @param node
      * @param key
      * @param d
-     *
      * @return
      */
-    private TrieNode get(TrieNode node, String key, int d)
-    {
+    private TrieNode get(TrieNode node, String key, int d) {
         //link was null - return null, indicating a miss
-        if (node == null)
-        {
+        if (node == null) {
             return null;
         }
         //we've reached the last node in the key,
         //return the node
-        if (d == key.length())
-        {
+        if (d == key.length()) {
             return node;
         }
         //proceed to the next node in the chain of nodes that
@@ -113,38 +102,30 @@ public class TrieImpl<Value> implements Trie<Value>
      * @param val
      */
     @Override
-    public void put(String key, Value val)
-    {
+    public void put(String key, Value val) {
         //deleteAll the value from this key
-        if (val == null)
-        {
+        if (val == null) {
             this.deleteAll(key);
-        }
-        else
-        {
+        } else {
             this.root = put(this.root, key, val, 0);
         }
     }
 
     /**
-     *
      * @param currentNode
      * @param key
      * @param val
      * @param d
      * @return root
      */
-    private TrieNode put(TrieNode currentNode, String key, Value val, int d)
-    {
+    private TrieNode put(TrieNode currentNode, String key, Value val, int d) {
         //create a new node
-        if (currentNode == null)
-        {
+        if (currentNode == null) {
             currentNode = new TrieNode();
         }
         //we've reached the last node in the key,
         //set the value for the key and return the node
-        if (d == key.length())
-        {
+        if (d == key.length()) {
             currentNode.addValue(val);
             return currentNode;
         }
@@ -162,45 +143,36 @@ public class TrieImpl<Value> implements Trie<Value>
      * @param key
      */
     @Override
-    public void deleteAll(String key)
-    {
+    public void deleteAll(String key) {
         this.root = deleteAll(this.root, key, 0);
     }
 
     /**
-     *
      * @param currentNode
      * @param key
      * @param d
      * @return root
      */
-    private TrieNode deleteAll(TrieNode currentNode, String key, int d)
-    {
-        if (currentNode == null)
-        {
+    private TrieNode deleteAll(TrieNode currentNode, String key, int d) {
+        if (currentNode == null) {
             return null;
         }
         //we're at the node to del - clear value collection
-        if (d == key.length())
-        {
+        if (d == key.length()) {
             currentNode.valueList = null;
         }
         //continue down the trie to the target node
-        else
-        {
+        else {
             char c = key.charAt(d);
             currentNode.links[c] = this.deleteAll(currentNode.links[c], key, d + 1);
         }
         //this node has a val – do nothing, return the node
-        if (currentNode.valueList != null)
-        {
+        if (currentNode.valueList != null) {
             return currentNode;
         }
         //remove subtrie rooted at currentNode if it is completely empty
-        for (int c = 0; c <alphabetSize; c++)
-        {
-            if (currentNode.links[c] != null)
-            {
+        for (int c = 0; c < alphabetSize; c++) {
+            if (currentNode.links[c] != null) {
                 return currentNode; //not empty
             }
         }
@@ -215,40 +187,31 @@ public class TrieImpl<Value> implements Trie<Value>
      * @param val
      */
     @Override
-    public void delete(String key, Value val)
-    {
+    public void delete(String key, Value val) {
         this.root = delete(this.root, key, val, 0);
     }
 
     /**
-     *
      * @param currentNode
      * @param key
      * @param d
      * @return root
      */
-    private TrieNode delete(TrieNode currentNode, String key, Value val, int d)
-    {
-        if (currentNode == null)
-        {
+    private TrieNode delete(TrieNode currentNode, String key, Value val, int d) {
+        if (currentNode == null) {
             return null;
         }
         //we're at the node to del - remove specified val
-        if (d == key.length())
-        {
+        if (d == key.length()) {
             //if del makes list empty, use deleteAll logic to clear empty subtries and parents
-            if (currentNode.listSize() == 1)
-            {
+            if (currentNode.listSize() == 1) {
                 this.deleteAll(key);
-            }
-            else
-            {
+            } else {
                 currentNode.removeValue(val);
             }
         }
         //continue down the trie to the target node
-        else
-        {
+        else {
             char c = key.charAt(d);
             currentNode.links[c] = this.delete(currentNode.links[c], key, val, d + 1);
         }

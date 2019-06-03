@@ -15,8 +15,6 @@ public class DocumentIOImpl extends edu.yu.cs.com1320.project.DocumentIO {
 
     public DocumentIOImpl(File dir) {
         this.baseDir = dir.toPath();
-        FileUtils.deleteQuietly(baseDir.toFile());
-        baseDir.toFile().mkdirs();
     }
 
     public DocumentIOImpl() {
@@ -25,8 +23,6 @@ public class DocumentIOImpl extends edu.yu.cs.com1320.project.DocumentIO {
 
     protected void setBaseDir(File dir) {
         this.baseDir = dir.toPath();
-        FileUtils.deleteQuietly(baseDir.toFile());
-        baseDir.toFile().mkdirs();
     }
 
     protected Path getPathFromUri(URI uri) {
