@@ -1,0 +1,173 @@
+ INFO: nweb starting:2006:55
+ INFO: request:GET /zubat.jpg HTTP/1.1**Host: localhost:2006**Connection: keep-alive**DNT: 1**Upgrade-Insecure-Requests: 1**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**Sec-Fetch-Dest: document**Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9**Sec-Fetch-Site: none**Sec-Fetch-Mode: navigate**Sec-Fetch-User: ?1**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:1
+ INFO: SEND:zubat.jpg:1
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 1185
+Connection: close
+Content-Type: image/jpg
+
+:1
+ INFO: request:GET /favicon.ico HTTP/1.1**Host: localhost:2006**Connection: keep-alive**Sec-Fetch-Dest: image**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**DNT: 1**Accept: image/webp,image/apng,image/*,*/*;q=0.8**Sec-Fetch-Site: same-origin**Sec-Fetch-Mode: no-cors**Referer: http://localhost:2006/zubat.jpg**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:2
+NOT FOUND: failed to open file:favicon.ico
+FORBIDDEN: failed to read browser request:
+ INFO: request:GET /index.html HTTP/1.1**Host: localhost:2006**Connection: keep-alive**DNT: 1**Upgrade-Insecure-Requests: 1**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**Sec-Fetch-Dest: document**Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9**Sec-Fetch-Site: none**Sec-Fetch-Mode: navigate**Sec-Fetch-User: ?1**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:4
+ INFO: SEND:index.html:4
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 248
+Connection: close
+Content-Type: text/html
+
+:4
+ INFO: request:GET /index.html HTTP/1.1**Host: localhost:2006**Connection: keep-alive**DNT: 1**Upgrade-Insecure-Requests: 1**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**Sec-Fetch-Dest: document**Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9**Sec-Fetch-Site: none**Sec-Fetch-Mode: navigate**Sec-Fetch-User: ?1**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:5
+ INFO: SEND:index.html:5
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 248
+Connection: close
+Content-Type: text/html
+
+:5
+ INFO: nweb starting:2007:112
+ INFO: nweb starting:2007:113
+ INFO: request:GET /zubat.jpg HTTP/1.0****:1
+ INFO: SEND:zubat.jpg:1
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 1185
+Connection: close
+Content-Type: image/jpg
+
+:1
+ INFO: request:GET /server.c HTTP/1.0****:2
+FORBIDDEN: file extension type not supported:GET /server.c
+ INFO: SEND:server.c:2
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 7660
+Connection: close
+Content-Type: (null)
+
+:2
+ INFO: request:GET /index.html HTTP/1.1**Host: localhost:2007**Connection: keep-alive**DNT: 1**Upgrade-Insecure-Requests: 1**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**Sec-Fetch-Dest: document**Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9**Sec-Fetch-Site: none**Sec-Fetch-Mode: navigate**Sec-Fetch-User: ?1**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:3
+ INFO: SEND:index.html:3
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 248
+Connection: close
+Content-Type: text/html
+
+:3
+ INFO: request:GET /favicon.ico HTTP/1.1**Host: localhost:2007**Connection: keep-alive**Sec-Fetch-Dest: image**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**DNT: 1**Accept: image/webp,image/apng,image/*,*/*;q=0.8**Sec-Fetch-Site: same-origin**Sec-Fetch-Mode: no-cors**Referer: http://localhost:2007/index.html**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:4
+NOT FOUND: failed to open file:favicon.ico
+ INFO: request:GET /client HTTP/1.1**Host: localhost:2007**Connection: keep-alive**DNT: 1**Upgrade-Insecure-Requests: 1**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**Sec-Fetch-Dest: document**Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9**Sec-Fetch-Site: none**Sec-Fetch-Mode: navigate**Sec-Fetch-User: ?1**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:5
+FORBIDDEN: file extension type not supported:GET /client
+ INFO: SEND:client:5
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 21152
+Connection: close
+Content-Type: (null)
+
+:5
+ INFO: nweb starting:2007:126
+ INFO: request:GET /nweb.txt HTTP/1.1**Host: localhost:2007**Connection: keep-alive**Cache-Control: max-age=0**DNT: 1**Upgrade-Insecure-Requests: 1**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**Sec-Fetch-Dest: document**Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9**Sec-Fetch-Site: none**Sec-Fetch-Mode: navigate**Sec-Fetch-User: ?1**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:1
+FORBIDDEN: file extension type not supported:GET /nweb.txt
+NOT FOUND: failed to open file:nweb.txt
+ INFO: request:GET /nweb.txt HTTP/1.1**Host: localhost:2007**Connection: keep-alive**Cache-Control: max-age=0**DNT: 1**Upgrade-Insecure-Requests: 1**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**Sec-Fetch-Dest: document**Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9**Sec-Fetch-Site: none**Sec-Fetch-Mode: navigate**Sec-Fetch-User: ?1**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:2
+FORBIDDEN: file extension type not supported:GET /nweb.txt
+ INFO: nweb starting:2007:127
+ INFO: request:GET /zubat.jpg HTTP/1.1**Host: localhost:2007**Connection: keep-alive**Cache-Control: max-age=0**Upgrade-Insecure-Requests: 1**DNT: 1**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**Sec-Fetch-Dest: document**Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9**Sec-Fetch-Site: cross-site**Sec-Fetch-Mode: navigate**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:1
+ INFO: SEND:zubat.jpg:1
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 1185
+Connection: close
+Content-Type: image/jpg
+
+:1
+ INFO: request:GET /zubat.jpg HTTP/1.1**Host: localhost:2007**Connection: keep-alive**Cache-Control: max-age=0**DNT: 1**Upgrade-Insecure-Requests: 1**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**Sec-Fetch-Dest: document**Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9**Sec-Fetch-Site: cross-site**Sec-Fetch-Mode: navigate**Sec-Fetch-User: ?1**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:2
+ INFO: SEND:zubat.jpg:2
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 1185
+Connection: close
+Content-Type: image/jpg
+
+:2
+ INFO: request:GET /zubat.jpg HTTP/1.1**Host: localhost:2007**Connection: keep-alive**Cache-Control: max-age=0**DNT: 1**Upgrade-Insecure-Requests: 1**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**Sec-Fetch-Dest: document**Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9**Sec-Fetch-Site: cross-site**Sec-Fetch-Mode: navigate**Sec-Fetch-User: ?1**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:3
+ INFO: SEND:zubat.jpg:3
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 1185
+Connection: close
+Content-Type: image/jpg
+
+:3
+ INFO: request:GET /zubat.jpg HTTP/1.1**Host: localhost:2007**Connection: keep-alive**Cache-Control: max-age=0**DNT: 1**Upgrade-Insecure-Requests: 1**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**Sec-Fetch-Dest: document**Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9**Sec-Fetch-Site: cross-site**Sec-Fetch-Mode: navigate**Sec-Fetch-User: ?1**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:4
+ INFO: SEND:zubat.jpg:4
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 1185
+Connection: close
+Content-Type: image/jpg
+
+:4
+ INFO: nweb starting:2007:128
+ INFO: request:GET /zubat.jpg HTTP/1.1**Host: localhost:2007**Connection: keep-alive**Cache-Control: max-age=0**Upgrade-Insecure-Requests: 1**DNT: 1**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**Sec-Fetch-Dest: document**Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9**Sec-Fetch-Site: cross-site**Sec-Fetch-Mode: navigate**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:1
+ INFO: SEND:zubat.jpg:1
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 1185
+Connection: close
+Content-Type: image/jpg
+
+:1
+ INFO: request:GET /ami.png HTTP/1.1**Host: localhost:2007**Connection: keep-alive**DNT: 1**Upgrade-Insecure-Requests: 1**User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36**Sec-Fetch-Dest: document**Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9**Sec-Fetch-Site: none**Sec-Fetch-Mode: navigate**Sec-Fetch-User: ?1**Accept-Encoding: gzip, deflate, br**Accept-Language: en-US,en;q=0.9****:2
+ INFO: SEND:ami.png:2
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 1905576
+Connection: close
+Content-Type: image/png
+
+:2
+ INFO: nweb starting:2007:133
+ INFO: request:GET ./index.html HTTP/1.0****:1
+NOT FOUND: failed to open file:/index.html
+ INFO: request:GET index.html HTTP/1.0****:2
+NOT FOUND: failed to open file:ndex.html
+ INFO: request:GET ../index.html HTTP/1.0****:3
+FORBIDDEN: Parent directory (..) path names not supported:GET ../index.html
+ INFO: request:GET ami.png HTTP/1.0****:4
+NOT FOUND: failed to open file:mi.png
+ INFO: nweb starting:2007:145
+ INFO: nweb starting:2008:147
+ INFO: request:GET /ami.png HTTP/1.0****:1
+ INFO: SEND:ami.png:1
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 1905576
+Connection: close
+Content-Type: image/png
+
+:1
+ INFO: request:GET /ami.png HTTP/1.0****:2
+ INFO: SEND:ami.png:2
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 1905576
+Connection: close
+Content-Type: image/png
+
+:2
+ INFO: request:GET /index.html HTTP/1.0****:3
+ INFO: SEND:index.html:3
+ INFO: Header:HTTP/1.1 200 OK
+Server: nweb/25.0
+Content-Length: 248
+Connection: close
+Content-Type: text/html
+
+:3
