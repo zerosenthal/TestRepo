@@ -143,6 +143,7 @@ void web(int fd, int hit)
     close(fd);
 }
 
+//OG main, before multi-threading
 int main(int argc, char **argv)
 {
 	int i, port, listenfd, socketfd, hit;
@@ -152,18 +153,18 @@ int main(int argc, char **argv)
 
 	if( argc < 3  || argc > 3 || !strcmp(argv[1], "-?") ) {
 		(void)printf("USAGE: %s <port-number> <top-directory>\t\tversion %d\n\n"
-	"\tnweb is a small and very safe mini web server\n"
-	"\tnweb only servers out file/web pages with extensions named below\n"
-	"\t and only from the named directory or its sub-directories.\n"
-	"\tThere is no fancy features = safe and secure.\n\n"
-	"\tExample: nweb 8181 /home/nwebdir &\n\n"
-	"\tOnly Supports:", argv[0], VERSION);
+			"\tnweb is a small and very safe mini web server\n"
+			"\tnweb only servers out file/web pages with extensions named below\n"
+			"\t and only from the named directory or its sub-directories.\n"
+			"\tThere is no fancy features = safe and secure.\n\n"
+			"\tExample: nweb 8181 /home/nwebdir &\n\n"
+			"\tOnly Supports:", argv[0], VERSION);
 		for(i=0;extensions[i].ext != 0;i++)
 			(void)printf(" %s",extensions[i].ext);
 
 		(void)printf("\n\tNot Supported: URLs including \"..\", Java, Javascript, CGI\n"
-	"\tNot Supported: directories / /etc /bin /lib /tmp /usr /dev /sbin \n"
-	"\tNo warranty given or implied\n\tNigel Griffiths nag@uk.ibm.com\n"  );
+			"\tNot Supported: directories / /etc /bin /lib /tmp /usr /dev /sbin \n"
+			"\tNo warranty given or implied\n\tNigel Griffiths nag@uk.ibm.com\n"  );
 		exit(0);
 	}
 	if( !strncmp(argv[2],"/"   ,2 ) || !strncmp(argv[2],"/etc", 5 ) ||
