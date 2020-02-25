@@ -32,10 +32,109 @@ struct {
 	{"html","text/html" },  
 	{0,0} };
   
+struct Buffer{
+	union BufferType bufType;
+	int capacity;
+	int waiting = 0;
+};
+
+union BufferType{
+	struct FIFOBuf fifoBuf;
+	struct HPBuf hpBuf;
+};
+
+struct FIFOBuf{
+	int[] buffer;
+	int front = 0;
+};
+
+struct HPBuf{
+	char* priorityType;
+
+	int[] pBuf; //priority buffer
+	int pFront = 0;
+	int pWaiting = 0;
+	
+	int[] npBuf; //non-priority buffer
+	int npFront = 0;
+	int npWaiting = 0;
+};
+
+
 static const char * HDRS_FORBIDDEN = "HTTP/1.1 403 Forbidden\nContent-Length: 185\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>403 Forbidden</title>\n</head><body>\n<h1>Forbidden</h1>\nThe requested URL, file type or operation is not allowed on this simple static file webserver.\n</body></html>\n";
 static const char * HDRS_NOTFOUND = "HTTP/1.1 404 Not Found\nContent-Length: 136\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>404 Not Found</title>\n</head><body>\n<h1>Not Found</h1>\nThe requested URL was not found on this server.\n</body></html>\n";
 static const char * HDRS_OK = "HTTP/1.1 200 OK\nServer: nweb/%d.0\nContent-Length: %ld\nConnection: close\nContent-Type: %s\n\n";
 static int dummy; //keep compiler happy
+
+void initBuf(struct Buffer buf, char* schedAlg, int size)
+{
+	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
+	{
+		buf.bufType.fifoBuf.buffer = int[size];
+		buf.capacity = size;
+	}
+	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
+	{
+		buf.bufType.hpBuf.priorityType = schedAlg;
+		buf.bufType.hpBuf.pBuf = int[size];
+		buf.bufType.hpBuf.npBuf = int[size];
+		buf.capacity = size;
+	}
+}
+int loadBuf(union Buffer buf, char* schedAlg, int socketfd, char* contentType)
+{
+	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
+	{
+		if (buf.waiting < buf.capacity) //buffer not yet full
+		{
+			int back = (buf.bufType.fifoBuf.front + (++buf.waiting)) % buf.capacity;
+			buf.bufType.fifoBuf.buffer[back] = socketfd;
+
+			return socketfd;
+		}
+		else { return -1;} //buffer is full
+	}
+	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
+	{
+		if (buf.waiting < buf.capacity) //buffer not yet full
+		{
+			if (!strcmp(contentType, buf.bufType.hpBuf.priorityType))
+			{
+				int back = (buf.bufType.hpBuf.pFront + (++buf.bufType.hpBuf.pWaiting)) % buf.capacity;
+				buf.bufType.hpBuf.pBuf[back] = socketfd;
+			}
+			else
+			{
+				int back = (buf.bufType.hpBuf.npFront + (++buf.bufType.hpBuf.npWaiting)) % buf.capacity;
+				buf.bufType.hpBuf.npBuf[back] = socketfd;
+			}
+			buf.waiting++;
+
+			return socketfd;
+		}
+		else { return -1;} //buffer is full
+	}
+}
+int unloadBuf(union Buffer buf, char* schedAlg)
+{
+	int socketfd;
+
+	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
+	{
+		int back = (buf.fifoBuf.front + (buf.fifoBuf.waiting)) % buf.fifoBuf.capacity;
+		socketfd = buf.fifoBuf.buffer[back];
+		buf.fifoBuf.waiting--;
+	}
+	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
+	{
+		if (buf.hpBuf.pWaiting != 0)
+		{
+			int back = (buf.hpBuf.pFront + (buf.hpBuf.pWaiting)) % buf.hpBuf.capacity;
+			socketfd = buf.fifoBuf.buffer[back];
+			buf.fifoBuf.waiting--;
+		}
+	}
+}
 
 void logger(int type, char *s1, char *s2, int socket_fd)
 {
@@ -150,20 +249,20 @@ int main(int argc, char **argv)
 	static struct sockaddr_in cli_addr; /* static = initialised to zeros */
 	static struct sockaddr_in serv_addr; /* static = initialised to zeros */
 
-	if( argc < 3  || argc > 3 || !strcmp(argv[1], "-?") ) {
+	if( argc < 6  || argc > 6 || !strcmp(argv[1], "-?") ) {
 		(void)printf("USAGE: %s <port-number> <top-directory>\t\tversion %d\n\n"
-	"\tnweb is a small and very safe mini web server\n"
-	"\tnweb only servers out file/web pages with extensions named below\n"
-	"\t and only from the named directory or its sub-directories.\n"
-	"\tThere is no fancy features = safe and secure.\n\n"
-	"\tExample: nweb 8181 /home/nwebdir &\n\n"
-	"\tOnly Supports:", argv[0], VERSION);
+			"\tnweb is a small and very safe mini web server\n"
+			"\tnweb only servers out file/web pages with extensions named below\n"
+			"\t and only from the named directory or its sub-directories.\n"
+			"\tThere is no fancy features = safe and secure.\n\n"
+			"\tExample: nweb 8181 /home/nwebdir &\n\n"
+			"\tOnly Supports:", argv[0], VERSION);
 		for(i=0;extensions[i].ext != 0;i++)
 			(void)printf(" %s",extensions[i].ext);
 
 		(void)printf("\n\tNot Supported: URLs including \"..\", Java, Javascript, CGI\n"
-	"\tNot Supported: directories / /etc /bin /lib /tmp /usr /dev /sbin \n"
-	"\tNo warranty given or implied\n\tNigel Griffiths nag@uk.ibm.com\n"  );
+			"\tNot Supported: directories / /etc /bin /lib /tmp /usr /dev /sbin \n"
+			"\tNo warranty given or implied\n\tNigel Griffiths nag@uk.ibm.com\n"  );
 		exit(0);
 	}
 	if( !strncmp(argv[2],"/"   ,2 ) || !strncmp(argv[2],"/etc", 5 ) ||
