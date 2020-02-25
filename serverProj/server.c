@@ -83,57 +83,60 @@ void initBuf(struct Buffer buf, char* schedAlg, int size)
 }
 int loadBuf(union Buffer buf, char* schedAlg, int socketfd, char* contentType)
 {
+	if (buf.waiting == buf.capacity) {return -1;} //buffer is full
+
 	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
 	{
-		if (buf.waiting < buf.capacity) //buffer not yet full
-		{
-			int back = (buf.bufType.fifoBuf.front + (++buf.waiting)) % buf.capacity;
-			buf.bufType.fifoBuf.buffer[back] = socketfd;
+		int back = (buf.bufType.fifoBuf.front + (++buf.waiting)) % buf.capacity;
+		buf.bufType.fifoBuf.buffer[back] = socketfd;
 
-			return socketfd;
-		}
-		else { return -1;} //buffer is full
+		return socketfd;
 	}
 	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
 	{
-		if (buf.waiting < buf.capacity) //buffer not yet full
+		if (!strcmp(contentType, buf.bufType.hpBuf.priorityType))
 		{
-			if (!strcmp(contentType, buf.bufType.hpBuf.priorityType))
-			{
-				int back = (buf.bufType.hpBuf.pFront + (++buf.bufType.hpBuf.pWaiting)) % buf.capacity;
-				buf.bufType.hpBuf.pBuf[back] = socketfd;
-			}
-			else
-			{
-				int back = (buf.bufType.hpBuf.npFront + (++buf.bufType.hpBuf.npWaiting)) % buf.capacity;
-				buf.bufType.hpBuf.npBuf[back] = socketfd;
-			}
-			buf.waiting++;
-
-			return socketfd;
+			int back = (buf.bufType.hpBuf.pFront + (++buf.bufType.hpBuf.pWaiting)) % buf.capacity;
+			buf.bufType.hpBuf.pBuf[back] = socketfd;
 		}
-		else { return -1;} //buffer is full
+		else
+		{
+			int back = (buf.bufType.hpBuf.npFront + (++buf.bufType.hpBuf.npWaiting)) % buf.capacity;
+			buf.bufType.hpBuf.npBuf[back] = socketfd;
+		}
+		buf.waiting++;
+
+		return socketfd;
 	}
 }
 int unloadBuf(union Buffer buf, char* schedAlg)
 {
+	if (buf.waiting == 0) {return -1;} //no waiting requests in buffer
+	
 	int socketfd;
 
 	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
 	{
-		int back = (buf.fifoBuf.front + (buf.fifoBuf.waiting)) % buf.fifoBuf.capacity;
+		int back = (buf.bufType.fifoBuf.front + (buf.waiting)) % buf.capacity;
 		socketfd = buf.fifoBuf.buffer[back];
-		buf.fifoBuf.waiting--;
 	}
 	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
 	{
-		if (buf.hpBuf.pWaiting != 0)
+		if (buf.bufType.hpBuf.pWaiting != 0) //if there are available high-priority requests
 		{
-			int back = (buf.hpBuf.pFront + (buf.hpBuf.pWaiting)) % buf.hpBuf.capacity;
-			socketfd = buf.fifoBuf.buffer[back];
-			buf.fifoBuf.waiting--;
+			int back = (buf.bufType.hpBuf.pFront + (buf.bufType.hpBuf.pWaiting)) % buf.capacity;
+			socketfd = buf.hpBuf.pBuf[back];
+			buf.bufType.pWaiting--;
+		}
+		else
+		{
+			int back = (buf.bufType.hpBuf.npFront + (buf.bufType.hpBuf.npWaiting)) % buf.capacity;
+			socketfd = buf.hpBuf.npBuf[back];
+			buf.bufType.npWaiting--;
 		}
 	}
+	buf.waiting--;
+	return socketfd;
 }
 
 void logger(int type, char *s1, char *s2, int socket_fd)
