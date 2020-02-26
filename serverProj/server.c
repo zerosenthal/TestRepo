@@ -44,18 +44,16 @@ union BufferType{
 };
 
 struct FIFOBuf{
-	int[] buffer;
+	int buffer[0];
 	int front = 0;
 };
 
 struct HPBuf{
-	char* priorityType;
-
-	int[] pBuf; //priority buffer
+	int pBuf[0]; //priority buffer
 	int pFront = 0;
 	int pWaiting = 0;
 	
-	int[] npBuf; //non-priority buffer
+	int npBuf[0]; //non-priority buffer
 	int npFront = 0;
 	int npWaiting = 0;
 };
@@ -65,77 +63,78 @@ static const char * HDRS_FORBIDDEN = "HTTP/1.1 403 Forbidden\nContent-Length: 18
 static const char * HDRS_NOTFOUND = "HTTP/1.1 404 Not Found\nContent-Length: 136\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>404 Not Found</title>\n</head><body>\n<h1>Not Found</h1>\nThe requested URL was not found on this server.\n</body></html>\n";
 static const char * HDRS_OK = "HTTP/1.1 200 OK\nServer: nweb/%d.0\nContent-Length: %ld\nConnection: close\nContent-Type: %s\n\n";
 static int dummy; //keep compiler happy
+static struct Buffer* buf;
+static char* schedAlg;
 
-void initBuf(struct Buffer buf, char* schedAlg, int size)
+void initBuf(int size)
 {
 	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
 	{
-		buf.bufType.fifoBuf.buffer = int[size];
-		buf.capacity = size;
+		buf = (Buffer*)malloc(sizeof(*buf) + (size * sizeof(int));
+		buf->capacity = size;
 	}
 	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
 	{
-		buf.bufType.hpBuf.priorityType = schedAlg;
-		buf.bufType.hpBuf.pBuf = int[size];
-		buf.bufType.hpBuf.npBuf = int[size];
-		buf.capacity = size;
+		buf = (Buffer*)malloc(sizeof(*buf) + (2 * size * sizeof(int));
+		buf->capacity = size;
 	}
 }
-int loadBuf(union Buffer buf, char* schedAlg, int socketfd, char* contentType)
-{
-	if (buf.waiting == buf.capacity) {return -1;} //buffer is full
+int loadBuf(int socketfd, char contentType) //need to add conditional locks for buf reads
+{	
+	if (buf->waiting == buf->capacity) {return -1;} //buffer is full
 
 	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
 	{
-		int back = (buf.bufType.fifoBuf.front + (++buf.waiting)) % buf.capacity;
-		buf.bufType.fifoBuf.buffer[back] = socketfd;
+		int back = (buf->bufType.fifoBuf.front + (++buf.waiting)) % buf.capacity;
+		buf->bufType.fifoBuf.buffer[back] = socketfd;
 
 		return socketfd;
 	}
 	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
 	{
-		if (!strcmp(contentType, buf.bufType.hpBuf.priorityType))
+		char pContent = schedAlg[2];
+		if (contentType == pContent)
 		{
-			int back = (buf.bufType.hpBuf.pFront + (++buf.bufType.hpBuf.pWaiting)) % buf.capacity;
-			buf.bufType.hpBuf.pBuf[back] = socketfd;
+			int back = (buf->bufType.hpBuf.pFront + (++(buf->bufType.hpBuf.pWaiting))) % buf->capacity;
+			buf->bufType.hpBuf.pBuf[back] = socketfd;
 		}
 		else
 		{
-			int back = (buf.bufType.hpBuf.npFront + (++buf.bufType.hpBuf.npWaiting)) % buf.capacity;
-			buf.bufType.hpBuf.npBuf[back] = socketfd;
+			int back = (buf->bufType.hpBuf.npFront + (++buf->bufType.hpBuf.npWaiting)) % buf->capacity;
+			buf->bufType.hpBuf.npBuf[back] = socketfd;
 		}
-		buf.waiting++;
+		buf->waiting++;
 
 		return socketfd;
 	}
 }
-int unloadBuf(union Buffer buf, char* schedAlg)
+int unloadBuf() //need to add conditional locks for buf reads
 {
-	if (buf.waiting == 0) {return -1;} //no waiting requests in buffer
+	if (buf->waiting == 0) {return -1;} //no waiting requests in buffer
 	
 	int socketfd;
 
 	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
 	{
-		int back = (buf.bufType.fifoBuf.front + (buf.waiting)) % buf.capacity;
-		socketfd = buf.fifoBuf.buffer[back];
+		int back = (buf->bufType.fifoBuf.front + (buf->waiting)) % buf->capacity;
+		socketfd = buf->fifoBuf.buffer[back];
 	}
 	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
 	{
-		if (buf.bufType.hpBuf.pWaiting != 0) //if there are available high-priority requests
+		if (buf->bufType.hpBuf.pWaiting != 0) //if there are available high-priority requests
 		{
-			int back = (buf.bufType.hpBuf.pFront + (buf.bufType.hpBuf.pWaiting)) % buf.capacity;
-			socketfd = buf.hpBuf.pBuf[back];
-			buf.bufType.pWaiting--;
+			int back = (buf->bufType.hpBuf.pFront + (buf->bufType.hpBuf.pWaiting)) % buf->capacity;
+			socketfd = buf->hpBuf.pBuf[back];
+			(buf->bufType.hpBuf.pWaiting)--;
 		}
 		else
 		{
-			int back = (buf.bufType.hpBuf.npFront + (buf.bufType.hpBuf.npWaiting)) % buf.capacity;
-			socketfd = buf.hpBuf.npBuf[back];
-			buf.bufType.npWaiting--;
+			int back = (buf->bufType.hpBuf.npFront + (buf->bufType.hpBuf.npWaiting)) % buf->capacity;
+			socketfd = buf->bufType.hpBuf.npBuf[back];
+			(buf->bufType.hpBuf.npWaiting)--;
 		}
 	}
-	buf.waiting--;
+	(buf->waiting)--;
 	return socketfd;
 }
 
