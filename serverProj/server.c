@@ -47,7 +47,7 @@ struct socket
 };
 struct socketBuffer
 {
-	struct socket sockets[1000]; //TOFIX: Set size of this from cmd line.
+	struct socket *sockets; //TOFIX: Set size of this from cmd line.
 	int capacity;				 //As of now, capacity allows it to "pretend" its a smaller array, which functionally works.
 	int front;
 	int count;
@@ -256,7 +256,7 @@ int main(int argc, char **argv)
 		exit(4);
 	}
 	if (atoi(argv[3]) < 1)
-	{
+	{	
 		(void)printf("ERROR: Number of worker threads must be > 1 %s\n", argv[3]);
 		exit(4);
 	}
@@ -291,7 +291,9 @@ int main(int argc, char **argv)
 
 	/* Initialize Buffer */
 	int bufferSize = atoi(argv[4]);
-	buf.capacity = bufferSize; //Tofix: set buffer array size from cmd. As of now, capacity must be < 1000
+	buf.sockets = (struct socket *) malloc(sizeof(struct socket)*bufferSize);
+	if ((long)buf.sockets < 1) exit(12);
+	buf.capacity = bufferSize; 
 	buf.count = 0;
 	buf.front = 0;
 	/*Initialize pThread stuff */
