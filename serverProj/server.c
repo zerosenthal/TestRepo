@@ -87,7 +87,6 @@ void logger(int type, char *s1, char *s2, int socket_fd)
 	}
 }
 
-/* this is a child web server process, so we can exit on errors */
 void web(int fd, int hit)
 {
 	int j, file_fd, buflen;
@@ -232,7 +231,7 @@ int main(int argc, char **argv)
 					 "\tnweb only servers out file/web pages with extensions named below\n"
 					 "\t and only from the named directory or its sub-directories.\n"
 					 "\tThere is no fancy features = safe and secure.\n\n"
-					 "\tExample: nweb 8181 /home/nwebdir &\n\n"
+					 "\tExample: nweb 8181 /home/nwebdir 10 8 &\n\n"
 					 "\tOnly Supports:",
 					 argv[0], VERSION);
 		for (i = 0; extensions[i].ext != 0; i++)
@@ -316,10 +315,11 @@ int main(int argc, char **argv)
 		}
 		struct socket toAdd = {socketfd, hit};
 		addToBuffer(toAdd);
-		// web(socketfd,hit);
 	}
 
+	/* We never get here, Master thread is infinite loop
 	pthread_mutex_destroy(&bufMutex);
 	pthread_cond_destroy(&prodCond);
 	pthread_cond_destroy(&consCond);
+	*/
 }
