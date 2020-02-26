@@ -288,8 +288,10 @@ int main(int argc, char **argv)
 	pthread_mutex_init(&bufMutex, NULL);
 	pthread_cond_init(&prodCond, NULL);
 	pthread_cond_init(&consCond, NULL);
-	pthread_t worker1; //Try one worker for now.
+	pthread_t worker1; //Try two workers?
+	pthread_t worker2;
 	pthread_create(&worker1, NULL, worker, NULL);
+	pthread_create(&worker2, NULL, worker, NULL);
 
 	for (hit = 1;; hit++)
 	{
