@@ -78,6 +78,8 @@ void *run(void *arg)
   int clientfd;
   char buf[BUF_SIZE];
 
+  while (1)
+  {
   // Establish connection with <hostname>:<port>
   clientfd = establishConnection(getHostInfo(argv[1], argv[2]));
   if (clientfd == -1)
@@ -88,8 +90,6 @@ void *run(void *arg)
     return (void *)3;
   }
 
-  while (1)
-  {
     pthread_barrier_wait(&bar);
     GET(clientfd, argv[5]);
     pthread_barrier_wait(&bar);
