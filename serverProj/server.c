@@ -47,8 +47,8 @@ struct socket
 };
 struct socketBuffer
 {
-	struct socket sockets[5];
-	int capacity;
+	struct socket sockets[1000]; //TOFIX: Set size of this from cmd line.
+	int capacity;				 //As of now, capacity allows it to "pretend" its a smaller array, which functionally works.
 	int front;
 	int count;
 };
@@ -218,7 +218,6 @@ void addToBuffer(struct socket toAdd)
 	pthread_mutex_unlock(&bufMutex);
 }
 
-
 int main(int argc, char **argv)
 {
 	int i, port, listenfd, socketfd, hit;
@@ -226,9 +225,9 @@ int main(int argc, char **argv)
 	static struct sockaddr_in cli_addr;  /* static = initialised to zeros */
 	static struct sockaddr_in serv_addr; /* static = initialised to zeros */
 
-	if (argc < 3 || argc > 3 || !strcmp(argv[1], "-?"))
+	if (argc < 5 || argc > 5 || !strcmp(argv[1], "-?"))
 	{
-		(void)printf("USAGE: %s <port-number> <top-directory>\t\tversion %d\n\n"
+		(void)printf("USAGE: %s <port-number> <top-directory> <threads> <buffers>\t\tversion %d\n\n"
 					 "\tnweb is a small and very safe mini web server\n"
 					 "\tnweb only servers out file/web pages with extensions named below\n"
 					 "\t and only from the named directory or its sub-directories.\n"
@@ -257,6 +256,16 @@ int main(int argc, char **argv)
 		(void)printf("ERROR: Can't Change to directory %s\n", argv[2]);
 		exit(4);
 	}
+	if (atoi(argv[3]) < 1)
+	{
+		(void)printf("ERROR: Number of worker threads must be > 1 %s\n", argv[3]);
+		exit(4);
+	}
+	if (atoi(argv[4]) < 1)
+	{
+		(void)printf("ERROR: buffer must be > 1 %s\n", argv[4]);
+		exit(5);
+	}
 
 	logger(LOG, "nweb starting", argv[1], getpid());
 	/* setup the network socket */
@@ -280,19 +289,24 @@ int main(int argc, char **argv)
 	{
 		logger(ERROR, "system call", "listen", 0);
 	}
+
 	/* Initialize Buffer */
-	buf.capacity = 5;
+	int bufferSize = atoi(argv[4]);
+	buf.capacity = bufferSize; //Tofix: set buffer array size from cmd. As of now, capacity must be < 1000
 	buf.count = 0;
 	buf.front = 0;
 	/*Initialize pThread stuff */
 	pthread_mutex_init(&bufMutex, NULL);
 	pthread_cond_init(&prodCond, NULL);
 	pthread_cond_init(&consCond, NULL);
-	pthread_t worker1; //Try two workers?
-	pthread_t worker2;
-	pthread_create(&worker1, NULL, worker, NULL);
-	pthread_create(&worker2, NULL, worker, NULL);
+	int numThreads = atoi(argv[3]);
+	pthread_t threads[numThreads];
+	for (int i = 0; i < numThreads; i++)
+	{
+		pthread_create(&threads[i], NULL, worker, NULL);
+	}
 
+	/* Master Thread Loop*/
 	for (hit = 1;; hit++)
 	{
 		length = sizeof(cli_addr);
@@ -309,4 +323,3 @@ int main(int argc, char **argv)
 	pthread_cond_destroy(&prodCond);
 	pthread_cond_destroy(&consCond);
 }
-
