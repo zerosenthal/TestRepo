@@ -80,15 +80,15 @@ void *run(void *arg)
 
   while (1)
   {
-  // Establish connection with <hostname>:<port>
-  clientfd = establishConnection(getHostInfo(argv[1], argv[2]));
-  if (clientfd == -1)
-  {
-    fprintf(stderr,
-            "[main:73] Failed to connect to: %s:%s%s \n",
-            argv[1], argv[2], argv[5]);
-    return (void *)3;
-  }
+    // Establish connection with <hostname>:<port>
+    clientfd = establishConnection(getHostInfo(argv[1], argv[2]));
+    if (clientfd == -1)
+    {
+      fprintf(stderr,
+              "[main:73] Failed to connect to: %s:%s%s \n",
+              argv[1], argv[2], argv[5]);
+      return (void *)3;
+    }
 
     pthread_barrier_wait(&bar);
     GET(clientfd, argv[5]);
@@ -98,8 +98,10 @@ void *run(void *arg)
       fputs(buf, stdout);
       memset(buf, 0, BUF_SIZE);
     }
+    pthread_barrier_wait(&bar);
+    close(clientfd);
   }
-  close(clientfd);
+  return (void *)0;
 }
 
 int main(int argc, char **argv)
@@ -116,7 +118,7 @@ int main(int argc, char **argv)
     (void)printf("ERROR: Number of threads must be > 1 %s\n", argv[3]);
     exit(4);
   }
-  if (!strncmp(argv[4], "CONCUR", 7) && !strncmp(argv[4], "FIFO", 5))
+  if (strncmp(argv[4], "CONCUR", 7) && strncmp(argv[4], "FIFO", 5))
   {
     (void)printf("ERROR: Scheduling must be CONCUR or FIFO: %s\n", argv[4]);
     exit(5);

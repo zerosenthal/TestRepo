@@ -47,8 +47,8 @@ struct socket
 };
 struct socketBuffer
 {
-	struct socket *sockets; //TOFIX: Set size of this from cmd line.
-	int capacity;				 //As of now, capacity allows it to "pretend" its a smaller array, which functionally works.
+	struct socket *sockets; 
+	int capacity;			
 	int front;
 	int count;
 };
