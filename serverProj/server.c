@@ -32,19 +32,6 @@ struct {
 	{"html","text/html" },  
 	{0,0} };
   
-<<<<<<< HEAD
-=======
-struct Job{
-	int socketfd;
-	int job_id;
-};
-
-struct Buffer{
-	union BufferType bufType;
-	int capacity;
-	int waiting = 0;
-};
->>>>>>> 95d1873aeda44b91d1fe39f5c5e2fda6499c7642
 
 static const char * HDRS_FORBIDDEN = "HTTP/1.1 403 Forbidden\nContent-Length: 185\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>403 Forbidden</title>\n</head><body>\n<h1>Forbidden</h1>\nThe requested URL, file type or operation is not allowed on this simple static file webserver.\n</body></html>\n";
 static const char * HDRS_NOTFOUND = "HTTP/1.1 404 Not Found\nContent-Length: 136\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>404 Not Found</title>\n</head><body>\n<h1>Not Found</h1>\nThe requested URL was not found on this server.\n</body></html>\n";
@@ -65,30 +52,17 @@ struct Job{
 
 struct FIFOBuf{
 	struct Job* jobs; //unitialized job buffer
-<<<<<<< HEAD
 	int front;
-=======
-	int front = 0;
->>>>>>> 95d1873aeda44b91d1fe39f5c5e2fda6499c7642
 };
 
 struct HPBuf{
 	struct Job* pJobs; //unitialized priority job buffer
-<<<<<<< HEAD
 	int pFront;
 	int pWaiting;
 	
 	struct Job* npJobs; //unitialized non-priority job buffer
 	int npFront;
 	int npWaiting;
-=======
-	int pFront = 0;
-	int pWaiting = 0;
-	
-	struct Job* npJobs; //unitialized non-priority job buffer
-	int npFront = 0;
-	int npWaiting = 0;
->>>>>>> 95d1873aeda44b91d1fe39f5c5e2fda6499c7642
 };
 
 struct Buffer{
@@ -100,7 +74,6 @@ struct Buffer{
 	};
 };
 
-<<<<<<< HEAD
 /* union BufferType{
 	struct FIFOBuf fifoBuf;
 	struct HPBuf hpBuf;
@@ -109,15 +82,7 @@ struct Buffer{
 static Buffer buf;
 static char* schedAlg = "ANY"; //default schedAlg -> ANY
 
-=======
-static const char * HDRS_FORBIDDEN = "HTTP/1.1 403 Forbidden\nContent-Length: 185\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>403 Forbidden</title>\n</head><body>\n<h1>Forbidden</h1>\nThe requested URL, file type or operation is not allowed on this simple static file webserver.\n</body></html>\n";
-static const char * HDRS_NOTFOUND = "HTTP/1.1 404 Not Found\nContent-Length: 136\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>404 Not Found</title>\n</head><body>\n<h1>Not Found</h1>\nThe requested URL was not found on this server.\n</body></html>\n";
-static const char * HDRS_OK = "HTTP/1.1 200 OK\nServer: nweb/%d.0\nContent-Length: %ld\nConnection: close\nContent-Type: %s\n\n";
-static int dummy; //keep compiler happy
-static struct Buffer buf;
-static char* schedAlg;
 
->>>>>>> 95d1873aeda44b91d1fe39f5c5e2fda6499c7642
 void initBuf(int size)
 {
 	buf.capacity = size;
@@ -125,7 +90,6 @@ void initBuf(int size)
 
 	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
 	{
-<<<<<<< HEAD
 		buf.fifoBuf.jobs = (Job*)calloc(size, sizeof(Job));
 		buf.fifoBuf.front = 0;
 	}
@@ -137,16 +101,6 @@ void initBuf(int size)
 		buf.hpBuf.pWaiting = 0;
 		buf.hpBuf.npFront = 0;
 		buf.hpBuf.npWaiting = 0;
-=======
-		buf.bufType.fifoBuf.jobs = (struct Job*)calloc(size, sizeof(struct Job));
-		buf.capacity = size;
-	}
-	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
-	{
-		buf.bufType.hpBuf.pJobs = (struct Job*)calloc(size, sizeof(struct Job));
-		buf.bufType.hpBuf.npJobs = (struct Job*)calloc(size, sizeof(struct Job));
-		buf.capacity = size;
->>>>>>> 95d1873aeda44b91d1fe39f5c5e2fda6499c7642
 	}
 }
 int loadBuf(struct Job* newJob, char contentType) //need to add conditional locks for buf reads
@@ -155,13 +109,8 @@ int loadBuf(struct Job* newJob, char contentType) //need to add conditional lock
 
 	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
 	{
-<<<<<<< HEAD
 		int back = (buf.fifoBuf.front + (++buf.waiting)) % buf.capacity;
 		buf.fifoBuf.jobs[back] = *newJob;
-=======
-		int back = (buf.bufType.fifoBuf.front + (++buf.waiting)) % buf.capacity;
-		buf.bufType.fifoBuf.buffer[back] = *newJob;
->>>>>>> 95d1873aeda44b91d1fe39f5c5e2fda6499c7642
 
 		return newJob->job_id;
 	}
@@ -170,7 +119,6 @@ int loadBuf(struct Job* newJob, char contentType) //need to add conditional lock
 		char pContent = schedAlg[2];
 		if (contentType == pContent)
 		{
-<<<<<<< HEAD
 			int back = (buf.hpBuf.pFront + (++(buf.hpBuf.pWaiting))) % buf.capacity;
 			buf.hpBuf.pJobs[back] = *newJob;
 		}
@@ -178,15 +126,6 @@ int loadBuf(struct Job* newJob, char contentType) //need to add conditional lock
 		{
 			int back = (buf.hpBuf.npFront + (++buf.hpBuf.npWaiting)) % buf.capacity;
 			buf.hpBuf.npJobs[back] = *newJob;
-=======
-			int back = (buf.bufType.hpBuf.pFront + (++(buf.bufType.hpBuf.pWaiting))) % buf.capacity;
-			buf.bufType.hpBuf.pBuf[back] = *newJob;
-		}
-		else
-		{
-			int back = (buf.bufType.hpBuf.npFront + (++buf.bufType.hpBuf.npWaiting)) % buf.capacity;
-			buf.bufType.hpBuf.npBuf[back] = *newJob;
->>>>>>> 95d1873aeda44b91d1fe39f5c5e2fda6499c7642
 		}
 		buf.waiting++;
 
@@ -209,7 +148,6 @@ int unloadBuf() //TOFIX: adjust for worker threads/Job structs
 	{
 		if (buf.hpBuf.pWaiting != 0) //if there are available high-priority requests
 		{
-<<<<<<< HEAD
 			int back = (buf.hpBuf.pFront + (buf.hpBuf.pWaiting)) % buf.capacity;
 			socketfd = buf.hpBuf.pJobs[back].socketfd;
 			(buf.hpBuf.pWaiting)--;
@@ -219,17 +157,6 @@ int unloadBuf() //TOFIX: adjust for worker threads/Job structs
 			int back = (buf.hpBuf.npFront + (buf.hpBuf.npWaiting)) % buf.capacity;
 			socketfd = buf.hpBuf.npJobs[back].socketfd;
 			(buf.hpBuf.npWaiting)--;
-=======
-			int back = (buf.bufType.hpBuf.pFront + (buf.bufType.hpBuf.pWaiting)) % buf.capacity;
-			socketfd = buf.hpBuf.pBuf[back];
-			(buf.bufType.hpBuf.pWaiting)--;
-		}
-		else
-		{
-			int back = (buf.bufType.hpBuf.npFront + (buf.bufType.hpBuf.npWaiting)) % buf.capacity;
-			socketfd = buf.bufType.hpBuf.npBuf[back];
-			(buf.bufType.hpBuf.npWaiting)--;
->>>>>>> 95d1873aeda44b91d1fe39f5c5e2fda6499c7642
 		}
 	}
 	(buf.waiting)--;
