@@ -81,8 +81,9 @@ void logger(int type, char *s1, char *s2, int socket_fd)
 	/* No checks here, nothing can be done with a failure anyway */
 	if ((fd = open("nweb.log", O_CREAT | O_WRONLY | O_APPEND, 0644)) >= 0)
 	{
-		dummy = write(fd, logbuffer, strlen(logbuffer));
-		dummy = write(fd, "\n", 1);
+		int len = strlen(logbuffer);
+		logbuffer[len] = '\n';
+		dummy = write(fd, logbuffer, len+1); /*Do it in a single thread-safe write*/
 		(void)close(fd);
 	}
 }
@@ -92,7 +93,8 @@ void web(int fd, int hit)
 	int j, file_fd, buflen;
 	long i, ret, len;
 	char *fstr;
-	static char buffer[BUFSIZE + 1]; /* static so zero filled */
+	char buffer[BUFSIZE + 1]; /*DONT HAVE A STATIC BUFFER IF EVERYONES CALLING IT*/
+	memset(buffer, 0, BUFSIZE+1);
 
 	ret = read(fd, buffer, BUFSIZE); /* read Web request in one go */
 	if (ret == 0 || ret == -1)
@@ -176,6 +178,7 @@ void web(int fd, int hit)
 	{
 		dummy = write(fd, buffer, ret);
 	}
+	close(file_fd); /*FIXED MEM LEAK*/
 endRequest:
 	sleep(1); /* allow socket to drain before signalling the socket is closed */
 	close(fd);
