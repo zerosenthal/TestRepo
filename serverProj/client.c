@@ -98,10 +98,8 @@ void *run(void *arg)
       fputs(buf, stdout);
       memset(buf, 0, BUF_SIZE);
     }
-    pthread_barrier_wait(&bar);
-    close(clientfd);
   }
-  return (void *)0;
+  close(clientfd);
 }
 
 int main(int argc, char **argv)
@@ -118,7 +116,7 @@ int main(int argc, char **argv)
     (void)printf("ERROR: Number of threads must be > 1 %s\n", argv[3]);
     exit(4);
   }
-  if (strncmp(argv[4], "CONCUR", 7) && strncmp(argv[4], "FIFO", 5))
+  if (!strncmp(argv[4], "CONCUR", 7) && !strncmp(argv[4], "FIFO", 5))
   {
     (void)printf("ERROR: Scheduling must be CONCUR or FIFO: %s\n", argv[4]);
     exit(5);
