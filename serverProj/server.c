@@ -21,40 +21,151 @@ struct
 {
 	char *ext;
 	char *filetype;
-} extensions[] = {
-	{"gif", "image/gif"},
-	{"jpg", "image/jpg"},
-	{"jpeg", "image/jpeg"},
-	{"png", "image/png"},
-	{"ico", "image/ico"},
-	{"zip", "image/zip"},
-	{"gz", "image/gz"},
-	{"tar", "image/tar"},
-	{"htm", "text/html"},
-	{"html", "text/html"},
-	{0, 0}};
+} extensions [] = {
+	{"gif", "image/gif" },  
+	{"jpg", "image/jpg" }, 
+	{"jpeg","image/jpeg"},
+	{"png", "image/png" },  
+	{"ico", "image/ico" },  
+	{"zip", "image/zip" },  
+	{"gz",  "image/gz"  },  
+	{"tar", "image/tar" },  
+	{"htm", "text/html" },  
+	{"html","text/html" },  
+	{0,0} };
+  
 
-static const char *HDRS_FORBIDDEN = "HTTP/1.1 403 Forbidden\nContent-Length: 185\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>403 Forbidden</title>\n</head><body>\n<h1>Forbidden</h1>\nThe requested URL, file type or operation is not allowed on this simple static file webserver.\n</body></html>\n";
-static const char *HDRS_NOTFOUND = "HTTP/1.1 404 Not Found\nContent-Length: 136\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>404 Not Found</title>\n</head><body>\n<h1>Not Found</h1>\nThe requested URL was not found on this server.\n</body></html>\n";
-static const char *HDRS_OK = "HTTP/1.1 200 OK\nServer: nweb/%d.0\nContent-Length: %ld\nConnection: close\nContent-Type: %s\n\n";
+static const char * HDRS_FORBIDDEN = "HTTP/1.1 403 Forbidden\nContent-Length: 185\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>403 Forbidden</title>\n</head><body>\n<h1>Forbidden</h1>\nThe requested URL, file type or operation is not allowed on this simple static file webserver.\n</body></html>\n";
+static const char * HDRS_NOTFOUND = "HTTP/1.1 404 Not Found\nContent-Length: 136\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>404 Not Found</title>\n</head><body>\n<h1>Not Found</h1>\nThe requested URL was not found on this server.\n</body></html>\n";
+static const char * HDRS_OK = "HTTP/1.1 200 OK\nServer: nweb/%d.0\nContent-Length: %ld\nConnection: close\nContent-Type: %s\n\n";
 static int dummy; //keep compiler happy
 
-/*Start Globals: Buffer, Mutex, Condition Variable */
-struct socket
-{
+/* 
+Globals 
+Declare structs, mutexes, condition vars
+*/
+
+typedef struct Job Job;
+typedef struct Buffer Buffer;
+typedef struct FIFOBuf FIFOBuf;
+typedef struct HPBuf HPBuf;
+
+struct Job{
 	int socketfd;
-	int hit;
+	int job_id;
 };
-struct socketBuffer
-{
-	struct socket *sockets; 
-	int capacity;			
+
+struct FIFOBuf{
+	struct Job* jobs; //unitialized job buffer
 	int front;
-	int count;
 };
-static struct socketBuffer buf;
+
+struct HPBuf{
+	struct Job* pJobs; //unitialized priority job buffer
+	int pFront;
+	int pWaiting;
+	
+	struct Job* npJobs; //unitialized non-priority job buffer
+	int npFront;
+	int npWaiting;
+};
+
+struct Buffer{
+	int capacity;
+	int waiting;
+	union{
+		FIFOBuf fifoBuf;
+		HPBuf hpBuf;
+	};
+};
+
+static Buffer buf;
+static char* schedAlg; //default schedAlg -> ANY
 pthread_mutex_t bufMutex;
 pthread_cond_t prodCond, consCond;
+
+/*
+Helper funcs
+*/
+
+void initBuf(int size)
+{
+	buf.capacity = size;
+	buf.waiting = 0; 
+
+	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
+	{
+		buf.fifoBuf.jobs = (Job*)calloc(size, sizeof(Job));
+		buf.fifoBuf.front = 0;
+	}
+	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
+	{
+		buf.hpBuf.pJobs = (Job*)calloc(size, sizeof(Job));
+		buf.hpBuf.npJobs = (Job*)calloc(size, sizeof(Job));
+		buf.hpBuf.pFront = 0;
+		buf.hpBuf.pWaiting = 0;
+		buf.hpBuf.npFront = 0;
+		buf.hpBuf.npWaiting = 0;
+	}
+}
+int loadBuf(struct Job* newJob, char contentType) //need to add conditional locks for buf reads
+{	
+	if (buf.waiting == buf.capacity) {return -1;} //buffer is full
+
+	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
+	{
+		int back = (buf.fifoBuf.front + (++buf.waiting)) % buf.capacity;
+		buf.fifoBuf.jobs[back] = *newJob;
+
+		return newJob->job_id;
+	}
+	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
+	{
+		char pContent = schedAlg[2];
+		if (contentType == pContent)
+		{
+			int back = (buf.hpBuf.pFront + (++(buf.hpBuf.pWaiting))) % buf.capacity;
+			buf.hpBuf.pJobs[back] = *newJob;
+		}
+		else
+		{
+			int back = (buf.hpBuf.npFront + (++buf.hpBuf.npWaiting)) % buf.capacity;
+			buf.hpBuf.npJobs[back] = *newJob;
+		}
+		buf.waiting++;
+
+		return newJob->job_id;
+	}
+	else return -1; //should never reach here
+}
+
+Job unloadBuf()
+{	
+	Job nextJob;
+
+	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
+	{
+		int back = (buf.fifoBuf.front + (buf.waiting)) % buf.capacity;
+		nextJob = buf.fifoBuf.jobs[back];
+	}
+	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
+	{
+		if (buf.hpBuf.pWaiting != 0) //if there are available high-priority requests
+		{
+			int back = (buf.hpBuf.pFront + (buf.hpBuf.pWaiting)) % buf.capacity;
+			nextJob = buf.hpBuf.pJobs[back];
+			(buf.hpBuf.pWaiting)--;
+		}
+		else
+		{
+			int back = (buf.hpBuf.npFront + (buf.hpBuf.npWaiting)) % buf.capacity;
+			nextJob = buf.hpBuf.npJobs[back];
+			(buf.hpBuf.npWaiting)--;
+		}
+	}
+	(buf.waiting)--;
+	return nextJob;
+}
 
 void logger(int type, char *s1, char *s2, int socket_fd)
 {
@@ -190,31 +301,60 @@ void *worker(void *arg)
 	while (1)
 	{
 		pthread_mutex_lock(&bufMutex);
-		while (buf.count == 0) //if buffer is empty, block
+		while (buf.waiting == 0) //if buffer is empty, block
 			pthread_cond_wait(&consCond, &bufMutex);
-		struct socket toRead;
-		toRead = buf.sockets[buf.front];
-		buf.count--;
-		buf.sockets[buf.front].socketfd = 0;
-		buf.sockets[buf.front].hit = 0;
-		buf.front = (buf.front + 1) % buf.capacity;
+		Job nextJob = unloadBuf();
 		pthread_cond_signal(&prodCond); //Awaken the master thread - there's room in buf
 		pthread_mutex_unlock(&bufMutex);
 
-		web(toRead.socketfd, toRead.hit);
+		web(nextJob.socketfd, nextJob.job_id);
 	}
 }
 
 /* Called by master thread to load an incoming request*/
-void addToBuffer(struct socket toAdd)
+void addJob(Job* newJob)
 {
+	//process fd to determine content type
+	char contentType;
+	char readBuf[BUFSIZE + 1];
+	long ret;
+	ret = read(newJob->socketfd, readBuf, BUFSIZE);
+
+	if (ret == 42)
+	{
+		//do nothing, making compiler happy
+	}
+
+	if (strstr(readBuf, ".gif") != NULL ||
+		strstr(readBuf, ".jpg") != NULL ||
+		strstr(readBuf, ".jpeg") != NULL ||
+		strstr(readBuf, ".png") != NULL ||
+		strstr(readBuf, ".ico") != NULL ||
+		strstr(readBuf, ".zip") != NULL ||
+		strstr(readBuf, ".gz") != NULL ||
+		strstr(readBuf, ".tar") != NULL
+		)
+	{
+		contentType = 'I';
+	}
+	else if (strstr(readBuf, ".htm") != NULL || strstr(readBuf, ".html") != NULL)
+	{
+		contentType = 'H';
+	}
+	else { contentType = 'E';}
+
+	lseek(newJob->socketfd, 0, SEEK_SET); //reset file offset to 0
+	
 	pthread_mutex_lock(&bufMutex);
-	while (buf.count == buf.capacity) //if buffer is full, block
+	while (buf.waiting == buf.capacity) //if buffer is full, block
 		pthread_cond_wait(&prodCond, &bufMutex);
 
-	int back = (buf.front + buf.count) % buf.capacity;
-	buf.sockets[back] = toAdd;
-	buf.count++;
+	if (loadBuf(newJob, contentType) == -1)
+	{
+		//mutex unlocked when buffer was full
+		printf("ERROR: master thread attempted to access full buffer");
+		exit(6);
+	}
 
 	pthread_cond_broadcast(&consCond); //Awaken all workers, can't hurt
 	pthread_mutex_unlock(&bufMutex);
@@ -227,14 +367,18 @@ int main(int argc, char **argv)
 	static struct sockaddr_in cli_addr;  /* static = initialised to zeros */
 	static struct sockaddr_in serv_addr; /* static = initialised to zeros */
 
-	if (argc < 5 || argc > 5 || !strcmp(argv[1], "-?"))
+	if (argc < 6 || argc > 6 || !strcmp(argv[1], "-?"))
 	{
-		(void)printf("USAGE: %s <port-number> <top-directory> <threads> <buffers>\t\tversion %d\n\n"
+		(void)printf("USAGE: %s <port-number> <top-directory> <threads> <buffers> <schedalg>\t\tversion %d\n\n"
 					 "\tnweb is a small and very safe mini web server\n"
 					 "\tnweb only servers out file/web pages with extensions named below\n"
 					 "\t and only from the named directory or its sub-directories.\n"
-					 "\tThere is no fancy features = safe and secure.\n\n"
-					 "\tExample: nweb 8181 /home/nwebdir 10 8 &\n\n"
+					 "\tProvides multi-threaded functionality, based on user-determined\n"
+					 "\t thread count, job queue size, and scheduling algorithm.\n"
+					 "\tExample: nweb 8181 /home/nwebdir 10 8 FIFO &\n\n"
+					 "\tOnly Supports \"ANY\", \"FIFO\" (First In First Out), \"HPIC\"\n"
+					 "\t (High Priority Image Content), and \"HPHC\" (High Priority HTML Content)\n"
+					 "\t scheduling policies.\n"
 					 "\tOnly Supports:",
 					 argv[0], VERSION);
 		for (i = 0; extensions[i].ext != 0; i++)
@@ -292,13 +436,18 @@ int main(int argc, char **argv)
 		logger(ERROR, "system call", "listen", 0);
 	}
 
+	/* Set schedAlg */
+	if (strcmp(argv[5], "ANY") && strcmp(argv[5], "FIFO") && strcmp(argv[5], "HPIC") && strcmp(argv[5], "HPHC")) 
+	{
+		(void)printf("ERROR: schedAlg must be one of \"ANY\", \"FIFO\", \"HPIC\", \"HPHC\", entered %s\n", argv[4]);
+		exit(1);
+	}
+	else{ schedAlg = argv[5];}
+	
 	/* Initialize Buffer */
 	int bufferSize = atoi(argv[4]);
-	buf.sockets = (struct socket *) malloc(sizeof(struct socket)*bufferSize);
-	if ((long)buf.sockets < 1) exit(12);
-	buf.capacity = bufferSize; 
-	buf.count = 0;
-	buf.front = 0;
+	initBuf(bufferSize);
+
 	/*Initialize pThread stuff */
 	pthread_mutex_init(&bufMutex, NULL);
 	pthread_cond_init(&prodCond, NULL);
@@ -318,8 +467,8 @@ int main(int argc, char **argv)
 		{
 			logger(ERROR, "system call", "accept", 0);
 		}
-		struct socket toAdd = {socketfd, hit};
-		addToBuffer(toAdd);
+		Job newJob = {socketfd, hit};
+		addJob(&newJob);
 	}
 
 	/* We never get here, Master thread is infinite loop
