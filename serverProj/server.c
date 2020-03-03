@@ -53,6 +53,7 @@ typedef struct HPBuf HPBuf;
 struct Job{
 	int socketfd;
 	int job_id;
+	char readBuf[BUFSIZE + 1];
 };
 
 struct FIFOBuf{
@@ -199,35 +200,13 @@ void logger(int type, char *s1, char *s2, int socket_fd)
 	}
 }
 
-void web(int fd, int hit)
+
+void web(int fd, int hit, char* buffer)
 {
 	int j, file_fd, buflen;
 	long i, ret, len;
 	char *fstr;
-	char buffer[BUFSIZE + 1]; /*DONT HAVE A STATIC BUFFER IF EVERYONES CALLING IT*/
-	memset(buffer, 0, BUFSIZE+1);
-
-	ret = read(fd, buffer, BUFSIZE); /* read Web request in one go */
-	if (ret == 0 || ret == -1)
-	{ /* read failure stop now */
-		logger(FORBIDDEN, "failed to read browser request", "", fd);
-		goto endRequest;
-	}
-	if (ret > 0 && ret < BUFSIZE)
-	{					 /* return code is valid chars */
-		buffer[ret] = 0; /* terminate the buffer */
-	}
-	else
-	{
-		buffer[0] = 0;
-	}
-	for (i = 0; i < ret; i++)
-	{ /* remove CF and LF characters */
-		if (buffer[i] == '\r' || buffer[i] == '\n')
-		{
-			buffer[i] = '*';
-		}
-	}
+	
 	logger(LOG, "request", buffer, hit);
 	if (strncmp(buffer, "GET ", 4) && strncmp(buffer, "get ", 4))
 	{
@@ -307,7 +286,7 @@ void *worker(void *arg)
 		pthread_cond_signal(&prodCond); //Awaken the master thread - there's room in buf
 		pthread_mutex_unlock(&bufMutex);
 
-		web(nextJob.socketfd, nextJob.job_id);
+		web(nextJob.socketfd, nextJob.job_id, nextJob.readBuf);
 	}
 }
 
@@ -316,28 +295,47 @@ void addJob(Job* newJob)
 {
 	//process fd to determine content type
 	char contentType;
-	char readBuf[BUFSIZE + 1];
-	long ret;
-	ret = read(newJob->socketfd, readBuf, BUFSIZE);
+	memset(newJob->readBuf, 0, BUFSIZE+1);
+	long ret, i;
+	ret = read(newJob->socketfd, newJob->readBuf, BUFSIZE);  /* read Web request in one go */
 
-	if (ret < 1)
+	if (ret == 0 || ret == -1)
+	{ /* read failure stop now */
+		logger(FORBIDDEN, "failed to read browser request", "", newJob->socketfd);
+		//end request
+		sleep(1); /* allow socket to drain before signalling the socket is closed */
+		close(newJob->socketfd);
+		return;
+	}
+	if (ret > 0 && ret < BUFSIZE)
+	{					 /* return code is valid chars */
+		newJob->readBuf[ret] = 0; /* terminate the buffer */
+	}
+	else
 	{
-		printf("ERROR: read for content type unsuccessful");
+		newJob->readBuf[0] = 0;
+	}
+	for (i = 0; i < ret; i++)
+	{ /* remove CF and LF characters */
+		if (newJob->readBuf[i] == '\r' || newJob->readBuf[i] == '\n')
+		{
+			newJob->readBuf[i] = '*';
+		}
 	}
 
-	if (strstr(readBuf, ".gif") != NULL ||
-		strstr(readBuf, ".jpg") != NULL ||
-		strstr(readBuf, ".jpeg") != NULL ||
-		strstr(readBuf, ".png") != NULL ||
-		strstr(readBuf, ".ico") != NULL ||
-		strstr(readBuf, ".zip") != NULL ||
-		strstr(readBuf, ".gz") != NULL ||
-		strstr(readBuf, ".tar") != NULL
+	if (strstr(newJob->readBuf, ".gif") != NULL ||
+		strstr(newJob->readBuf, ".jpg") != NULL ||
+		strstr(newJob->readBuf, ".jpeg") != NULL ||
+		strstr(newJob->readBuf, ".png") != NULL ||
+		strstr(newJob->readBuf, ".ico") != NULL ||
+		strstr(newJob->readBuf, ".zip") != NULL ||
+		strstr(newJob->readBuf, ".gz") != NULL ||
+		strstr(newJob->readBuf, ".tar") != NULL
 		)
 	{
 		contentType = 'I';
 	}
-	else if (strstr(readBuf, ".htm") != NULL || strstr(readBuf, ".html") != NULL)
+	else if (strstr(newJob->readBuf, ".htm") != NULL || strstr(newJob->readBuf, ".html") != NULL)
 	{
 		contentType = 'H';
 	}
