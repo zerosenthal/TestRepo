@@ -341,8 +341,6 @@ void addJob(Job* newJob)
 	}
 	else { contentType = 'E';}
 
-	lseek(newJob->socketfd, 0, SEEK_SET); //reset file offset to 0
-
 	pthread_mutex_lock(&bufMutex);
 	while (buf.waiting == buf.capacity) //if buffer is full, block
 		pthread_cond_wait(&prodCond, &bufMutex);
