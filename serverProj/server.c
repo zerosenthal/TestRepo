@@ -53,7 +53,7 @@ typedef struct HPBuf HPBuf;
 struct Job{
 	int socketfd;
 	int job_id;
-	char readBuf[BUFSIZE + 1];
+	char *readBuf;
 };
 
 struct FIFOBuf{
