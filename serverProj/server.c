@@ -10,6 +10,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <pthread.h>
+#include <sys/time.h>
+#include <semaphore.h>
 #define VERSION 25
 #define BUFSIZE 8096
 #define ERROR 42
@@ -37,7 +39,7 @@ struct
 
 static const char * HDRS_FORBIDDEN = "HTTP/1.1 403 Forbidden\nContent-Length: 185\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>403 Forbidden</title>\n</head><body>\n<h1>Forbidden</h1>\nThe requested URL, file type or operation is not allowed on this simple static file webserver.\n</body></html>\n";
 static const char * HDRS_NOTFOUND = "HTTP/1.1 404 Not Found\nContent-Length: 136\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>404 Not Found</title>\n</head><body>\n<h1>Not Found</h1>\nThe requested URL was not found on this server.\n</body></html>\n";
-static const char * HDRS_OK = "HTTP/1.1 200 OK\nServer: nweb/%d.0\nContent-Length: %ld\nConnection: close\nContent-Type: %s\n\n";
+static const char * HDRS_OK = "HTTP/1.1 200 OK\nServer: nweb/%d.0\nContent-Length: %ld\nConnection: close\nContent-Type: %s\nX-stat-req-arrival-count: %d\nX-stat-req-arrival-time: &ld\nX-stat-req-dispatch-count: %d\nX-stat-req-dispatch-time: %ld\nX-stat-req-complete-count: %d\nX-stat-req-complete-time: %ld\nX-stat-req-age: %d\nX-stat-thread-id: %d\nX-stat-thread-count: %d\nX-stat-thread-html: %d\nX-stat-thread-image: %d\n\n";
 static int dummy; //keep compiler happy
 
 /* 
@@ -49,11 +51,34 @@ typedef struct Job Job;
 typedef struct Buffer Buffer;
 typedef struct FIFOBuf FIFOBuf;
 typedef struct HPBuf HPBuf;
+typedef struct ServerStats ServerStats;
+typedef struct ThreadStats ThreadStats;
+
+struct ServerStats {
+	long startTime;
+	int arrivalCount;
+	int dispatchCount;
+	int completedCount;
+};
 
 struct Job{
 	int socketfd;
 	int job_id;
+	int arrivalCount;
+	int dispatchCount;
+	int completedCount;
+	long arrivalTime;
+	long dispatchTime;
+	long completedTime;
 	char readBuf[BUFSIZE+1];
+	char contentType;
+};
+
+struct ThreadStats {
+	int thread_id;
+	int count;
+	int hTMLCount;
+	int imageCount;
 };
 
 struct FIFOBuf{
@@ -81,13 +106,26 @@ struct Buffer{
 };
 
 static Buffer buf;
+static ServerStats stats; /* static = initialised to zeros */
 static char* schedAlg; //default schedAlg -> ANY
 pthread_mutex_t bufMutex;
 pthread_cond_t prodCond, consCond;
+static sem_t statMutex;
+
 
 /*
 Helper funcs
 */
+
+long getServerTime() {
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	long time_in_mill = (tv.tv_sec) * 1000 + (tv.tv_usec) / 1000 ;
+	sem_wait(&statMutex);
+	time_in_mill -= stats.startTime;
+	sem_post(&statMutex);
+	return time_in_mill;
+}
 
 void initBuf(int size)
 {
@@ -201,8 +239,11 @@ void logger(int type, char *s1, char *s2, int socket_fd)
 }
 
 
-void web(int fd, int hit, char* buffer)
+void web(Job *job, ThreadStats *tStats)
 {
+	int fd = job->socketfd;
+	int hit = job->job_id;
+	char *buffer = job->readBuf;
 	int j, file_fd, buflen;
 	long i, ret, len;
 	char *fstr;
@@ -213,6 +254,7 @@ void web(int fd, int hit, char* buffer)
 		logger(FORBIDDEN, "Only simple GET operation supported", buffer, fd);
 		goto endRequest;
 	}
+
 	for (i = 4; i < BUFSIZE; i++)
 	{ /* null terminate after the second space to ignore extra stuff */
 		if (buffer[i] == ' ')
@@ -255,11 +297,23 @@ void web(int fd, int hit, char* buffer)
 		logger(NOTFOUND, "failed to open file", &buffer[5], fd);
 		goto endRequest;
 	}
+
+	job->completedTime = getServerTime();
+	sem_wait(&statMutex);
+	job->completedCount = stats.completedCount;
+	sem_post(&statMutex);
+
 	logger(LOG, "SEND", &buffer[5], hit);
 	len = (long)lseek(file_fd, (off_t)0, SEEK_END); /* lseek to the file end to find the length */
 	(void)lseek(file_fd, (off_t)0, SEEK_SET);		/* lseek back to the file start ready for reading */
 	/* print out the response line, stock headers, and a blank line at the end. */
-	(void)sprintf(buffer, HDRS_OK, VERSION, len, fstr);
+	int age = job->dispatchCount - job->arrivalCount;
+	age = age < 1 ? 0 : age;
+	sem_wait(&statMutex);
+	(void)sprintf(buffer, HDRS_OK, VERSION, len, fstr, job->arrivalCount,job->arrivalTime,job->dispatchCount,job->dispatchTime,job->completedCount,job->completedTime,age,tStats->thread_id,tStats->count,tStats->hTMLCount,tStats->imageCount);
+	sem_post(&statMutex);
+
+
 	logger(LOG, "Header", buffer, hit);
 	dummy = write(fd, buffer, strlen(buffer));
 
@@ -268,6 +322,10 @@ void web(int fd, int hit, char* buffer)
 	{
 		dummy = write(fd, buffer, ret);
 	}
+
+	sem_wait(&statMutex);
+	stats.completedCount++;
+	sem_post(&statMutex);
 	close(file_fd); /*FIXED MEM LEAK*/
 endRequest:
 	sleep(1); /* allow socket to drain before signalling the socket is closed */
@@ -277,6 +335,7 @@ endRequest:
 /* Worker thread function*/
 void *worker(void *arg)
 {
+	ThreadStats tStats = {*((int *)arg),0,0,0};
 	while (1)
 	{
 		pthread_mutex_lock(&bufMutex);
@@ -286,7 +345,23 @@ void *worker(void *arg)
 		pthread_cond_signal(&prodCond); //Awaken the master thread - there's room in buf
 		pthread_mutex_unlock(&bufMutex);
 
-		web(nextJob.socketfd, nextJob.job_id, nextJob.readBuf);
+		nextJob.dispatchTime = getServerTime();
+		sem_wait(&statMutex);
+		stats.dispatchCount++;
+		nextJob.dispatchCount = stats.dispatchCount;
+		sem_post(&statMutex);
+
+		switch(nextJob.contentType){
+			case 'I':
+				tStats.imageCount++;
+				break;
+			case 'H':
+				tStats.hTMLCount++;
+				break;
+		}
+		tStats.count++;
+
+		web(&nextJob, &tStats);
 	}
 }
 
@@ -340,7 +415,7 @@ void addJob(Job* newJob)
 		contentType = 'H';
 	}
 	else { contentType = 'E';}
-
+	newJob->contentType = contentType;
 	pthread_mutex_lock(&bufMutex);
 	while (buf.waiting == buf.capacity) //if buffer is full, block
 		pthread_cond_wait(&prodCond, &bufMutex);
@@ -354,6 +429,10 @@ void addJob(Job* newJob)
 
 	pthread_cond_broadcast(&consCond); //Awaken all workers, can't hurt
 	pthread_mutex_unlock(&bufMutex);
+	sem_wait(&statMutex);
+	stats.arrivalCount++;
+	newJob->arrivalCount = stats.arrivalCount;
+	sem_post(&statMutex);
 }
 
 int main(int argc, char **argv)
@@ -444,7 +523,11 @@ int main(int argc, char **argv)
 	int bufferSize = atoi(argv[4]);
 	initBuf(bufferSize);
 
+	stats.startTime = getServerTime();
+
 	/*Initialize pThread stuff */
+	sem_init(&statMutex,0,0);
+	
 	pthread_mutex_init(&bufMutex, NULL);
 	pthread_cond_init(&prodCond, NULL);
 	pthread_cond_init(&consCond, NULL);
@@ -452,8 +535,9 @@ int main(int argc, char **argv)
 	pthread_t threads[numThreads];
 	for (int i = 0; i < numThreads; i++)
 	{
-		pthread_create(&threads[i], NULL, worker, NULL);
+		pthread_create(&threads[i], NULL, worker, (void *)&i);
 	}
+
 
 	/* Master Thread Loop*/
 	for (hit = 1;; hit++)
@@ -463,7 +547,8 @@ int main(int argc, char **argv)
 		{
 			logger(ERROR, "system call", "accept", 0);
 		}
-		Job newJob = {socketfd, hit};
+		long arrivalTime = getServerTime();
+		Job newJob = {socketfd, hit, arrivalTime};
 		addJob(&newJob);
 	}
 
