@@ -5,6 +5,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <semaphore.h>
 
 /* Network */
 #include <netdb.h>
@@ -13,6 +14,8 @@
 #define BUF_SIZE 250
 
 pthread_barrier_t bar;
+sem_t mutex;
+int twoFiles;
 
 // Get host information (used to establishConnection)
 struct addrinfo *getHostInfo(char *host, char *port)
@@ -72,32 +75,87 @@ void GET(int clientfd, char *path)
   send(clientfd, req, strlen(req), 0);
 }
 
-void *run(void *arg)
+void *runCONCUR(void *arg)
 {
   char **argv = (char **)arg;
   int clientfd;
   char buf[BUF_SIZE];
+  char* file;
+  int file1 = 1; 
 
   while (1)
   {
+    if (twoFiles)
+    {
+      if (file1){ file = argv[5];}
+      else {file = argv[6];}
+      file1 = !file1;
+    }
+    else { file = argv[5];}
+    
     // Establish connection with <hostname>:<port>
     clientfd = establishConnection(getHostInfo(argv[1], argv[2]));
     if (clientfd == -1)
     {
       fprintf(stderr,
               "[main:73] Failed to connect to: %s:%s%s \n",
-              argv[1], argv[2], argv[5]);
+              argv[1], argv[2], file);
       return (void *)3;
     }
-
-    pthread_barrier_wait(&bar);
-    GET(clientfd, argv[5]);
-    pthread_barrier_wait(&bar);
+    pthread_barrier_wait(&bar); //wait until all threads have connected to server
+    
+    GET(clientfd, file);
+    pthread_barrier_wait(&bar); //wait until all threads have sent request
+    
     while (recv(clientfd, buf, BUF_SIZE, 0) > 0)
     {
       fputs(buf, stdout);
       memset(buf, 0, BUF_SIZE);
     }
+    pthread_barrier_wait(&bar); //wait until all threads have received requests
+  }
+  close(clientfd);
+}
+
+void *runFIFO(void *arg)
+{
+  char **argv = (char **)arg;
+  int clientfd;
+  char buf[BUF_SIZE];
+  char* file;
+  int file1 = 1; 
+
+  while (1)
+  {
+    if (twoFiles)
+    {
+      if (file1){ file = argv[5];}
+      else {file = argv[6];}
+      file1 = !file1;
+    }
+    else { file = argv[5];}
+    
+    sem_wait(&mutex); //lock mutex ahead of connection establishment to ensure FIFO behavior
+    
+    // Establish connection with <hostname>:<port>
+    clientfd = establishConnection(getHostInfo(argv[1], argv[2]));
+    if (clientfd == -1)
+    {
+      fprintf(stderr,
+              "[main:73] Failed to connect to: %s:%s%s \n",
+              argv[1], argv[2], file);
+      return (void *)3;
+    }
+
+    GET(clientfd, file);
+    sem_post(&mutex); //unlock mutex, allow next request
+
+    while (recv(clientfd, buf, BUF_SIZE, 0) > 0)
+    {//wait to receive concurrently
+      fputs(buf, stdout);
+      memset(buf, 0, BUF_SIZE);
+    }
+    pthread_barrier_wait(&bar); //wait until all threads have received requests - ruins FIFO
   }
   close(clientfd);
 }
@@ -106,9 +164,9 @@ int main(int argc, char **argv)
 {
 
   /*Validate args*/
-  if (argc != 6)
-  { //Only one file for now
-    fprintf(stderr, "USAGE: %s <hostname> <port> <threads> <schedalg> <filename1>\n", argv[0]);
+  if (!(argc == 6 || argc == 7))
+  {
+    fprintf(stderr, "USAGE: %s <hostname> <port> <threads> <schedalg> <filename1> [filename2]\n", argv[0]);
     return 1;
   }
   if (atoi(argv[3]) < 1)
@@ -121,15 +179,30 @@ int main(int argc, char **argv)
     (void)printf("ERROR: Scheduling must be CONCUR or FIFO: %s\n", argv[4]);
     exit(5);
   }
-  //AS of now, only does concur.
-  int numThreads = atoi(argv[3]);
-  pthread_barrier_init(&bar, NULL, numThreads);
-  pthread_t threads[numThreads];
-  for (size_t i = 0; i < numThreads; i++)
-  {
-    pthread_create(&threads[i], NULL, run, (void *)argv);
-  }
+  if (argc == 7) { twoFiles = 1;}
+  else {twoFiles = 0;}
 
+  int numThreads = atoi(argv[3]);
+  pthread_t threads[numThreads];
+  pthread_barrier_init(&bar, NULL, numThreads);
+
+  if (!strcmp(argv[4], "FIFO"))
+  {
+    sem_init(&mutex, 0, 1);
+
+    for (size_t i = 0; i < numThreads; i++)
+    {
+      pthread_create(&threads[i], NULL, runFIFO, (void *)argv);
+    }
+  }
+  else
+  {
+    for (size_t i = 0; i < numThreads; i++)
+    {
+      pthread_create(&threads[i], NULL, runCONCUR, (void *)argv);
+    }
+  }
+  
   for (size_t i = 0; i < numThreads; i++)
   {
     pthread_join(threads[i], NULL);
