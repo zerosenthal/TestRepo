@@ -110,7 +110,7 @@ static ServerStats stats; /* static = initialised to zeros */
 static char* schedAlg; //default schedAlg -> ANY
 pthread_mutex_t bufMutex;
 pthread_cond_t prodCond, consCond;
-static sem_t statMutex;
+sem_t statMutex;
 
 
 /*
@@ -523,10 +523,10 @@ int main(int argc, char **argv)
 	int bufferSize = atoi(argv[4]);
 	initBuf(bufferSize);
 
-	stats.startTime = getServerTime();
 
 	/*Initialize pThread stuff */
-	sem_init(&statMutex,0,0);
+	sem_init(&statMutex,0,1);
+	stats.startTime = getServerTime();
 	
 	pthread_mutex_init(&bufMutex, NULL);
 	pthread_cond_init(&prodCond, NULL);
