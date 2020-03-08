@@ -203,6 +203,7 @@ Job unloadBuf()
 		}
 	}
 	(buf.waiting)--;
+
 	return nextJob;
 }
 
@@ -342,15 +343,17 @@ void *worker(void *arg)
 		pthread_mutex_lock(&bufMutex);
 		while (buf.waiting == 0) //if buffer is empty, block
 			pthread_cond_wait(&consCond, &bufMutex);
+		
 		Job nextJob = unloadBuf();
-		pthread_cond_signal(&prodCond); //Awaken the master thread - there's room in buf
-		pthread_mutex_unlock(&bufMutex);
 
 		nextJob.dispatchTime = getServerTime();
 		sem_wait(&statMutex);
 		stats.dispatchCount++;
 		nextJob.dispatchCount = stats.dispatchCount;
 		sem_post(&statMutex);
+
+		pthread_cond_signal(&prodCond); //Awaken the master thread - there's room in buf
+		pthread_mutex_unlock(&bufMutex);
 
 		switch(nextJob.contentType){
 			case 'I':
@@ -421,26 +424,19 @@ void addJob(Job* newJob)
 	while (buf.waiting == buf.capacity) //if buffer is full, block
 		pthread_cond_wait(&prodCond, &bufMutex);
 
+	
+	//had to move inside buf lock - job was consumed before arrival count was updated
+	sem_wait(&statMutex);
+	stats.arrivalCount++;
+	newJob->arrivalCount = stats.arrivalCount;
+	sem_post(&statMutex);
+
 	if (loadBuf(newJob, contentType) == -1)
 	{
 		//mutex unlocked when buffer was full
 		printf("ERROR: master thread attempted to access full buffer");
 		exit(6);
 	}
-
-	//had to move inside buf lock - job was consumed before arrival count was updated
-	sem_wait(&statMutex);
-	int curAC = stats.arrivalCount;
-	stats.arrivalCount++;
-	int newAC = stats.arrivalCount;
-
-	int curJAC = newJob->arrivalCount;
-	newJob->arrivalCount = stats.arrivalCount;
-	int newJAC = newJob->arrivalCount;
-
-	int dummyArr[4] = {curAC, newAC, curJAC, newJAC};
-	if (dummyArr[0] == 0) {}
-	sem_post(&statMutex);
 
 	pthread_cond_broadcast(&consCond); //Awaken all workers, can't hurt
 	pthread_mutex_unlock(&bufMutex);
@@ -563,7 +559,7 @@ int main(int argc, char **argv)
 			logger(ERROR, "system call", "accept", 0);
 		}
 		long arrivalTime = getServerTime();
-		Job newJob = {socketfd, hit, 0,0,0,arrivalTime};
+		Job newJob = {socketfd, hit, 0, 0, 0, arrivalTime};
 		addJob(&newJob);
 	}
 
