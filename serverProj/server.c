@@ -39,7 +39,7 @@ struct
 
 static const char * HDRS_FORBIDDEN = "HTTP/1.1 403 Forbidden\nContent-Length: 185\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>403 Forbidden</title>\n</head><body>\n<h1>Forbidden</h1>\nThe requested URL, file type or operation is not allowed on this simple static file webserver.\n</body></html>\n";
 static const char * HDRS_NOTFOUND = "HTTP/1.1 404 Not Found\nContent-Length: 136\nConnection: close\nContent-Type: text/html\n\n<html><head>\n<title>404 Not Found</title>\n</head><body>\n<h1>Not Found</h1>\nThe requested URL was not found on this server.\n</body></html>\n";
-static const char * HDRS_OK = "HTTP/1.1 200 OK\nServer: nweb/%d.0\nContent-Length: %ld\nConnection: close\nContent-Type: %s\nX-stat-req-arrival-count: %d\nX-stat-req-arrival-time: &ld\nX-stat-req-dispatch-count: %d\nX-stat-req-dispatch-time: %ld\nX-stat-req-complete-count: %d\nX-stat-req-complete-time: %ld\nX-stat-req-age: %d\nX-stat-thread-id: %d\nX-stat-thread-count: %d\nX-stat-thread-html: %d\nX-stat-thread-image: %d\n\n";
+static const char * HDRS_OK = "HTTP/1.1 200 OK\nServer: nweb/%d.0\nContent-Length: %ld\nConnection: close\nContent-Type: %s\nX-stat-req-arrival-count: %d\nX-stat-req-arrival-time: %ld\nX-stat-req-dispatch-count: %d\nX-stat-req-dispatch-time: %ld\nX-stat-req-complete-count: %d\nX-stat-req-complete-time: %ld\nX-stat-req-age: %d\nX-stat-thread-id: %d\nX-stat-thread-count: %d\nX-stat-thread-html: %d\nX-stat-thread-image: %d\n\n";
 static int dummy; //keep compiler happy
 
 /* 
@@ -427,12 +427,22 @@ void addJob(Job* newJob)
 		exit(6);
 	}
 
+	//had to move inside buf lock - job was consumed before arrival count was updated
+	sem_wait(&statMutex);
+	int curAC = stats.arrivalCount;
+	stats.arrivalCount++;
+	int newAC = stats.arrivalCount;
+
+	int curJAC = newJob->arrivalCount;
+	newJob->arrivalCount = stats.arrivalCount;
+	int newJAC = newJob->arrivalCount;
+
+	int dummyArr[4] = {curAC, newAC, curJAC, newJAC};
+	if (dummyArr[0] == 0) {}
+	sem_post(&statMutex);
+
 	pthread_cond_broadcast(&consCond); //Awaken all workers, can't hurt
 	pthread_mutex_unlock(&bufMutex);
-	sem_wait(&statMutex);
-	stats.arrivalCount++;
-	newJob->arrivalCount = stats.arrivalCount;
-	sem_post(&statMutex);
 }
 
 int main(int argc, char **argv)
@@ -519,13 +529,17 @@ int main(int argc, char **argv)
 	}
 	else{ schedAlg = argv[5];}
 	
+	
 	/* Initialize Buffer */
 	int bufferSize = atoi(argv[4]);
 	initBuf(bufferSize);
 
 
-	/*Initialize pThread stuff */
+	/*Initialize pThread stuff, stats struct*/
 	sem_init(&statMutex,0,1);
+	stats.arrivalCount = 0;
+	stats.completedCount = 0;
+	stats.dispatchCount = 0;
 	stats.startTime = getServerTime();
 	
 	pthread_mutex_init(&bufMutex, NULL);
@@ -548,7 +562,7 @@ int main(int argc, char **argv)
 			logger(ERROR, "system call", "accept", 0);
 		}
 		long arrivalTime = getServerTime();
-		Job newJob = {socketfd, hit, arrivalTime};
+		Job newJob = {socketfd, hit, 0,0,0,arrivalTime};
 		addJob(&newJob);
 	}
 
