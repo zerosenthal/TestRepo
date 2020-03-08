@@ -335,7 +335,8 @@ endRequest:
 /* Worker thread function*/
 void *worker(void *arg)
 {
-	ThreadStats tStats = {*((int *)arg),0,0,0};
+	int threadID = (int)(long)arg;
+	ThreadStats tStats = {threadID,0,0,0};
 	while (1)
 	{
 		pthread_mutex_lock(&bufMutex);
@@ -547,9 +548,9 @@ int main(int argc, char **argv)
 	pthread_cond_init(&consCond, NULL);
 	int numThreads = atoi(argv[3]);
 	pthread_t threads[numThreads];
-	for (int i = 0; i < numThreads; i++)
+	for (long i = 1; i <= numThreads; i++)
 	{
-		pthread_create(&threads[i], NULL, worker, (void *)&i);
+		pthread_create(&threads[i], NULL, worker, (void *)i);
 	}
 
 
