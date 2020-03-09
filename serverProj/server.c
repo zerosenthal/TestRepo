@@ -153,7 +153,7 @@ int loadBuf(struct Job* newJob, char contentType) //need to add conditional lock
 
 	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
 	{
-		int back = (buf.fifoBuf.front + (++buf.waiting)) % buf.capacity;
+		int back = (buf.fifoBuf.front + (buf.waiting++)) % buf.capacity;
 		buf.fifoBuf.jobs[back] = *newJob;
 
 		return newJob->job_id;
@@ -163,12 +163,12 @@ int loadBuf(struct Job* newJob, char contentType) //need to add conditional lock
 		char pContent = schedAlg[2];
 		if (contentType == pContent)
 		{
-			int back = (buf.hpBuf.pFront + (++(buf.hpBuf.pWaiting))) % buf.capacity;
+			int back = (buf.hpBuf.pFront + ((buf.hpBuf.pWaiting)++)) % buf.capacity;
 			buf.hpBuf.pJobs[back] = *newJob;
 		}
 		else
 		{
-			int back = (buf.hpBuf.npFront + (++buf.hpBuf.npWaiting)) % buf.capacity;
+			int back = (buf.hpBuf.npFront + (buf.hpBuf.npWaiting)++) % buf.capacity;
 			buf.hpBuf.npJobs[back] = *newJob;
 		}
 		buf.waiting++;
@@ -184,21 +184,21 @@ Job unloadBuf()
 
 	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
 	{
-		int back = (buf.fifoBuf.front + (buf.waiting)) % buf.capacity;
-		nextJob = buf.fifoBuf.jobs[back];
+		nextJob = buf.fifoBuf.jobs[buf.fifoBuf.front];
+		buf.fifoBuf.front = (buf.fifoBuf.front + 1) % buf.capacity;
 	}
 	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
 	{
 		if (buf.hpBuf.pWaiting != 0) //if there are available high-priority requests
 		{
-			int back = (buf.hpBuf.pFront + (buf.hpBuf.pWaiting)) % buf.capacity;
-			nextJob = buf.hpBuf.pJobs[back];
+			nextJob = buf.hpBuf.pJobs[buf.hpBuf.pFront];
+			buf.hpBuf.pFront = (buf.hpBuf.pFront + 1) % buf.capacity;
 			(buf.hpBuf.pWaiting)--;
 		}
 		else
 		{
-			int back = (buf.hpBuf.npFront + (buf.hpBuf.npWaiting)) % buf.capacity;
-			nextJob = buf.hpBuf.npJobs[back];
+			nextJob = buf.hpBuf.npJobs[buf.hpBuf.npFront];
+			buf.hpBuf.npFront = (buf.hpBuf.npFront + 1) % buf.capacity;
 			(buf.hpBuf.npWaiting)--;
 		}
 	}
