@@ -113,8 +113,8 @@ void *runCONCUR(void *arg)
       memset(buf, 0, BUF_SIZE);
     }
     pthread_barrier_wait(&bar); //wait until all threads have received requests
+    close(clientfd);
   }
-  close(clientfd);
 }
 
 void *runFIFO(void *arg)
@@ -156,8 +156,8 @@ void *runFIFO(void *arg)
       memset(buf, 0, BUF_SIZE);
     }
     pthread_barrier_wait(&bar); //wait until all threads have received requests - ruins FIFO
+   close(clientfd);
   }
-  close(clientfd);
 }
 
 int main(int argc, char **argv)

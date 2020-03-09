@@ -147,6 +147,7 @@ void initBuf(int size)
 		buf.hpBuf.npWaiting = 0;
 	}
 }
+
 int loadBuf(struct Job* newJob, char contentType) //need to add conditional locks for buf reads
 {	
 	if (buf.waiting == buf.capacity) {return -1;} //buffer is full
@@ -302,6 +303,7 @@ void web(Job *job, ThreadStats *tStats)
 	job->completedTime = getServerTime();
 	sem_wait(&statMutex);
 	job->completedCount = stats.completedCount;
+	stats.completedCount++; //Change here to prevent multiple requests having the same completedcount
 	sem_post(&statMutex);
 
 	logger(LOG, "SEND", &buffer[5], hit);
@@ -324,9 +326,6 @@ void web(Job *job, ThreadStats *tStats)
 		dummy = write(fd, buffer, ret);
 	}
 
-	sem_wait(&statMutex);
-	stats.completedCount++;
-	sem_post(&statMutex);
 	close(file_fd); /*FIXED MEM LEAK*/
 endRequest:
 	sleep(1); /* allow socket to drain before signalling the socket is closed */
