@@ -119,11 +119,11 @@ Helper funcs
 
 long getServerTime() {
 	struct timeval tv;
-	gettimeofday(&tv, NULL);
-	long time_in_mill = (tv.tv_sec) * 1000 + (tv.tv_usec) / 1000 ;
-	sem_wait(&statMutex);
+	gettimeofday(&tv, NULL);//ERRORCHECK
+	long time_in_mill = (tv.tv_sec) * 1000 + (tv.tv_usec) / 1000 ; 
+	sem_wait(&statMutex);//ERRORCHECK
 	time_in_mill -= stats.startTime;
-	sem_post(&statMutex);
+	sem_post(&statMutex);//ERRORCHECK
 	return time_in_mill;
 }
 
@@ -132,15 +132,15 @@ void initBuf(int size)
 	buf.capacity = size;
 	buf.waiting = 0; 
 
-	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
+	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))//ERRORCHECK
 	{
-		buf.fifoBuf.jobs = (Job*)calloc(size, sizeof(Job));
+		buf.fifoBuf.jobs = (Job*)calloc(size, sizeof(Job));//ERRORCHECK
 		buf.fifoBuf.front = 0;
 	}
-	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
+	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))//ERRORCHECK
 	{
-		buf.hpBuf.pJobs = (Job*)calloc(size, sizeof(Job));
-		buf.hpBuf.npJobs = (Job*)calloc(size, sizeof(Job));
+		buf.hpBuf.pJobs = (Job*)calloc(size, sizeof(Job));//ERRORCHECK
+		buf.hpBuf.npJobs = (Job*)calloc(size, sizeof(Job));//ERRORCHECK
 		buf.hpBuf.pFront = 0;
 		buf.hpBuf.pWaiting = 0;
 		buf.hpBuf.npFront = 0;
@@ -152,14 +152,14 @@ int loadBuf(struct Job* newJob, char contentType) //need to add conditional lock
 {	
 	if (buf.waiting == buf.capacity) {return -1;} //buffer is full
 
-	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
+	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))//ERRORCHECK
 	{
 		int back = (buf.fifoBuf.front + (buf.waiting++)) % buf.capacity;
 		buf.fifoBuf.jobs[back] = *newJob;
 
 		return newJob->job_id;
 	}
-	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
+	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))//ERRORCHECK
 	{
 		char pContent = schedAlg[2];
 		if (contentType == pContent)
@@ -183,12 +183,12 @@ Job unloadBuf()
 {	
 	Job nextJob;
 
-	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))
+	if (!strcmp(schedAlg, "ANY") || !strcmp(schedAlg, "FIFO"))//ERRORCHECK
 	{
 		nextJob = buf.fifoBuf.jobs[buf.fifoBuf.front];
 		buf.fifoBuf.front = (buf.fifoBuf.front + 1) % buf.capacity;
 	}
-	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
+	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))//ERRORCHECK
 	{
 		if (buf.hpBuf.pWaiting != 0) //if there are available high-priority requests
 		{
@@ -216,27 +216,27 @@ void logger(int type, char *s1, char *s2, int socket_fd)
 	switch (type)
 	{
 	case ERROR:
-		(void)sprintf(logbuffer, "ERROR: %s:%s Errno=%d exiting pid=%d", s1, s2, errno, getpid());
+		(void)sprintf(logbuffer, "ERROR: %s:%s Errno=%d exiting pid=%d", s1, s2, errno, getpid()); //ERRORCHECK
 		break;
 	case FORBIDDEN:
-		dummy = write(socket_fd, HDRS_FORBIDDEN, 271);
-		(void)sprintf(logbuffer, "FORBIDDEN: %s:%s", s1, s2);
+		dummy = write(socket_fd, HDRS_FORBIDDEN, 271);//ERRORCHECK
+		(void)sprintf(logbuffer, "FORBIDDEN: %s:%s", s1, s2);//ERRORCHECK
 		break;
 	case NOTFOUND:
-		dummy = write(socket_fd, HDRS_NOTFOUND, 224);
-		(void)sprintf(logbuffer, "NOT FOUND: %s:%s", s1, s2);
+		dummy = write(socket_fd, HDRS_NOTFOUND, 224);//ERRORCHECK
+		(void)sprintf(logbuffer, "NOT FOUND: %s:%s", s1, s2);//ERRORCHECK
 		break;
 	case LOG:
-		(void)sprintf(logbuffer, " INFO: %s:%s:%d", s1, s2, socket_fd);
+		(void)sprintf(logbuffer, " INFO: %s:%s:%d", s1, s2, socket_fd);//ERRORCHECK
 		break;
 	}
 	/* No checks here, nothing can be done with a failure anyway */
-	if ((fd = open("nweb.log", O_CREAT | O_WRONLY | O_APPEND, 0644)) >= 0)
+	if ((fd = open("nweb.log", O_CREAT | O_WRONLY | O_APPEND, 0644)) >= 0)//ERRORCHECK
 	{
 		int len = strlen(logbuffer);
 		logbuffer[len] = '\n';
-		dummy = write(fd, logbuffer, len+1); /*Do it in a single thread-safe write*/
-		(void)close(fd);
+		dummy = write(fd, logbuffer, len+1); /*Do it in a single thread-safe write*/ //ERRORCHECK
+		(void)close(fd);//ERRORCHECK
 	}
 }
 
@@ -251,7 +251,7 @@ void web(Job *job, ThreadStats *tStats)
 	char *fstr;
 	
 	logger(LOG, "request", buffer, hit);
-	if (strncmp(buffer, "GET ", 4) && strncmp(buffer, "get ", 4))
+	if (strncmp(buffer, "GET ", 4) && strncmp(buffer, "get ", 4))//ERRORCHECK
 	{
 		logger(FORBIDDEN, "Only simple GET operation supported", buffer, fd);
 		goto endRequest;
@@ -275,7 +275,7 @@ void web(Job *job, ThreadStats *tStats)
 	}
 	if (!strncmp(&buffer[0], "GET /\0", 6) || !strncmp(&buffer[0], "get /\0", 6))
 	{ /* convert no filename to index file */
-		(void)strcpy(buffer, "GET /index.html");
+		(void)strcpy(buffer, "GET /index.html");//ERRORCHECK
 	}
 
 	/* work out the file type and check we support it */
@@ -284,7 +284,7 @@ void web(Job *job, ThreadStats *tStats)
 	for (i = 0; extensions[i].ext != 0; i++)
 	{
 		len = strlen(extensions[i].ext);
-		if (!strncmp(&buffer[buflen - len], extensions[i].ext, len))
+		if (!strncmp(&buffer[buflen - len], extensions[i].ext, len))//ERRORCHECK
 		{
 			fstr = extensions[i].filetype;
 			break;
@@ -294,42 +294,42 @@ void web(Job *job, ThreadStats *tStats)
 	{
 		logger(FORBIDDEN, "file extension type not supported", buffer, fd);
 	}
-	if ((file_fd = open(&buffer[5], O_RDONLY)) == -1)
+	if ((file_fd = open(&buffer[5], O_RDONLY)) == -1)//ERRORCHECK
 	{ /* open the file for reading */
 		logger(NOTFOUND, "failed to open file", &buffer[5], fd);
 		goto endRequest;
 	}
 
 	job->completedTime = getServerTime();
-	sem_wait(&statMutex);
+	sem_wait(&statMutex);//ERRORCHECK
 	job->completedCount = stats.completedCount;
 	stats.completedCount++; //Change here to prevent multiple requests having the same completedcount
-	sem_post(&statMutex);
+	sem_post(&statMutex);//ERRORCHECK
 
 	logger(LOG, "SEND", &buffer[5], hit);
-	len = (long)lseek(file_fd, (off_t)0, SEEK_END); /* lseek to the file end to find the length */
-	(void)lseek(file_fd, (off_t)0, SEEK_SET);		/* lseek back to the file start ready for reading */
+	len = (long)lseek(file_fd, (off_t)0, SEEK_END); /* lseek to the file end to find the length */ //ERRORCHECK
+	(void)lseek(file_fd, (off_t)0, SEEK_SET);		/* lseek back to the file start ready for reading */ //ERRORCHECK
 	/* print out the response line, stock headers, and a blank line at the end. */
 	int age = job->dispatchCount - job->arrivalCount;
 	age = age < 1 ? 0 : age;
-	sem_wait(&statMutex);
-	(void)sprintf(buffer, HDRS_OK, VERSION, len, fstr, job->arrivalCount,job->arrivalTime,job->dispatchCount,job->dispatchTime,job->completedCount,job->completedTime,age,tStats->thread_id,tStats->count,tStats->hTMLCount,tStats->imageCount);
-	sem_post(&statMutex);
+	sem_wait(&statMutex);//ERRORCHECK
+	(void)sprintf(buffer, HDRS_OK, VERSION, len, fstr, job->arrivalCount,job->arrivalTime,job->dispatchCount,job->dispatchTime,job->completedCount,job->completedTime,age,tStats->thread_id,tStats->count,tStats->hTMLCount,tStats->imageCount);//ERRORCHECK
+	sem_post(&statMutex);//ERRORCHECK
 
 
 	logger(LOG, "Header", buffer, hit);
-	dummy = write(fd, buffer, strlen(buffer));
+	dummy = write(fd, buffer, strlen(buffer));//ERRORCHECK
 
 	/* send file in 8KB block - last block may be smaller */
-	while ((ret = read(file_fd, buffer, BUFSIZE)) > 0)
+	while ((ret = read(file_fd, buffer, BUFSIZE)) > 0)//ERRORCHECK
 	{
-		dummy = write(fd, buffer, ret);
+		dummy = write(fd, buffer, ret);//ERRORCHECK
 	}
 
-	close(file_fd); /*FIXED MEM LEAK*/
+	close(file_fd); /*FIXED MEM LEAK*/ //ERRORCHECK
 endRequest:
-	sleep(1); /* allow socket to drain before signalling the socket is closed */
-	close(fd);
+	sleep(1); /* allow socket to drain before signalling the socket is closed */ //ERRORCHECK
+	close(fd);//ERRORCHECK
 }
 
 /* Worker thread function*/
@@ -339,20 +339,20 @@ void *worker(void *arg)
 	ThreadStats tStats = {threadID,0,0,0};
 	while (1)
 	{
-		pthread_mutex_lock(&bufMutex);
+		pthread_mutex_lock(&bufMutex);//ERRORCHECK
 		while (buf.waiting == 0) //if buffer is empty, block
-			pthread_cond_wait(&consCond, &bufMutex);
+			pthread_cond_wait(&consCond, &bufMutex);//ERRORCHECK
 		
 		Job nextJob = unloadBuf();
 
 		nextJob.dispatchTime = getServerTime();
-		sem_wait(&statMutex);
+		sem_wait(&statMutex);//ERRORCHECK
 		stats.dispatchCount++;
 		nextJob.dispatchCount = stats.dispatchCount;
-		sem_post(&statMutex);
+		sem_post(&statMutex);//ERRORCHECK
 
-		pthread_cond_signal(&prodCond); //Awaken the master thread - there's room in buf
-		pthread_mutex_unlock(&bufMutex);
+		pthread_cond_signal(&prodCond); //Awaken the master thread - there's room in buf //ERRORCHECK
+		pthread_mutex_unlock(&bufMutex); //ERRORCHECK
 
 		switch(nextJob.contentType){
 			case 'I':
@@ -373,16 +373,16 @@ void addJob(Job* newJob)
 {
 	//process fd to determine content type
 	char contentType;
-	memset(newJob->readBuf, 0, BUFSIZE+1);
+	memset(newJob->readBuf, 0, BUFSIZE+1); //ERRORCHECK
 	long ret, i;
-	ret = read(newJob->socketfd, newJob->readBuf, BUFSIZE);  /* read Web request in one go */
+	ret = read(newJob->socketfd, newJob->readBuf, BUFSIZE);  /* read Web request in one go */ //ERRORCHECK
 
 	if (ret == 0 || ret == -1)
 	{ /* read failure stop now */
 		logger(FORBIDDEN, "failed to read browser request", "", newJob->socketfd);
 		//end request
-		sleep(1); /* allow socket to drain before signalling the socket is closed */
-		close(newJob->socketfd);
+		sleep(1); /* allow socket to drain before signalling the socket is closed */ //ERRORCHECK
+		close(newJob->socketfd); //ERRORCHECK
 		return;
 	}
 	if (ret > 0 && ret < BUFSIZE)
@@ -409,36 +409,36 @@ void addJob(Job* newJob)
 		strstr(newJob->readBuf, ".zip") != NULL ||
 		strstr(newJob->readBuf, ".gz") != NULL ||
 		strstr(newJob->readBuf, ".tar") != NULL
-		)
+		)//ERRORCHECK
 	{
 		contentType = 'I';
 	}
-	else if (strstr(newJob->readBuf, ".htm") != NULL || strstr(newJob->readBuf, ".html") != NULL)
+	else if (strstr(newJob->readBuf, ".htm") != NULL || strstr(newJob->readBuf, ".html") != NULL)//ERRORCHECK
 	{
 		contentType = 'H';
 	}
 	else { contentType = 'E';}
 	newJob->contentType = contentType;
-	pthread_mutex_lock(&bufMutex);
+	pthread_mutex_lock(&bufMutex);//ERRORCHECK
 	while (buf.waiting == buf.capacity) //if buffer is full, block
-		pthread_cond_wait(&prodCond, &bufMutex);
+		pthread_cond_wait(&prodCond, &bufMutex);//ERRORCHECK
 
 	
 	//had to move inside buf lock - job was consumed before arrival count was updated
-	sem_wait(&statMutex);
+	sem_wait(&statMutex);//ERRORCHECK
 	stats.arrivalCount++;
 	newJob->arrivalCount = stats.arrivalCount;
-	sem_post(&statMutex);
+	sem_post(&statMutex);//ERRORCHECK
 
 	if (loadBuf(newJob, contentType) == -1)
 	{
 		//mutex unlocked when buffer was full
-		printf("ERROR: master thread attempted to access full buffer");
+		printf("ERROR: master thread attempted to access full buffer");//ERRORCHECK
 		exit(6);
 	}
 
-	pthread_cond_broadcast(&consCond); //Awaken all workers, can't hurt
-	pthread_mutex_unlock(&bufMutex);
+	pthread_cond_broadcast(&consCond); //Awaken all workers, can't hurt//ERRORCHECK
+	pthread_mutex_unlock(&bufMutex);//ERRORCHECK
 }
 
 int main(int argc, char **argv)
@@ -461,91 +461,91 @@ int main(int argc, char **argv)
 					 "\t (High Priority Image Content), and \"HPHC\" (High Priority HTML Content)\n"
 					 "\t scheduling policies.\n"
 					 "\tOnly Supports:",
-					 argv[0], VERSION);
+					 argv[0], VERSION);//ERRORCHECK
 		for (i = 0; extensions[i].ext != 0; i++)
-			(void)printf(" %s", extensions[i].ext);
+			(void)printf(" %s", extensions[i].ext);//ERRORCHECK
 
 		(void)printf("\n\tNot Supported: URLs including \"..\", Java, Javascript, CGI\n"
 					 "\tNot Supported: directories / /etc /bin /lib /tmp /usr /dev /sbin \n"
-					 "\tNo warranty given or implied\n\tNigel Griffiths nag@uk.ibm.com\n");
-		exit(0);
+					 "\tNo warranty given or implied\n\tNigel Griffiths nag@uk.ibm.com\n");//ERRORCHECK
+		exit(0);//ERRORCHECK
 	}
 	if (!strncmp(argv[2], "/", 2) || !strncmp(argv[2], "/etc", 5) ||
 		!strncmp(argv[2], "/bin", 5) || !strncmp(argv[2], "/lib", 5) ||
 		!strncmp(argv[2], "/tmp", 5) || !strncmp(argv[2], "/usr", 5) ||
-		!strncmp(argv[2], "/dev", 5) || !strncmp(argv[2], "/sbin", 6))
+		!strncmp(argv[2], "/dev", 5) || !strncmp(argv[2], "/sbin", 6))//ERRORCHECK
 	{
-		(void)printf("ERROR: Bad top directory %s, see nweb -?\n", argv[2]);
-		exit(3);
+		(void)printf("ERROR: Bad top directory %s, see nweb -?\n", argv[2]);//ERRORCHECK
+		exit(3);//ERRORCHECK
 	}
-	if (chdir(argv[2]) == -1)
+	if (chdir(argv[2]) == -1)//ERRORCHECK
 	{
-		(void)printf("ERROR: Can't Change to directory %s\n", argv[2]);
-		exit(4);
+		(void)printf("ERROR: Can't Change to directory %s\n", argv[2]);//ERRORCHECK
+		exit(4);//ERRORCHECK
 	}
-	if (atoi(argv[3]) < 1)
+	if (atoi(argv[3]) < 1)//ERRORCHECK
 	{	
-		(void)printf("ERROR: Number of worker threads must be > 1 %s\n", argv[3]);
-		exit(4);
+		(void)printf("ERROR: Number of worker threads must be > 1 %s\n", argv[3]);//ERRORCHECK
+		exit(4);//ERRORCHECK
 	}
-	if (atoi(argv[4]) < 1)
+	if (atoi(argv[4]) < 1)//ERRORCHECK
 	{
-		(void)printf("ERROR: buffer must be > 1 %s\n", argv[4]);
-		exit(5);
+		(void)printf("ERROR: buffer must be > 1 %s\n", argv[4]);//ERRORCHECK
+		exit(5);//ERRORCHECK
 	}
 
 	logger(LOG, "nweb starting", argv[1], getpid());
 	/* setup the network socket */
-	if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+	if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)//ERRORCHECK
 	{
 		logger(ERROR, "system call", "socket", 0);
 	}
-	port = atoi(argv[1]);
+	port = atoi(argv[1]);//ERRORCHECK
 	if (port < 1025 || port > 65000)
 	{
 		logger(ERROR, "Invalid port number (try 1025->65000)", argv[1], 0);
 	}
 	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-	serv_addr.sin_port = htons(port);
-	if (bind(listenfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+	serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);//ERRORCHECK
+	serv_addr.sin_port = htons(port);//ERRORCHECK
+	if (bind(listenfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)//ERRORCHECK
 	{
 		logger(ERROR, "system call", "bind", 0);
 	}
-	if (listen(listenfd, 64) < 0)
+	if (listen(listenfd, 64) < 0)//ERRORCHECK
 	{
 		logger(ERROR, "system call", "listen", 0);
 	}
 
 	/* Set schedAlg */
-	if (strcmp(argv[5], "ANY") && strcmp(argv[5], "FIFO") && strcmp(argv[5], "HPIC") && strcmp(argv[5], "HPHC")) 
+	if (strcmp(argv[5], "ANY") && strcmp(argv[5], "FIFO") && strcmp(argv[5], "HPIC") && strcmp(argv[5], "HPHC")) //ERRORCHECK
 	{
-		(void)printf("ERROR: schedAlg must be one of \"ANY\", \"FIFO\", \"HPIC\", \"HPHC\", entered %s\n", argv[4]);
-		exit(1);
+		(void)printf("ERROR: schedAlg must be one of \"ANY\", \"FIFO\", \"HPIC\", \"HPHC\", entered %s\n", argv[4]);//ERRORCHECK
+		exit(1);//ERRORCHECK
 	}
 	else{ schedAlg = argv[5];}
 	
 	
 	/* Initialize Buffer */
-	int bufferSize = atoi(argv[4]);
+	int bufferSize = atoi(argv[4]);//ERRORCHECK
 	initBuf(bufferSize);
 
 
 	/*Initialize pThread stuff, stats struct*/
-	sem_init(&statMutex,0,1);
+	sem_init(&statMutex,0,1);//ERRORCHECK
 	stats.arrivalCount = 0;
 	stats.completedCount = 0;
 	stats.dispatchCount = 0;
 	stats.startTime = getServerTime();
 	
-	pthread_mutex_init(&bufMutex, NULL);
-	pthread_cond_init(&prodCond, NULL);
-	pthread_cond_init(&consCond, NULL);
-	int numThreads = atoi(argv[3]);
+	pthread_mutex_init(&bufMutex, NULL);//ERRORCHECK
+	pthread_cond_init(&prodCond, NULL);//ERRORCHECK
+	pthread_cond_init(&consCond, NULL);//ERRORCHECK
+	int numThreads = atoi(argv[3]);//ERRORCHECK
 	pthread_t threads[numThreads];
 	for (long i = 1; i <= numThreads; i++)
 	{
-		pthread_create(&threads[i], NULL, worker, (void *)i);
+		pthread_create(&threads[i], NULL, worker, (void *)i);//ERRORCHECK
 	}
 
 
@@ -553,7 +553,7 @@ int main(int argc, char **argv)
 	for (hit = 1;; hit++)
 	{
 		length = sizeof(cli_addr);
-		if ((socketfd = accept(listenfd, (struct sockaddr *)&cli_addr, &length)) < 0)
+		if ((socketfd = accept(listenfd, (struct sockaddr *)&cli_addr, &length)) < 0)//ERRORCHECK
 		{
 			logger(ERROR, "system call", "accept", 0);
 		}

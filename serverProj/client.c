@@ -23,12 +23,12 @@ struct addrinfo *getHostInfo(char *host, char *port)
   int r;
   struct addrinfo hints, *getaddrinfo_res;
   // Setup hints
-  memset(&hints, 0, sizeof(hints));
+  memset(&hints, 0, sizeof(hints));//ERRORCHECK
   hints.ai_family = AF_INET;
   hints.ai_socktype = SOCK_STREAM;
-  if ((r = getaddrinfo(host, port, &hints, &getaddrinfo_res)))
+  if ((r = getaddrinfo(host, port, &hints, &getaddrinfo_res)))//ERRORCHECK
   {
-    fprintf(stderr, "[getHostInfo:21:getaddrinfo] %s\n", gai_strerror(r));
+    fprintf(stderr, "[getHostInfo:21:getaddrinfo] %s\n", gai_strerror(r));//ERRORCHECK
     return NULL;
   }
 
@@ -46,24 +46,24 @@ int establishConnection(struct addrinfo *info)
   {
     if ((clientfd = socket(info->ai_family,
                            info->ai_socktype,
-                           info->ai_protocol)) < 0)
+                           info->ai_protocol)) < 0)//ERRORCHECK
     {
       perror("[establishConnection:35:socket]");
       continue;
     }
 
-    if (connect(clientfd, info->ai_addr, info->ai_addrlen) < 0)
+    if (connect(clientfd, info->ai_addr, info->ai_addrlen) < 0)//ERRORCHECK
     {
-      close(clientfd);
+      close(clientfd);//ERRORCHECK
       perror("[establishConnection:42:connect]");
       continue;
     }
 
-    freeaddrinfo(info);
+    freeaddrinfo(info);//ERRORCHECK
     return clientfd;
   }
 
-  freeaddrinfo(info);
+  freeaddrinfo(info);//ERRORCHECK
   return -1;
 }
 
@@ -71,8 +71,8 @@ int establishConnection(struct addrinfo *info)
 void GET(int clientfd, char *path)
 {
   char req[1000] = {0};
-  sprintf(req, "GET %s HTTP/1.0\r\n\r\n", path);
-  send(clientfd, req, strlen(req), 0);
+  sprintf(req, "GET %s HTTP/1.0\r\n\r\n", path);//ERRORCHECK
+  send(clientfd, req, strlen(req), 0);//ERRORCHECK
 }
 
 void *runCONCUR(void *arg)
@@ -99,21 +99,21 @@ void *runCONCUR(void *arg)
     {
       fprintf(stderr,
               "[main:73] Failed to connect to: %s:%s%s \n",
-              argv[1], argv[2], file);
+              argv[1], argv[2], file);//ERRORCHECK
       return (void *)3;
     }
-    pthread_barrier_wait(&bar); //wait until all threads have connected to server
+    pthread_barrier_wait(&bar); //wait until all threads have connected to server //ERRORCHECK
     
     GET(clientfd, file);
-    pthread_barrier_wait(&bar); //wait until all threads have sent request
+    pthread_barrier_wait(&bar); //wait until all threads have sent request //ERRORCHECK
     
-    while (recv(clientfd, buf, BUF_SIZE, 0) > 0)
+    while (recv(clientfd, buf, BUF_SIZE, 0) > 0) //ERRORCHECK
     {
-      fputs(buf, stdout);
-      memset(buf, 0, BUF_SIZE);
+      fputs(buf, stdout); //ERRORCHECK
+      memset(buf, 0, BUF_SIZE); //ERRORCHECK
     }
-    pthread_barrier_wait(&bar); //wait until all threads have received requests
-    close(clientfd);
+    pthread_barrier_wait(&bar); //wait until all threads have received requests //ERRORCHECK
+    close(clientfd); //ERRORCHECK
   }
 }
 
@@ -135,7 +135,7 @@ void *runFIFO(void *arg)
     }
     else { file = argv[5];}
     
-    sem_wait(&mutex); //lock mutex ahead of connection establishment to ensure FIFO behavior
+    sem_wait(&mutex); //lock mutex ahead of connection establishment to ensure FIFO behavior //ERRORCHECK
     
     // Establish connection with <hostname>:<port>
     clientfd = establishConnection(getHostInfo(argv[1], argv[2]));
@@ -143,20 +143,20 @@ void *runFIFO(void *arg)
     {
       fprintf(stderr,
               "[main:73] Failed to connect to: %s:%s%s \n",
-              argv[1], argv[2], file);
+              argv[1], argv[2], file); //ERRORCHECK
       return (void *)3;
     }
 
     GET(clientfd, file);
-    sem_post(&mutex); //unlock mutex, allow next request
+    sem_post(&mutex); //unlock mutex, allow next request //ERRORCHECK
 
-    while (recv(clientfd, buf, BUF_SIZE, 0) > 0)
+    while (recv(clientfd, buf, BUF_SIZE, 0) > 0) //ERRORCHECK
     {//wait to receive concurrently
-      fputs(buf, stdout);
-      memset(buf, 0, BUF_SIZE);
+      fputs(buf, stdout);//ERRORCHECK
+      memset(buf, 0, BUF_SIZE);//ERRORCHECK
     }
-    pthread_barrier_wait(&bar); //wait until all threads have received requests - ruins FIFO
-   close(clientfd);
+    pthread_barrier_wait(&bar); //wait until all threads have received requests - ruins FIFO //ERRORCHECK
+   close(clientfd); //ERRORCHECK
   }
 }
 
@@ -166,46 +166,46 @@ int main(int argc, char **argv)
   /*Validate args*/
   if (!(argc == 6 || argc == 7))
   {
-    fprintf(stderr, "USAGE: %s <hostname> <port> <threads> <schedalg> <filename1> [filename2]\n", argv[0]);
+    fprintf(stderr, "USAGE: %s <hostname> <port> <threads> <schedalg> <filename1> [filename2]\n", argv[0]); //ERRORCHECK
     return 1;
   }
-  if (atoi(argv[3]) < 1)
+  if (atoi(argv[3]) < 1)//ERRORCHECK
   {
-    (void)printf("ERROR: Number of threads must be > 1 %s\n", argv[3]);
-    exit(4);
+    (void)printf("ERROR: Number of threads must be > 1 %s\n", argv[3]);//ERRORCHECK
+    exit(4);//ERRORCHECK
   }
-  if (!strncmp(argv[4], "CONCUR", 7) && !strncmp(argv[4], "FIFO", 5))
+  if (!strncmp(argv[4], "CONCUR", 7) && !strncmp(argv[4], "FIFO", 5))//ERRORCHECK
   {
-    (void)printf("ERROR: Scheduling must be CONCUR or FIFO: %s\n", argv[4]);
-    exit(5);
+    (void)printf("ERROR: Scheduling must be CONCUR or FIFO: %s\n", argv[4]);//ERRORCHECK
+    exit(5);//ERRORCHECK
   }
   if (argc == 7) { twoFiles = 1;}
   else {twoFiles = 0;}
 
   int numThreads = atoi(argv[3]);
   pthread_t threads[numThreads];
-  pthread_barrier_init(&bar, NULL, numThreads);
+  pthread_barrier_init(&bar, NULL, numThreads);//ERRORCHECK
 
-  if (!strcmp(argv[4], "FIFO"))
+  if (!strcmp(argv[4], "FIFO"))//ERRORCHECK
   {
-    sem_init(&mutex, 0, 1);
+    sem_init(&mutex, 0, 1);//ERRORCHECK
 
     for (size_t i = 0; i < numThreads; i++)
     {
-      pthread_create(&threads[i], NULL, runFIFO, (void *)argv);
+      pthread_create(&threads[i], NULL, runFIFO, (void *)argv);//ERRORCHECK
     }
   }
   else
   {
     for (size_t i = 0; i < numThreads; i++)
     {
-      pthread_create(&threads[i], NULL, runCONCUR, (void *)argv);
+      pthread_create(&threads[i], NULL, runCONCUR, (void *)argv);//ERRORCHECK
     }
   }
   
   for (size_t i = 0; i < numThreads; i++)
   {
-    pthread_join(threads[i], NULL);
+    pthread_join(threads[i], NULL);//ERRORCHECK
   }
 
   return 0;
