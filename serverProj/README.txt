@@ -57,6 +57,11 @@ ADDITIONAL SPECIFICATIONS:
         REQ-AGE - dispatch count minus arrival count (ie number of jobs that arrived later, dispatched earlier),
             0 if negative (given priority).
 
+    ERROR HANDLING:
+        SYSTEM CALLS - all system calls are diverted through the CSAPP wrapper functions and return value is
+            checked. In a few cases (read, etc) exceptional return values are handled in the context of normal 
+            control flow so as not to interrupt normal program behavior.
+
 KNOWN BUGS:
     -When running on the class server, cannot exceed ~50 total threads between client and server.
     -FIFO client unexpectedly more efficient than CONCUR client when running ~150 threads.
