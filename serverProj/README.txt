@@ -6,13 +6,13 @@ Eli Perl <eperl@mail.yu.edu 800431807>
 Zechariah Rosenthal <zrosent1@mail.yu.edu 800449055>
 
 DIVISION OF LABOR:
-    E. PERL: developed and implemented algs for server and client scheduling policies, 
-    implemented and debugged stat-tracking tools, refactored for clarity, 
-    developed tests for project functionality, deployed tests for project functionality, authored write-up.
+    E. PERL: developed and implemented algs for server and client scheduling 
+        policies, implemented and debugged stat-tracking tools, refactored for clarity, 
+        developed tests for project functionality, deployed tests, authored write-up.
     
     Z. ROSENTHAL: engineered and implemented multi-threaded capability for server and client design, 
-    implemented and debugged stat-tracking tools, built in error catches for all system calls, 
-    integrated daemon function into server code, developed tests for project functionality.
+        implemented and debugged stat-tracking tools, built in error catches for all system calls, 
+        integrated daemon function into server code, developed tests for project functionality.
 
 DESIGN OVERVIEW:
     Multi-threaded client and server capable of fetching/retrieving html and image content.
@@ -43,20 +43,19 @@ ADDITIONAL SPECIFICATIONS:
         ANY - obeys FIFO behavior.
         FIFO - buffer designed as array-based queue.
         HPIC/HPHC - buffer modeled as two FIFO buffers, one for high-priority content, one for non-priority
-        content. 
+            content. 
     
     SYNCHRONIZATION TOOLS:
         SERVER WORKER THREAD SHARED BUFFER ACCESS - pthread mutex + condition variables.
         SERVER WORKER THREAD SHARED STATS ACCESS - pthread semaphore lock.
         CLIENT WORKER THREAD 'CONCUR' POLICY - pthread barrier.
         CLIENT WORKER THREAD 'FIFO' POLICY - pthread semaphore lock for sequential GET requests, pthread barrier
-        for concurrent response reception.
+            for concurrent response reception.
 
     STATISTICS:
         TIME - getServerTime() function subtracts current system time (gettimeofday()) from server start time.
         REQ-AGE - dispatch count minus arrival count (ie number of jobs that arrived later, dispatched earlier),
-        0 if negative (given priority).
-
+            0 if negative (given priority).
 
 KNOWN BUGS:
     -When running on the class server, cannot exceed ~50 total threads between client and server.
@@ -70,15 +69,16 @@ TESTING:
 
     SECTION         FEATURE         SERVER ARGS     CLIENT1 ARGS    CLIENT2 ARGS    BEHAVIOR/OUTPUT
     
-    Part 1:         Working thread  10 100 ANY      10 CONCUR       n/a             Unique thread-id's 1-10
-    Multi-Threaded  pool                            /index.html                     correspond to server's 10 threads.
-    Server
-                    Effective prod- 10 100 ANY      1 CONCUR        n/a             Server doesn't hang, ie no infinite
-                    cons sharing                    /index.html                     waits in mutual-exclusion scenarios.
-
-    Part 2:         ANY             10 100 ANY      50 CONCUR       n/a             Server is operational.
-    Scheduling                                      /index.html
-    Policies        
+    Part 1:
+    Multi-Threaded  Working thread  10 100 ANY      10 CONCUR       n/a             Unique thread-id's 1-10
+    Server          pool                            /index.html                     correspond to server's 10 threads.
+    
+                    Effective prod- 10 100 ANY      1 CONCUR        n/a             Server doesn't hang (ie no infinite
+                    cons sharing                    /index.html                     waits in mutual-exclusion scenarios).
+    Part 2:
+    Scheduling      ANY             10 100 ANY      50 CONCUR       n/a             Server is operational.
+    Policies                                        /index.html
+           
                     FIFO            10 100 FIFO     50 CONCUR       50 FIFO         Despite influx of requests from
                                                     /index.html     /zubat.jpg      alternating html requests from client1
                                                     /test.html                      and jpg requests from client2, all requests
@@ -99,13 +99,13 @@ TESTING:
                                                                                     requests all have an age of zero, and image 
                                                                                     requests have a positive age (ie html requests
                                                                                     given priority to the point of image starvation).
+    Part 3: 
+    Usage           req-stats       1 10 ANY        1 CONCUR        n/a             For vanilla single-threaded server and client,         
+    Statistics      (basic)                         /index.html                     stats are consistent and accurate.
+    
 
-    Part 3:         req-stats       1 10 ANY        1 CONCUR        n/a             For vanilla single-threaded server and client,         
-    Usage           (basic)                         /index.html                     stats are consistent and accurate.
-    Statistics
-
-                    req-stats       15 500 ANY      50 CONCUR       n/a             For full-throttled server and client, stats are
-                    (advanced)                      /index.html                     consistent and accurate.
+                    req-stats       15 500 ANY      50 CONCUR       n/a             For full-throttled mulit-threaded server and client, 
+                    (advanced)                      /index.html                     stats are consistent and accurate.
 
                     thread-stats    10 100 ANY      50 CONCUR       n/a             For image requests, individual thread stats
                     (image)                         /zubat.jpg                      reflect steadily incrementing total and image
@@ -119,7 +119,6 @@ TESTING:
                                                     /index.html                     incrementing total request counts. Alternating
                                                     /zubat.jpg                      request types reflected by alternating increments
                                                                                     for html and image counts.
-    
     Part 4:
     Multi-Threaded  Working thread  50 500 ANY      10 CONCUR       n/a             Each thread batch consistently sends and receives          
     Client          pool                            /index.html                     10 requests of alternating file type.
@@ -136,7 +135,6 @@ TESTING:
                                                     /zubat.jpg                      than CONCUR, as requests are being handled 
                                                                                     sequentially. (Run on local machine to accomodate
                                                                                     larger thread count necessary to observe discrepancy).
-    
     Part 5:
     Daemonize
     the Server
