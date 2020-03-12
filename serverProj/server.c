@@ -386,7 +386,7 @@ void parseJob(Job* newJob)
 	char contentType;
 	memset(newJob->readBuf, 0, BUFSIZE+1); 
 	long ret, i;
-	ret = Read(newJob->socketfd, newJob->readBuf, BUFSIZE);  /* read Web request in one go */ //ERRORCHECK done
+	ret = read(newJob->socketfd, newJob->readBuf, BUFSIZE);  /* read Web request in one go */ //ERRORCHECK done
 
 	if (ret == 0 || ret == -1)
 	{ /* read failure stop now */
@@ -518,11 +518,13 @@ int main(int argc, char **argv)
 	if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)//ERRORCHECK done
 	{
 		logger(ERROR, "system call", "socket", 0);
+		exit(1);
 	}
 	port = atoi(argv[1]);
 	if (port < 1025 || port > 65000)
 	{
 		logger(ERROR, "Invalid port number (try 1025->65000)", argv[1], 0);
+		exit(1);
 	}
 	serv_addr.sin_family = AF_INET;
 	serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -530,10 +532,12 @@ int main(int argc, char **argv)
 	if (bind(listenfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)//ERRORCHECK done
 	{
 		logger(ERROR, "system call", "bind", 0);
+		exit(1);
 	}
 	if (listen(listenfd, 64) < 0)//ERRORCHECK done
 	{
 		logger(ERROR, "system call", "listen", 0);
+		exit(1);
 	}
 
 	/* Set schedAlg */
