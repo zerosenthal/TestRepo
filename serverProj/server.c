@@ -47,8 +47,8 @@ static const char * HDRS_OK = "HTTP/1.1 200 OK\nServer: nweb/%d.0\nContent-Lengt
 static int dummy; //keep compiler happy
 
 /* 
-Globals 
-Declare structs, mutexes, condition vars
+	GLOBALS 
+	Declare structs, mutexes, condition vars
 */
 
 typedef struct Job Job;
@@ -116,9 +116,7 @@ pthread_mutex_t bufMutex;
 pthread_cond_t prodCond, consCond;
 sem_t statMutex;
 
-/*
-Helper funcs
-*/
+/* HELPER FUNCTIONS */
 
 long getServerTime() {
 	struct timeval tv;
@@ -129,6 +127,41 @@ long getServerTime() {
 	V(&statMutex);//ERRORCHECK done
 	return time_in_mill;
 }
+
+/* writes info to nweb.log */
+void logger(int type, char *s1, char *s2, int socket_fd)
+{
+	int fd;
+	char logbuffer[BUFSIZE * 2];
+
+	switch (type)
+	{
+	case ERROR:
+		sprintf(logbuffer, "ERROR: %s:%s Errno=%d exiting pid=%d", s1, s2, errno, getpid());
+		break;
+	case FORBIDDEN:
+		dummy = Write(socket_fd, HDRS_FORBIDDEN, 271);//ERRORCHECK done
+		sprintf(logbuffer, "FORBIDDEN: %s:%s", s1, s2);
+		break;
+	case NOTFOUND:
+		dummy = Write(socket_fd, HDRS_NOTFOUND, 224);//ERRORCHECK done
+		sprintf(logbuffer, "NOT FOUND: %s:%s", s1, s2);
+		break;
+	case LOG:
+		sprintf(logbuffer, " INFO: %s:%s:%d", s1, s2, socket_fd);
+		break;
+	}
+	
+	if ((fd = Open("nweb.log", O_CREAT | O_WRONLY | O_APPEND, 0644)) >= 0)//ERRORCHECK done
+	{
+		int len = strlen(logbuffer);
+		logbuffer[len] = '\n';
+		dummy = Write(fd, logbuffer, len+1); /*Do it in a single thread-safe write*/ //ERRORCHECK done
+		Close(fd);//ERRORCHECK done
+	}
+}
+
+/* BUFFER API */
 
 void initBuf(int size)
 {
@@ -151,7 +184,7 @@ void initBuf(int size)
 	}
 }
 
-int loadBuf(struct Job* newJob, char contentType) //need to add conditional locks for buf reads
+int loadBuf(struct Job* newJob)
 {	
 	if (buf.waiting == buf.capacity) {return -1;} //buffer is full
 
@@ -165,7 +198,7 @@ int loadBuf(struct Job* newJob, char contentType) //need to add conditional lock
 	else if (!strcmp(schedAlg, "HPIC") || !strcmp(schedAlg, "HPHC"))
 	{
 		char pContent = schedAlg[2];
-		if (contentType == pContent)
+		if (newJob->contentType == pContent)
 		{
 			int back = (buf.hpBuf.pFront + ((buf.hpBuf.pWaiting)++)) % buf.capacity;
 			buf.hpBuf.pJobs[back] = *newJob;
@@ -211,39 +244,46 @@ Job unloadBuf()
 	return nextJob;
 }
 
-void logger(int type, char *s1, char *s2, int socket_fd)
-{
-	int fd;
-	char logbuffer[BUFSIZE * 2];
 
-	switch (type)
+/* WORKER FUNCTIONS */
+
+/* worker thread */
+void *worker(void *arg)
+{
+	int threadID = (int)(long)arg;
+	ThreadStats tStats = {threadID,0,0,0};
+	while (1)
 	{
-	case ERROR:
-		sprintf(logbuffer, "ERROR: %s:%s Errno=%d exiting pid=%d", s1, s2, errno, getpid());
-		break;
-	case FORBIDDEN:
-		dummy = Write(socket_fd, HDRS_FORBIDDEN, 271);//ERRORCHECK done
-		sprintf(logbuffer, "FORBIDDEN: %s:%s", s1, s2);
-		break;
-	case NOTFOUND:
-		dummy = Write(socket_fd, HDRS_NOTFOUND, 224);//ERRORCHECK done
-		sprintf(logbuffer, "NOT FOUND: %s:%s", s1, s2);
-		break;
-	case LOG:
-		sprintf(logbuffer, " INFO: %s:%s:%d", s1, s2, socket_fd);
-		break;
-	}
-	
-	if ((fd = Open("nweb.log", O_CREAT | O_WRONLY | O_APPEND, 0644)) >= 0)//ERRORCHECK done
-	{
-		int len = strlen(logbuffer);
-		logbuffer[len] = '\n';
-		dummy = Write(fd, logbuffer, len+1); /*Do it in a single thread-safe write*/ //ERRORCHECK done
-		Close(fd);//ERRORCHECK done
+		pthread_mutex_lock(&bufMutex);//ERRORCHECK
+		while (buf.waiting == 0) //if buffer is empty, block
+			pthread_cond_wait(&consCond, &bufMutex);//ERRORCHECK
+		
+		Job nextJob = unloadBuf();
+
+		nextJob.dispatchTime = getServerTime();
+		P(&statMutex);//ERRORCHECK done
+		stats.dispatchCount++;
+		nextJob.dispatchCount = stats.dispatchCount;
+		V(&statMutex);//ERRORCHECK done
+
+		pthread_cond_signal(&prodCond); //Awaken the master thread - there's room in buf //ERRORCHECK
+		pthread_mutex_unlock(&bufMutex); //ERRORCHECK
+
+		switch(nextJob.contentType){
+			case 'I':
+				tStats.imageCount++;
+				break;
+			case 'H':
+				tStats.hTMLCount++;
+				break;
+		}
+		tStats.count++;
+
+		web(&nextJob, &tStats);
 	}
 }
 
-
+/* function to read and log request */
 void web(Job *job, ThreadStats *tStats)
 {
 	int fd = job->socketfd;
@@ -335,44 +375,12 @@ endRequest:
 	Close(fd);//ERRORCHECK done
 }
 
-/* Worker thread function*/
-void *worker(void *arg)
-{
-	int threadID = (int)(long)arg;
-	ThreadStats tStats = {threadID,0,0,0};
-	while (1)
-	{
-		pthread_mutex_lock(&bufMutex);//ERRORCHECK
-		while (buf.waiting == 0) //if buffer is empty, block
-			pthread_cond_wait(&consCond, &bufMutex);//ERRORCHECK
-		
-		Job nextJob = unloadBuf();
 
-		nextJob.dispatchTime = getServerTime();
-		P(&statMutex);//ERRORCHECK done
-		stats.dispatchCount++;
-		nextJob.dispatchCount = stats.dispatchCount;
-		V(&statMutex);//ERRORCHECK done
 
-		pthread_cond_signal(&prodCond); //Awaken the master thread - there's room in buf //ERRORCHECK
-		pthread_mutex_unlock(&bufMutex); //ERRORCHECK
+/* MASTER THREAD FUNCTIONS*/
 
-		switch(nextJob.contentType){
-			case 'I':
-				tStats.imageCount++;
-				break;
-			case 'H':
-				tStats.hTMLCount++;
-				break;
-		}
-		tStats.count++;
-
-		web(&nextJob, &tStats);
-	}
-}
-
-/* Called by master thread to load an incoming request*/
-void addJob(Job* newJob)
+/* determine content type, store readBuf */
+void parseJob(Job* newJob)
 {
 	//process fd to determine content type
 	char contentType;
@@ -422,6 +430,13 @@ void addJob(Job* newJob)
 	}
 	else { contentType = 'E';}
 	newJob->contentType = contentType;
+}
+
+/* called by master thread to add job  to buffer*/
+void addJob(Job* newJob)
+{
+	parseJob(newJob);
+	
 	pthread_mutex_lock(&bufMutex);//ERRORCHECK
 	while (buf.waiting == buf.capacity) //if buffer is full, block
 		pthread_cond_wait(&prodCond, &bufMutex);//ERRORCHECK
@@ -433,7 +448,7 @@ void addJob(Job* newJob)
 	newJob->arrivalCount = stats.arrivalCount;
 	V(&statMutex);//ERRORCHECK done
 
-	if (loadBuf(newJob, contentType) == -1)
+	if (loadBuf(newJob) == -1)
 	{
 		//mutex unlocked when buffer was full
 		printf("ERROR: master thread attempted to access full buffer");
@@ -444,6 +459,7 @@ void addJob(Job* newJob)
 	pthread_mutex_unlock(&bufMutex);//ERRORCHECK
 }
 
+/* master thread */
 int main(int argc, char **argv)
 {
 	int i, port, listenfd, socketfd, hit;
@@ -551,7 +567,6 @@ int main(int argc, char **argv)
 		Pthread_create(&threads[i], NULL, worker, (void *)i);//ERRORCHECK done
 	}
 
-
 	/* Master Thread Loop*/
 	for (hit = 1;; hit++)
 	{
@@ -569,9 +584,9 @@ int main(int argc, char **argv)
 
 
 
-/************************** 
- * Error-handling functions
- **************************/
+/**************************** 
+ * Error-handling functions *
+ ****************************/
 
 void unix_error(char *msg) /* Unix-style error */
 {
@@ -601,9 +616,9 @@ unsigned int Sleep(unsigned int secs)
 }
 
 
-/********************************
- * Wrappers for Unix I/O routines
- ********************************/
+/**********************************
+ * Wrappers for Unix I/O routines *
+ **********************************/
 
 int Open(const char *pathname, int flags, mode_t mode) 
 {
@@ -659,9 +674,9 @@ void *Calloc(size_t nmemb, size_t size)
 }
 
 
-/************************************************
- * Wrappers for Pthreads thread control functions
- ************************************************/
+/**************************************************
+ * Wrappers for Pthreads thread control functions *
+ **************************************************/
 
 void Pthread_create(pthread_t *tidp, pthread_attr_t *attrp, 
 		    void * (*routine)(void *), void *argp) 
@@ -671,9 +686,9 @@ void Pthread_create(pthread_t *tidp, pthread_attr_t *attrp,
     if ((rc = pthread_create(tidp, attrp, routine, argp)) != 0)
 	posix_error(rc, "Pthread_create error");
 }
-/*******************************
- * Wrappers for Posix semaphores
- *******************************/
+/*********************************
+ * Wrappers for Posix semaphores *
+ *********************************/
 
 void Sem_init(sem_t *sem, int pshared, unsigned int value) 
 {
@@ -693,9 +708,9 @@ void V(sem_t *sem)
 	unix_error("V error");
 }
 
-/**************************** 
- * Sockets interface wrappers
- ****************************/
+/****************************** 
+ * Sockets interface wrappers *
+ ******************************/
 
 int Socket(int domain, int type, int protocol) 
 {
@@ -747,9 +762,9 @@ void Connect(int sockfd, struct sockaddr *serv_addr, int addrlen)
 	unix_error("Connect error");
 }
 
-/*******************************
- * Protocol-independent wrappers
- *******************************/
+/*********************************
+ * Protocol-independent wrappers *
+ *********************************/
 /* $begin getaddrinfo */
 void Getaddrinfo(const char *node, const char *service, 
                  const struct addrinfo *hints, struct addrinfo **res)

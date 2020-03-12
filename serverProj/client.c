@@ -13,9 +13,12 @@
 
 #define BUF_SIZE 250
 
+/* Globals */
 pthread_barrier_t bar;
 sem_t mutex;
 int twoFiles;
+
+/* NETWORK API */
 
 // Get host information (used to establishConnection)
 struct addrinfo *getHostInfo(char *host, char *port)
@@ -75,6 +78,9 @@ void GET(int clientfd, char *path)
   send(clientfd, req, strlen(req), 0);//ERRORCHECK
 }
 
+/* WORKER THREAD FUNCTIONS */
+
+//worker function called for CONCUR groups
 void *runCONCUR(void *arg)
 {
   char **argv = (char **)arg;
@@ -117,6 +123,7 @@ void *runCONCUR(void *arg)
   }
 }
 
+//worker function called for FIFO groups
 void *runFIFO(void *arg)
 {
   char **argv = (char **)arg;
@@ -159,6 +166,8 @@ void *runFIFO(void *arg)
    close(clientfd); //ERRORCHECK
   }
 }
+
+/* MASTER THREAD */
 
 int main(int argc, char **argv)
 {
