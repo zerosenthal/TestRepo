@@ -194,6 +194,22 @@ int open_listenfd(char *port);
 int Open_clientfd(char *hostname, char *port);
 int Open_listenfd(char *port);
 
+/*custom wrappers by ZR and EP */
+void Pthread_cond_broadcast(pthread_cond_t *cond);
+void Pthread_cond_signal(pthread_cond_t *cond);
+void Pthread_cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex);
+void Pthread_cond_init(pthread_cond_t *cond,
+					   const pthread_condattr_t *cond_attr);
+void Pthread_mutex_unlock(pthread_mutex_t *mutex);
+void Pthread_mutex_lock(pthread_mutex_t *mutex);
+void Pthread_mutex_init(pthread_mutex_t *mutex,
+						const pthread_mutexattr_t *mutexattr);
+void Pthread_barrier_init(pthread_barrier_t *barrier,
+                          const pthread_barrierattr_t *attr, unsigned count);
+void Pthread_barrier_wait(pthread_barrier_t *barrier);
+void Pthread_join (pthread_t th, void **thread_return);
+void Send(int fd, const void *buf, size_t n, int flags);
+
 
 #endif /* __CSAPP_H__ */
 /* $end csapp.h */
