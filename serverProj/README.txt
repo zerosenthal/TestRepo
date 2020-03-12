@@ -33,8 +33,8 @@ DESIGN OVERVIEW:
     CLIENT:
         Thread mechanics modeled as a fixed-size thread pool. Main serves as the master thread,
         parsing command-line args for client specs. Chosen scheduling algorithm (between CONCUR and FIFO) 
-        worker function version. Once the worker threads are dispatched, each thread enters an infinite loop 
-        to establish connection and query server with GET request. 
+        determines worker function version. Once the worker threads are dispatched, each thread enters an  
+        infinite loop to establish connection and query server with GET request. 
 
 ADDITIONAL SPECIFICATIONS:
     Clarification for implementation of ambiguous requirements.
