@@ -544,7 +544,7 @@ int main(int argc, char **argv)
 					 "\tProvides multi-threaded functionality, based on user-determined\n"
 					 "\t thread count, job queue size, and scheduling algorithm.\n"
 					 "\t Optional -d argument runs server as a daemon process.\n"
-					 "\tExample: nweb 8181 /home/nwebdir 10 8 FIFO &\n\n"
+					 "\tExample: perlweb 8181 /home/nwebdir 10 8 FIFO &\n\n"
 					 "\tOnly Supports \"ANY\", \"FIFO\" (First In First Out), \"HPIC\"\n"
 					 "\t (High Priority Image Content), and \"HPHC\" (High Priority HTML Content)\n"
 					 "\t scheduling policies.\n"
