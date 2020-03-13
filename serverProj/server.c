@@ -223,7 +223,7 @@ static void daemonize()
     }
 
     /* Open the log file */
-    logger(LOG, "daemon", "sucess", 0);
+    logger(LOG, "daemon", "success", 0);
 }
 
 

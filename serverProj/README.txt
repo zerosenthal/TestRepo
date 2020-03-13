@@ -61,11 +61,12 @@ ADDITIONAL SPECIFICATIONS:
         SYSTEM CALLS - all system calls are diverted through the CSAPP wrapper functions and return value is
             checked. In a few cases (read, etc) exceptional return values are handled in the context of normal 
             control flow so as not to interrupt normal program behavior.
+        SIGPIPE - killing a client (CTRL-C) may interrupt a server read/write call, but the resulting SIGPIPE is
+            supressed to prevent the server from crashing. 
 
 KNOWN BUGS:
     -When running on the class server, cannot exceed ~50 total threads between client and server.
     -FIFO client unexpectedly more efficient than CONCUR client when running ~150 threads.
-    -Killing a client (CTRL-C) may interrupt a server read/write call, resulting a SIGPIPE which crashes the server.
 
 TESTING:
     Each of the following scenarios tests a particular feature of the project, with specific parameters aimed to 
@@ -92,14 +93,14 @@ TESTING:
                                                                                     a la FIFO).
 
                     HPIC            1 100 HPIC      10 CONCUR       10 CONCUR       Despite identical thread allocation to
-                                                    /index.html     /zubat.html     both clients, thread-stats have a dramatically
+                                                    /index.html     /zubat.jpg      both clients, thread-stats have a dramatically
                                                                                     higher image count than html count, image 
                                                                                     requests all have an age of zero, and html 
                                                                                     requests have a positive age (ie image requests
                                                                                     given priority to the point of html starvation).
                     
                     HPHC            1 100 HPHC      10 CONCUR       10 CONCUR       Despite identical thread allocation to
-                                                    /index.html     /zubat.html     both clients, thread-stats have a dramatically
+                                                    /index.html     /zubat.jpg      both clients, thread-stats have a dramatically
                                                                                     higher html count than image count, html 
                                                                                     requests all have an age of zero, and image 
                                                                                     requests have a positive age (ie html requests
@@ -141,5 +142,7 @@ TESTING:
                                                                                     sequentially. (Run on local machine to accomodate
                                                                                     larger thread count necessary to observe discrepancy).
     Part 5:
-    Daemonize
-    the Server
+    Daemonize       Effectively     10 100 ANY      50 CONCUR       n/a             Server is operational. Terminal shows no server process 
+    the Server      spawn daemon                    /index.html                     when prompted with the <ps> command, but when prompted with
+                    process                                                         <ps -xj> shows server process with TTY: ? .
+                    
