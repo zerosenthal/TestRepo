@@ -184,8 +184,10 @@ static void daemonize()
 
     /* Catch, ignore and handle signals */
     //TODO: Implement a working signal handler */
-    signal(SIGCHLD, SIG_IGN);
-    signal(SIGHUP, SIG_IGN);
+    if(signal(SIGCHLD, SIG_IGN) == SIG_ERR)
+		unix_error("sig_err");
+    if(signal(SIGHUP, SIG_IGN) == SIG_ERR)
+		unix_error("sig_err");
 
     /* Fork off for the second time*/
     pid = fork();
@@ -201,9 +203,9 @@ static void daemonize()
     /* Set new file permissions */
     umask(0);
 
-    /* Change the working directory to the root directory */
-    /* or another appropriated directory */
-    chdir("/");
+    /* Change the working directory to the root directory
+    or another appropriated directory 
+    chdir("/"); */
 
     /* Close all open file descriptors */
     int x;
@@ -213,7 +215,7 @@ static void daemonize()
     }
 
     /* Open the log file */
-    openlog ("firstdaemon", LOG_PID, LOG_DAEMON);
+    logger(LOG, "daemon", "sucess", 0);
 }
 
 
