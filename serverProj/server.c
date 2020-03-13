@@ -535,7 +535,7 @@ int main(int argc, char **argv)
 	static struct sockaddr_in cli_addr;  /* static = initialised to zeros */
 	static struct sockaddr_in serv_addr; /* static = initialised to zeros */
 
-	if (argc < 6 || argc > 7 || !strcmp(argv[1], "-?") || strcmp(argv[6], "-d"))
+	if (argc < 6 || argc > 7 || !strcmp(argv[1], "-?"))
 	{
 		printf("USAGE: %s <port-number> <top-directory> <threads> <buffers> <schedalg> -d\t\tversion %d\n\n"
 					 "\tnweb is a small and very safe mini web server\n"
