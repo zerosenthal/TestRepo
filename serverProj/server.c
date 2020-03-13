@@ -14,7 +14,9 @@
 #include <semaphore.h>
 #include <stdarg.h>
 #include <netdb.h>
-#include "csapp.h" //contains headers for error wrapper functions
+#include <sys/stat.h>
+#include <syslog.h>
+#include "csapp.h"
 
 #define VERSION 5
 #define BUFSIZE 8096
@@ -168,6 +170,62 @@ void logger(int type, char *s1, char *s2, int socket_fd)
 		Close(fd);															   //ERRORCHECK done
 	}
 }
+
+static void daemonize()
+{
+    pid_t pid;
+
+    /* Fork off the parent process */
+    pid = fork();
+
+    /* An error occurred */
+    if (pid < 0)
+        exit(EXIT_FAILURE);
+
+    /* Success: Let the parent terminate */
+    if (pid > 0)
+        exit(EXIT_SUCCESS);
+
+    /* On success: The child process becomes session leader */
+    if (setsid() < 0)
+        exit(EXIT_FAILURE);
+
+    /* Catch, ignore and handle signals */
+    //TODO: Implement a working signal handler */
+    if(signal(SIGCHLD, SIG_IGN) == SIG_ERR)
+		unix_error("sig_err");
+    if(signal(SIGHUP, SIG_IGN) == SIG_ERR)
+		unix_error("sig_err");
+
+    /* Fork off for the second time*/
+    pid = fork();
+
+    /* An error occurred */
+    if (pid < 0)
+        exit(EXIT_FAILURE);
+
+    /* Success: Let the parent terminate */
+    if (pid > 0)
+        exit(EXIT_SUCCESS);
+
+    /* Set new file permissions */
+    umask(0);
+
+    /* Change the working directory to the root directory
+    or another appropriated directory 
+    chdir("/"); */
+
+    /* Close all open file descriptors */
+    int x;
+    for (x = sysconf(_SC_OPEN_MAX); x>=0; x--)
+    {
+        close (x);
+    }
+
+    /* Open the log file */
+    logger(LOG, "daemon", "sucess", 0);
+}
+
 
 /* BUFFER API */
 
@@ -477,20 +535,21 @@ int main(int argc, char **argv)
 	static struct sockaddr_in cli_addr;  /* static = initialised to zeros */
 	static struct sockaddr_in serv_addr; /* static = initialised to zeros */
 
-	if (argc < 6 || argc > 6 || !strcmp(argv[1], "-?"))
+	if (argc < 6 || argc > 7 || !strcmp(argv[1], "-?") || strcmp(argv[6], "-d"))
 	{
-		printf("USAGE: %s <port-number> <top-directory> <threads> <buffers> <schedalg>\t\tversion %d\n\n"
-			   "\tperlweb is a small and very safe mini web server\n"
-			   "\tperlweb only servers out file/web pages with extensions named below\n"
-			   "\t and only from the named directory or its sub-directories.\n"
-			   "\tProvides multi-threaded functionality, based on user-determined\n"
-			   "\t thread count, job queue size, and scheduling algorithm.\n"
-			   "\tExample: ./perlweb 8181 ./ 10 8 FIFO &\n\n"
-			   "\tOnly Supports \"ANY\", \"FIFO\" (First In First Out), \"HPIC\"\n"
-			   "\t (High Priority Image Content), and \"HPHC\" (High Priority HTML Content)\n"
-			   "\t scheduling policies.\n"
-			   "\tOnly Supports:",
-			   argv[0], VERSION);
+		printf("USAGE: %s <port-number> <top-directory> <threads> <buffers> <schedalg> -d\t\tversion %d\n\n"
+					 "\tnweb is a small and very safe mini web server\n"
+					 "\tnweb only servers out file/web pages with extensions named below\n"
+					 "\t and only from the named directory or its sub-directories.\n"
+					 "\tProvides multi-threaded functionality, based on user-determined\n"
+					 "\t thread count, job queue size, and scheduling algorithm.\n"
+					 "\t Optional -d argument runs server as a daemon process.\n"
+					 "\tExample: nweb 8181 /home/nwebdir 10 8 FIFO &\n\n"
+					 "\tOnly Supports \"ANY\", \"FIFO\" (First In First Out), \"HPIC\"\n"
+					 "\t (High Priority Image Content), and \"HPHC\" (High Priority HTML Content)\n"
+					 "\t scheduling policies.\n"
+					 "\tOnly Supports:",
+					 argv[0], VERSION);
 		for (i = 0; extensions[i].ext != 0; i++)
 			printf(" %s", extensions[i].ext);
 
@@ -523,7 +582,13 @@ int main(int argc, char **argv)
 		exit(5);
 	}
 
+	if (argc == 7 && !strcmp(argv[6], "-d"))
+	{
+		daemonize();
+	}
+	
 	logger(LOG, "perlweb starting", argv[1], getpid());
+	
 	/* setup the network socket */
 	if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) //ERRORCHECK done
 	{
