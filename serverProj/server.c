@@ -14,6 +14,8 @@
 #include <semaphore.h>
 #include <stdarg.h>
 #include <netdb.h>
+#include <sys/stat.h>
+#include <syslog.h>
 #include "csapp.h"
 
 #define VERSION 25
@@ -161,6 +163,60 @@ void logger(int type, char *s1, char *s2, int socket_fd)
 	}
 }
 
+static void daemonize()
+{
+    pid_t pid;
+
+    /* Fork off the parent process */
+    pid = fork();
+
+    /* An error occurred */
+    if (pid < 0)
+        exit(EXIT_FAILURE);
+
+    /* Success: Let the parent terminate */
+    if (pid > 0)
+        exit(EXIT_SUCCESS);
+
+    /* On success: The child process becomes session leader */
+    if (setsid() < 0)
+        exit(EXIT_FAILURE);
+
+    /* Catch, ignore and handle signals */
+    //TODO: Implement a working signal handler */
+    signal(SIGCHLD, SIG_IGN);
+    signal(SIGHUP, SIG_IGN);
+
+    /* Fork off for the second time*/
+    pid = fork();
+
+    /* An error occurred */
+    if (pid < 0)
+        exit(EXIT_FAILURE);
+
+    /* Success: Let the parent terminate */
+    if (pid > 0)
+        exit(EXIT_SUCCESS);
+
+    /* Set new file permissions */
+    umask(0);
+
+    /* Change the working directory to the root directory */
+    /* or another appropriated directory */
+    chdir("/");
+
+    /* Close all open file descriptors */
+    int x;
+    for (x = sysconf(_SC_OPEN_MAX); x>=0; x--)
+    {
+        close (x);
+    }
+
+    /* Open the log file */
+    openlog ("firstdaemon", LOG_PID, LOG_DAEMON);
+}
+
+
 /* BUFFER API */
 
 void initBuf(int size)
@@ -246,42 +302,6 @@ Job unloadBuf()
 
 
 /* WORKER FUNCTIONS */
-
-/* worker thread */
-void *worker(void *arg)
-{
-	int threadID = (int)(long)arg;
-	ThreadStats tStats = {threadID,0,0,0};
-	while (1)
-	{
-		pthread_mutex_lock(&bufMutex);//ERRORCHECK
-		while (buf.waiting == 0) //if buffer is empty, block
-			pthread_cond_wait(&consCond, &bufMutex);//ERRORCHECK
-		
-		Job nextJob = unloadBuf();
-
-		nextJob.dispatchTime = getServerTime();
-		P(&statMutex);//ERRORCHECK done
-		stats.dispatchCount++;
-		nextJob.dispatchCount = stats.dispatchCount;
-		V(&statMutex);//ERRORCHECK done
-
-		pthread_cond_signal(&prodCond); //Awaken the master thread - there's room in buf //ERRORCHECK
-		pthread_mutex_unlock(&bufMutex); //ERRORCHECK
-
-		switch(nextJob.contentType){
-			case 'I':
-				tStats.imageCount++;
-				break;
-			case 'H':
-				tStats.hTMLCount++;
-				break;
-		}
-		tStats.count++;
-
-		web(&nextJob, &tStats);
-	}
-}
 
 /* function to read and log request */
 void web(Job *job, ThreadStats *tStats)
@@ -375,7 +395,41 @@ endRequest:
 	Close(fd);//ERRORCHECK done
 }
 
+/* worker thread */
+void *worker(void *arg)
+{
+	int threadID = (int)(long)arg;
+	ThreadStats tStats = {threadID,0,0,0};
+	while (1)
+	{
+		pthread_mutex_lock(&bufMutex);//ERRORCHECK
+		while (buf.waiting == 0) //if buffer is empty, block
+			pthread_cond_wait(&consCond, &bufMutex);//ERRORCHECK
+		
+		Job nextJob = unloadBuf();
 
+		nextJob.dispatchTime = getServerTime();
+		P(&statMutex);//ERRORCHECK done
+		stats.dispatchCount++;
+		nextJob.dispatchCount = stats.dispatchCount;
+		V(&statMutex);//ERRORCHECK done
+
+		pthread_cond_signal(&prodCond); //Awaken the master thread - there's room in buf //ERRORCHECK
+		pthread_mutex_unlock(&bufMutex); //ERRORCHECK
+
+		switch(nextJob.contentType){
+			case 'I':
+				tStats.imageCount++;
+				break;
+			case 'H':
+				tStats.hTMLCount++;
+				break;
+		}
+		tStats.count++;
+
+		web(&nextJob, &tStats);
+	}
+}
 
 /* MASTER THREAD FUNCTIONS*/
 
@@ -467,14 +521,15 @@ int main(int argc, char **argv)
 	static struct sockaddr_in cli_addr;  /* static = initialised to zeros */
 	static struct sockaddr_in serv_addr; /* static = initialised to zeros */
 
-	if (argc < 6 || argc > 6 || !strcmp(argv[1], "-?"))
+	if (argc < 6 || argc > 7 || !strcmp(argv[1], "-?") || strcmp(argv[6], "-d"))
 	{
-		printf("USAGE: %s <port-number> <top-directory> <threads> <buffers> <schedalg>\t\tversion %d\n\n"
+		printf("USAGE: %s <port-number> <top-directory> <threads> <buffers> <schedalg> -d\t\tversion %d\n\n"
 					 "\tnweb is a small and very safe mini web server\n"
 					 "\tnweb only servers out file/web pages with extensions named below\n"
 					 "\t and only from the named directory or its sub-directories.\n"
 					 "\tProvides multi-threaded functionality, based on user-determined\n"
 					 "\t thread count, job queue size, and scheduling algorithm.\n"
+					 "\t Optional -d argument runs server as a daemon process.\n"
 					 "\tExample: nweb 8181 /home/nwebdir 10 8 FIFO &\n\n"
 					 "\tOnly Supports \"ANY\", \"FIFO\" (First In First Out), \"HPIC\"\n"
 					 "\t (High Priority Image Content), and \"HPHC\" (High Priority HTML Content)\n"
@@ -513,6 +568,11 @@ int main(int argc, char **argv)
 		exit(5);
 	}
 
+	if (argc == 7 && !strcmp(argv[6], "-d"))
+	{
+		daemonize();
+	}
+	
 	logger(LOG, "nweb starting", argv[1], getpid());
 	/* setup the network socket */
 	if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)//ERRORCHECK done
